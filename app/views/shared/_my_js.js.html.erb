@@ -1,0 +1,9 @@
+<script>
+        function myLoadingAjax() {
+            $(document).ajaxStart(function() {
+                $('.modal_json').fadeIn('fast');
+            }).ajaxStop(function() {
+                $('.modal_json').fadeOut('fast');
+            });
+        }
+</script>

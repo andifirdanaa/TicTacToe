@@ -1,0 +1,52 @@
+<script>
+$(document).ready(function() {
+    <% if flash[:pesan] %> 
+        showMessage("Informasi", "<%=flash[:pesan]%>","<%=flash[:tipe_pesan]%>")
+    <% end %>
+})
+
+function myLoading(){
+    mApp.blockPage({
+        overlayColor: "#000000",
+        type: "loader",
+        state: "success",
+        message: "Harap tunggu..."
+    })
+    // mApp.blockPage({
+    //     overlayColor: "#000000",
+    //     type: "loader",
+    //     state: "success",
+    //     message: "Harap tunggu..."
+    // }), setTimeout(function() {
+    //     mApp.unblockPage()
+    // }, 2e3)
+}
+
+function showMessage(title, message, message_type){
+    toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-full-width",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "0",
+    "timeOut": "0",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+    };
+    if(message_type =='success'){
+        toastr.success(message, title);
+    }else{
+        toastr.error(message, title);
+    }
+    
+}
+
+
+</script>

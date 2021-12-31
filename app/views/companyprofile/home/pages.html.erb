@@ -1,0 +1,443 @@
+<!-- <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+</head> -->
+<style>
+.container {
+    height: 100%;
+    margin: 0;
+}
+
+.badan {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.flex-header {
+    z-index: 1;
+}
+
+.flex-body {
+    flex: 6;
+    background-color: #FFF;
+    /* overflow-y: auto; */
+    /* overflow-x: hidden; */
+    /* overflow: hidden; */
+}
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+}
+
+.flex-footer {
+    flex: 1;
+    background-color: #272E48;
+}
+
+.textWhiteJudul{
+    color: #FFF;
+    font-size: 30px;
+    padding-top: 100px;
+    text-align: center;
+}
+
+.textInfo{
+  color: #8c8c8c;
+  font-size: 20px;
+}
+.textInfo2{
+  color: #8c8c8c;
+  font-size: 20px;
+}
+
+/* input[type=text], textarea{
+  width: 80%;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #e6e6e6;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+   border: none;
+   box-shadow: 1.5px 1px 2px #888888; /* offset-x | offset-y | blur-radius | color */
+} */
+
+::placeholder {
+  font-size: 14px;
+  color:black;
+  font-weight: bold;
+}
+input[type=text]:focus{
+  border: 1px solid #555;
+}
+
+textarea:focus{
+  border: 1px solid #555;
+}
+
+.btnKirim {
+    background: linear-gradient(90deg, #73D3FE 0%, #80AFE7 100%);    
+    padding: 2px 0px 2px 0px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 12px;
+    width: 40%;
+}
+
+.cardBlue {
+    background: #3963a3;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 4px;
+    margin-left: 40%;
+}
+
+.textWhitePesan{
+    color: #FFF;
+    font-size: 13px;
+}
+
+.port-item {
+  width: 100%;
+  min-width: 0;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+.judulUtama{
+    color: #050547;
+    font-size: 48px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.judulAccordion{
+    color: #050547;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.subJudulUtama{
+    color: #050547;
+    font-size: 16px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.subJudulClient{
+    color: #050547;
+    font-size: 20px;
+    float: center;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.subJudulClient2{
+    color: #878787;
+    font-size: 16px;
+    float: center;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+.subJudulClients{
+    color: white;
+    font-size: 20px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.subJudulClients2{
+    color: white;
+    font-size: 16px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+.judulCard{
+    color: white;
+    font-size: 20px;
+    float: center;
+    text-align: left;
+}
+
+.judulCard1{
+    color: white;
+    font-size: 16px;
+    float: center;
+    text-align: center;
+}
+
+.subJudulCard{
+    color: white;
+    font-size: 14px;
+    float: center;
+    text-align: right;
+}
+
+.subJudulRating{
+    color: #050547;
+    font-size: 20px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.subJudulRating2{
+    color: #878787;
+    font-size: 16px;
+    float: center;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.subJudulDigi{
+    color: #050547;
+    font-size: 20px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.subJudulDigi2{
+    color: #878787;
+    font-size: 16px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.textJudul{
+    color: #050547;
+    font-size: 38px;
+    float: center;
+    text-align: center;
+}
+.textJudul2{
+    color: #9d9d9d;
+    font-size: 16px;
+    float: center;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.textReview{
+    color: #050547;
+    font-size: 16px;
+    float: right;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.textReview2{
+    color: #050547;
+    font-size: 16px;
+    float: left;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.image-feature {
+  object-fit: contain;
+  width: 100px;
+  height: 150px;
+  padding: 3px;
+  border-radius: 12px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.image-review {
+  opacity: 1;
+  display: block;
+  transition: .5s ease; 
+  padding: 3px;
+  border-radius: 12px;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.image-testimoni {
+  opacity: 1;
+  transition: .5s ease; 
+  padding: 3px;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+  width: 80%;
+  height: 50%;
+}
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+/* .active, .accordion:hover {
+  background-color: #ccc; 
+} */
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+.card-header .title {
+    font-size: 17px;
+    color: #000;
+}
+.card-header .accicon {
+  float: right;
+  font-size: 20px;  
+  width: 1.2em;
+}
+.card-header{
+  cursor: pointer;
+  /* border-bottom: 4px solid #ddd;
+  background-color: white; */
+}
+.card{
+  border: 1px solid #ddd;
+}
+.card-body{
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.card-header:not(.collapsed) .rotate-icon {
+  transform: rotate(180deg);
+}
+@media screen and (max-width: 900px) {
+  #bars {
+    flex-direction: column !important;
+  }
+  img { 
+        width: 20%;
+        height: 75%;
+    }
+  #spreadImg{
+    width: 100%;
+    height: 100%;
+  }
+
+  #digiImg{
+    width: 100%;
+    height: 100%;
+  }
+  #dirutImg{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+</style>
+
+<div class="container">
+    <div class="badan">
+        <div class="flex-header">
+            <%= render "/companyprofile/home/mtm_menu.html.erb"%>
+        </div>
+        
+        <% if @pages != nil %>
+            <div class="flex-body">
+                <div id="bars" class="d-flex justify-content-center" style="background-color: #E1F1FF;">
+                    <div class="port-item p-2" style="text-align:center; margin-top: 100px;">
+                        <div class="judulUtama" style="text-align:center">
+                            <strong><%= @short_desc %></strong>
+                    </div>
+                </div>
+            </div>
+            <div style="margin: auto; width: 100%;">
+                <div class="align-self-center">
+                    <div class="container-fluid"">
+                        <span style="font-size: 12;"><%= raw @content %></span>
+                    </div>
+                </div>   
+            </div>
+            <div class="flex-footer">
+                <%= render "/companyprofile/home/mtm_footer.html.erb"%>
+            </div>
+        <% else %>
+            <div class="d-flex justify-content-center textJudul">
+                <h1>Pages Tidak Ada</h1>
+            </div>
+        <% end %>
+    </div>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function kirims(){
+
+    var first_name = document.getElementById("first_name").value;
+    var last_name = document.getElementById("last_name").value;
+    var email = document.getElementById("email").value;
+    var message = document.getElementById("message").value;
+
+    if(first_name == ''){
+      alert("Nama Anda Belum Diisi");
+    }else if(email == ''){
+      alert("Alamat Email Belum Diisi");
+    }else if(last_name == ''){
+      alert("Nama Anda Belum Diisi");
+    }else if(message == ''){
+      alert("Pesan Anda Belum Diisi");
+    }else{      
+      $("#simpan").trigger("click");
+    }
+  }
+
+    $(document).ready(function (e) {
+
+		$("#myformHubungi").on('submit', (function (e) {
+
+			e.preventDefault();
+			$.ajax({
+				url: "/companyprofile/home/aksi_about_us",
+				type: "POST",
+				data: new FormData(this),
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function (result) {
+                console.log(result);
+                // return
+          if (result.status == true) {
+              swal("Selamat", "Pesan Berhasil Dikirim", "success").then((value) => {
+                    window.location = "";
+                });  
+          } else {
+              swal("Gagal", "Pesan tidak Berhasil Dikirim", "danger").then((value) => {
+                    window.location = "";
+                }); 
+          }
+				}
+			});
+		}));
+	});
+</script>

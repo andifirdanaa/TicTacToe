@@ -1,0 +1,212 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="card">
+    <div class="card-body">
+        <div class="card-title"><h4><i class="fa fa-database"></i> Team</h4></div>
+        <div class="card-content">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data"
+                        aria-selected="true">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form"
+                        aria-selected="false">Form</a>
+                </li>
+            </ul>
+            <br>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
+                    <!-- Search Box -->
+                    <strong><i class="fa fa-search"></i> Cari</strong>
+                    <div class="card">
+                        <div class="card-body">
+                            <form>
+                                <div class="input-group mb-3">
+                                    <input type="hidden" name="page" value="<%= @page %>">
+                                    <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Cari..." value="<%= @keyword %>">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Search Box -->
+                    <p>
+                    <!-- LIST DATA -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive-sm">
+                                <table class="table table-hover table-striped table-sm table-bordered" align="center">
+                                    <!-- table-striped -->
+                                    <thead>
+                                        <tr align="center">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Jabatan</th>
+                                            <th scope="col">Divisi</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col" align="center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%  if @data['content']['data'].present?
+
+                                            @page = params['page'].to_i
+                                            if params['page'] == nil || params['page'] == 1
+                                            @no = 0
+                                            else
+                                                @no = (@limit * @page) - @limit
+                                            end
+                                            @data['content']['data'].each do |res| 
+                                         %>
+                                            <tr>
+                                                <td><%= @no = @no+1 %></td>
+                                                <td><%= res['nama'] %></td>
+                                                <td><%= res['jabatan'] %></td>
+                                                <td><%= res['divisi'] %></td>
+                                                <% if res['images'].present? %>
+                                                <td align="center">
+                                                    <img src= "<%= ENV['CIRACAS_WEB']+"/"+ res['images']%>" alt="rss feed"
+                                                        width='100px' height='100px'/>
+                                                    </td>
+                                                <%else%>
+                                                    <td>No Image</td>
+                                                <%end%>
+                                                <td align="center">
+                                                    <i class="fa <%= res['status'].to_i == 1 ? 'fa fa-check' : 'fa fa-close' %>"
+                                                            data-toggle="tooltip" data-placement="top" title="<%= res['status'].to_i == 1 ? 'Aktif' : 'Tidak Aktif' %>">
+                                                    </i>
+                                                </td>
+                                                <td align="center">
+                                                    <button class="btnedit btn btn-sm btn-primary" id="aksi_id" onclick="update('<%= res['id'] %>')" title="Edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        
+                                        <% end %>
+                                        <% else %>
+                                                <tr>
+                                                    <td colspan="19" align="center">Maaf, tidak ada data.</td>
+                                                </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
+                             <!-- PAGINATION aja -->
+                                
+                                    <%= 
+                                        @myparaam = '&keyword='+@key.to_s
+                                        render '/backoffice/template/pagination_bo' 
+                                    %>
+                                
+                            <!-- PAGINATION -->
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+                    <strong id="titleAdd"><i  class="fa fa-plus-square"></i> Tambah Data</strong>
+                    <strong id="titleEdit"><i class="fa fa-edit"></i> Ubah Data</strong>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="POST" class="form-horizontal" action="/backoffice/master/aksi_team" id="form_id" class="uploads" enctype="multipart/form-data">
+                                <input type="text" class="form-control" style="display: none" name="id" id="id_id" >
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Nama:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="nama" id="nama_id">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Nama Jabatan:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="jabatan" id="jabatan_id">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="pwd">Posisi:</label>
+                                    <div class="col-sm-6">
+                                        <select id="position_id" name="position" class="form-control">
+                                            <option value="1">Comisaris</option>
+                                            <option value="2">Director</option>
+                                            <option value="3">Head Div</option>
+                                            <option value="4">Head Sub Div</option>
+                                            <option value="5">Staff</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="pwd">Status:</label>
+                                    <div class="col-sm-6">
+                                        <select id="status_id" name="status" class="form-control">
+                                            <option value="1">Aktif</option>
+                                            <option value="0">Non Aktif</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Divisi:</label>
+                                    <div class="col-sm-10">
+                                        <select id="divisi_id" name="divisi" class="form-control">
+                                            <% @data_divisi['content']['data'].each do |data| %>
+                                                <option value="<%= data['id'] %>"><%= data['nama'] %></option>
+                                            <% end %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" id='div_images' style="display:block">
+                                    <label class="control-label col-sm-2" for="email">Upload Images</label>
+                                    <div class="col-sm-12">
+                                        <input type="file" name="images" id ="images_id" class="form-control" 
+                                        onchange="tampilkanPreview(this,'preview')">
+                                        <img id="preview" width="350px" style="margin-top:10px" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btnreset btn btn-warning">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function update(id){
+        var id = id;
+        window.location = '/backoffice/master/edit_team?id='+id;
+    }
+
+    function tampilkanPreview(userfile, idpreview) {
+        console.log(userfile, idpreview)
+        var gb = userfile.files;
+        for (var i = 0; i < gb.length; i++) {
+            var gbPreview = gb[i];
+            var imageType = /image.*/;
+            var preview = document.getElementById(idpreview);
+            var reader = new FileReader();
+            if (gbPreview.type.match(imageType)) {
+                //jika tipe data sesuai
+                preview.file = gbPreview;
+                reader.onload = (function (element) {
+                    return function (e) {
+                        element.src = e.target.result;
+                    };
+                })(preview);
+                //membaca data URL gambar
+                reader.readAsDataURL(gbPreview);
+            } else {
+                //jika tipe data tidak sesuai
+                alert("Tipe file tidak sesuai. Gambar harus bertipe .png, .gif atau .jpg.");
+            }
+        }
+    }
+    
+</script>

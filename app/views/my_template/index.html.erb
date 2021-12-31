@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Accordion examples">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+</head>
+
+<body style="overflow-y: auto; margin-bottom:20%">
+
+
+    <style>
+        .btn.active {
+            background-color: #ffff !important;
+            color: #005fa3;
+            box-shadow: 0 5px #666;
+            /* transform: translateY(4px); */
+        }
+
+        .btn:active {
+            background-color: #ffff;
+            box-shadow: 0 5px #666;
+            color: #005fa3;
+            /* transform: translateY(4px); */
+        }
+
+        .bottom-nav .button {
+            width: 100%;
+            height: 100%;
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            text-align: center;
+            text-transform: capitalize;
+            margin: 0;
+            border-radius: 0;
+            line-height: normal;
+        }
+
+        .bottom-nav {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            height: 56px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            -webkit-box-shadow: 0 -2px 10px 0 rgba(0, 0, 0, 0.16), 0 -1px 5px 0 rgba(0, 0, 0, 0.26);
+            box-shadow: 0 -2px 10px 0 rgba(0, 0, 0, 0.16), 0 -1px 5px 0 rgba(0, 0, 0, 0.26);
+            z-index: 1030;
+        }
+
+        .bottom-navxx {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            height: 56px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          
+            z-index: 1030;
+        }
+
+        .img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .modal_json {
+            display: none;
+            padding: 50% 50% 50% 50%;
+            position: fixed;
+            z-index: 1000000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0.80;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+            filter: alpha(opacity=10);
+            background-color: #ffffff;
+        }
+
+        .body_all {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+        }
+
+        .btn_home {
+            height: 15px;
+            width: 15px;
+            background-image: url('https://res.cloudinary.com/officemtm/image/upload/v1573788731/DIGICash/icon_home_o5zzcg.png');
+            background-repeat: no-repeat;
+        }
+
+        .btn_pengajuan {
+            height: 15px;
+            width: 15px;
+            background-image: url('https://res.cloudinary.com/officemtm/image/upload/v1573788732/DIGICash/icon_spun0x.png');
+            background-repeat: no-repeat;
+        }
+
+        .btn_history {
+            height: 15px;
+            width: 15px;
+            background-image: url('https://res.cloudinary.com/officemtm/image/upload/v1573788731/DIGICash/icon_histori_qiwxbq.png');
+            background-repeat: no-repeat;
+        }
+    </style>
+
+    <div class="body_all">
+        <!-- BODY START -->
+
+        <!-- LOADER -->
+
+        <div class="modal_json">
+            <span><img
+                    src="https://res.cloudinary.com/okejual/image/upload/v1564026550/loading-spinner-grey_x0mbxf.gif"></span>
+        </div>
+        <!-- LOADER -->
+
+        <!-- START CONTENT -->
+        <div class="m-content" style="overflow-y: auto;">
+            <span id="mycontent"></span>
+        </div>
+        <!-- END CONTENT -->
+
+
+        <!-- START FOOTER -->
+
+        <div style="margin-top:20%; background-color:transparant;">
+            <div class="bottom-nav btn-group" style="position: fixed; width:100%; background-color:#fff; ">
+
+                <table>
+                    <tr width="100%">
+                        <td align="center" width="150px">
+                            <img src="https://res.cloudinary.com/officemtm/image/upload/v1575362440/DIGICash/homewarnabaru_nhbc6y.png"
+                                alt="" style="width: 50px; height:50px; background-color:#fff;" onclick="goToContent('home')" id="mBeranda_id">
+                        </td>
+                        <td align="center" width="150px" >
+                            <img src="https://res.cloudinary.com/officemtm/image/upload/v1575362440/DIGICash/rpiconbaru_hoowxb.png"
+                                alt="" style="width: 80px; height:80px; background: transparent; margin-bottom: 30px;" onclick="goToContent('pengajuan')" id="mPengajuan_id">
+                        </td>
+                        <td align="center" width="150px">
+                            <img src="https://res.cloudinary.com/officemtm/image/upload/v1575362440/DIGICash/historywarnabaru_rsoz2v.png"
+                                alt="" style="width: 50px; height:50px; background-color:#fff; " onclick="goToContent('histori')" id="mHistory_id">
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- END FOOTER -->
+
+        <!-- BODY END -->
+    </div>
+
+    <%= render "/shared/my_js.js"%>
+    <%= render "/shared/myalert.js"%>
+
+    <script>
+
+        goToContent("home")
+
+        // set remove class "active" in button navigation
+        $(".btn-group > .btn").click(function () {
+            $(".btn-group > .btn").removeClass("active");
+            $(this).addClass("active");
+        });
+
+        // set class "active" in button navigation
+        function activePage(myContent) {
+            $('#mBeranda_id').removeClass("active");
+
+            if (myContent == 'home') {
+                $('#mBeranda_id').addClass("active");
+            } else if (myContent == 'pengajuan') {
+                $('#mPengajuan_id').addClass("active");
+            } else {
+                $('#mHistory_id').addClass("active");
+            }
+
+        }
+
+        function goToContent(content) {
+            var userName = '<%=params['userName']%>';
+            var password = '<%=params['password']%>';
+            activePage(content)
+            myLoadingAjax()
+            $.ajax({
+                url: '/my_template/' + content + "?userName=" + userName + "&password=" + password,
+                dataType: 'html',
+                beforeSend: function () {
+
+                    //  $('.modal_json').fadeIn('fast');
+                },
+                success: function (data) {
+                    $('#mycontent').html(data)
+                    //  $('#myModal').modal('hide')
+                },
+                error: function () {
+                    $('#mycontent').html("")
+                },
+                complete: function () {}
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+
+<style>
+ section {
+  padding: 50px 0;
+  
+}
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.section-title h2{
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  /* color: #2c4964; */
+}
+.section-title h2::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: #ddd;
+  bottom: 1px;
+  left: calc(50% - 60px);
+}
+
+.section-title h2::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #1977cc;
+  bottom: 0;
+  left: calc(50% - 20px);
+}
+
+.section-title p {
+  font-size: 18px;
+}
+.fix-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 200;
+}
+.navbars{
+  background-color:#ffffff;
+  /* background: rgba(255, 255, 255, 0.5); */
+  opacity: 0.9;
+  padding: 20px 55px;
+  border-bottom: 2px solid #888AA2;
+  
+}
+.navbars .nav-item a{
+  color: #888AA2;
+  font-size: 18px;
+  font-weight: 800;
+}
+.navbars .nav-item a:hover{
+  color: #222534;
+  border-bottom: 3px solid #888AA2;
+}
+.navbars .nav-item a:active{
+  color: #222534;
+}
+
+.navbars .chat:hover{
+  transition: 0.5s ease-in-out;
+  transform: scale(1.1);
+  overflow: hidden;
+}
+.img-banner{
+  height : 100%;
+  width: 100%;
+}
+.container {
+  height: 100%;
+  margin: 0;
+    
+}
+</style>
+
+
+  <div class="fix-nav">
+      <nav id="navbars" class="navbar navbar-expand-lg navbar-light navbars">
+        <div class="container-fluid">
+          <a href="/">
+            <img id="logo" src="/img/icon 1.png" style="max-width:110px;height:auto;margin-right:80px;" />
+          </a> 
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+            <% if @menu != nil %>
+             <% @menu.each do |res| %>
+              <li class="nav-item <%= res['rows_child'] == 1 ? 'dropdown' : '' %>" style="padding-right:20px;">
+                <a href="<%= res['url']%>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
+                  <%=res['menu'] %>
+                </a>
+                 <% if res['rows_child'] == 1 %>
+                  <% if res['menu_child'] != nil %>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <% res['menu_child'].each do |ress| %>
+                    <a class="dropdown-item" href="<%= ress['url'] %>"><%= ress['menu'] %></a>
+                  <% end %>     
+                </div>
+                  <%end%>
+                <%end%>
+              </li> 
+             <%end%>
+            <%end%>
+            <div class="d-flex justify-content-end chat" style="padding-left:20px;">
+              <a href="https://wa.me/083890886344"  target="_blank"><button class="btn edit btn-default" class="logoChat" style="margin-left:-10%;padding-left:20px;padding-right:25px;background-image: linear-gradient(to right,#2193b0,  #6dd5ed);border-radius: 4px; cursor: pointer;"><img src="" height="15px"/><span style="color: white; padding-left: 5px; font-size: 14px;">Chat Now</span></button></a>
+            </div>
+          </div>
+        </div>
+      </nav>
+  </div>

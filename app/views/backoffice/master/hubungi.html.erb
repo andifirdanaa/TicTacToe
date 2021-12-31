@@ -1,0 +1,107 @@
+<%= tinymce_assets %>
+<%= tinymce %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="card">
+    <div class="card-body">
+        <div class="card-title"><h4><i class="fa fa-database"></i> Hubungi </h4></div>
+        <div class="card-content">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data"
+                        aria-selected="true">Data</a>
+                </li>
+                
+            </ul>
+            <br>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
+                    <!-- Search Box -->
+                    <strong><i class="fa fa-search"></i> Cari</strong>
+                    <div class="card">
+                        <div class="card-body">
+                            <form>
+                                <div class="input-group mb-3">
+                                    <input type="hidden" name="page" value="<%= @page %>">
+                                    <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Cari..." value="<%= @keyword %>">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Search Box -->
+                    <p>
+                    <!-- LIST DATA -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive-sm">
+                                <table class="table table-hover table-striped table-sm table-bordered">
+                                    <!-- table-striped -->
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Pesan</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Created</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%  if @data['content']['data'].present?
+
+                                            @page = params['page'].to_i
+                                            if params['page'] == nil || params['page'] == 1
+                                            @no = 0
+                                            else
+                                                @no = (@limit * @page) - @limit
+                                            end
+                                            @data['content']['data'].each do |res| 
+                                         %>
+                                            <tr>
+                                                <td><%= @no = @no+1 %></td>
+                                                <td><%= res['nama'] %></td>
+                                                <td style = "overflow: hidden; text-overflow: ellipsis; max-width: 100px; white-space: nowrap;"><%= res['pesan'] %></td>
+                                                <td><%= res['email'] %></td>
+                                                <td><%= res['created_at'].to_s %></td>
+                                                <td>
+                                                
+                                                    <button class="btnedit btn btn-sm btn-danger" id="aksi_id" onclick="del('<%= res['id'] %>')" title="Delete">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                               
+                                                </td>
+                                            </tr>
+                                        
+                                        <% end %>
+                                        <% else %>
+                                                <tr>
+                                                    <td colspan="19" align="center">Maaf, tidak ada data.</td>
+                                                </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
+                             <!-- PAGINATION aja -->
+                                
+                                    <%= 
+                                        @myparaam = '&keyword='+@key.to_s
+                                        render '/backoffice/template/pagination_bo' 
+                                    %>
+                                
+                            <!-- PAGINATION -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+
+    
+    function del(id){
+        var id = id;
+        window.location = '/backoffice/master/aksi_hubungi?id='+id;
+    }
+</script>

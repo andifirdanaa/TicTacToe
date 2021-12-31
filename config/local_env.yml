@@ -1,0 +1,8 @@
+CIRACAS_WEB: 'http://localhost:4002/'
+DIGI_LIMIT_LIST: '20'
+# DIGI_URL: 'http://localhost:4002/'
+
+
+# #local
+# SITE_KEY: '6LdbosUZAAAAAG5r64Tlz3Q2BKJGshKAAYpukW8W'
+# SECRET_KEY: '6LdbosUZAAAAABsU-YoQ83u4FUqWxq7dzpQtVSpV'

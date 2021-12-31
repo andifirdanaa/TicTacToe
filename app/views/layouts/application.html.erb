@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RSUD Ciracas</title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta charset="utf-8" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="description" content="<%= @contents ? truncate(raw(strip_tags @contents), length:100) : 'RSUD Ciracas' %>">
+    <meta name="keywords" content="<%= @keyword_ ? @keyword_ : 'RSUD Ciracas'%>">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="<%="/img/logorsudciracas.png"%>" type="image/gif" sizes="16x16">
+
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet"> -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    
+    <style>
+
+        * {
+            font-family: 'Open Sans', sans-serif;
+            box-sizing: border-box;
+        }
+        /* * {
+            font-family: 'Lato', sans-serif;
+            box-sizing: border-box;
+        }     */
+                        
+    
+    </style>
+</head>
+
+<body>
+    <%= yield %>
+</body>
+
+</html>

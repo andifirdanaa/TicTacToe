@@ -1,0 +1,200 @@
+<div id="detail_pengajuan_backend">
+
+    <%= render "/my_template/header_nama" %>
+
+    <div class="container" style="margin-top: 20%;">
+
+        <center>
+            <h3 style="color: #3a4d87;">Rincian Pembiayaan</h3>
+        </center>
+
+        <hr style="border: 1px dashed grey;" />
+
+
+        <table width="100%" border="0" style="font-size: 14px;">
+
+            <tr>
+                <td width="65%">
+                    Jml Pembiayaan
+                </td>
+                <td class="kanan">
+                    <input size="20" id="pengajuan_det" disabled
+                        style="background-color:white; border:hidden; text-align:right;">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="65%">
+                    Biaya Administrasi
+                </td>
+                <td class="kanan">
+                    <input size="20" id="biaya_admin" disabled
+                        style="background-color:white; border:hidden; text-align:right;">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="65%">
+                    Biaya Asuransi Jiwa
+                </td>
+                <td class="kanan">
+                    <input size="20" id="biaya_asuransi_jiwa" disabled
+                        style="background-color:white; border:hidden; text-align:right;">
+                </td>
+            </tr>
+
+            <tr id="tr_biaya_handling">
+                <td width="65%">
+                    Biaya Handling
+                </td>
+                <td class="kanan">
+                    <input size="20" id="biaya_handling" disabled
+                        style="background-color:white; border:hidden; text-align:right;">
+                </td>
+            </tr>
+
+            <tr id="tr_biaya_jasa_margin">
+                <td width="65%">
+                    Jasa/Margin Pembiayaan
+                </td>
+                <td class="kanan">
+                    <input size="20" id="biaya_jasa_margin" disabled
+                        style="background-color:white; border:hidden; text-align:right;">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="65%">
+                    Jenis Pembiayaan
+                </td>
+                <td class="kanan">
+                    <input size="20" id="jenis_pinjaman_det" disabled
+                        style="background-color:white; border:hidden; text-align:right;">
+                </td>
+            </tr>
+
+        </table>
+
+
+        <table border="0" width="100%" id="det_wallet_back" style="font-size: 14px;">
+            <tr>
+                <td>
+                    Nama Wallet
+                </td>
+                <td class="kanan">
+                    <%= @data['data']['nama'] %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ID Wallet
+                </td>
+                <td class="kanan">
+                    <%= session[params['userName']]['walletid'] %>
+                </td>
+            </tr>
+        </table>
+
+
+        <table border="0" width="100%" id="det_bank_back" style="font-size: 14px;">
+            <tr>
+                <td>
+                    Atas Nama
+                </td>
+                <td class="kanan">
+                    <%= @data['data']['namarek'] %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Bank
+                </td>
+                <td class="kanan">
+                    <%= @data['data']['namabank'] %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Nomor Rekening
+                </td>
+                <td class="kanan">
+                    <%= @data['data']['norek'] %>
+                </td>
+            </tr>
+        </table>
+
+        <table border="0" width="100%" id="det_linkaja_back" style="font-size: 14px;">
+            <tr>
+                <td>
+                    Atas Nama
+                </td>
+                <td class="kanan">
+                    <strong><%= @data['data']['namarek'] %></strong>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tujuan
+                </td>
+                <td class="kanan">
+                    <strong>LinkAja</strong>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Nomor LinkAja
+                </td>
+                <td class="kanan">
+
+                    <input size="20" id="no_hp_link" disabled value="<%= session[params['userName']]['nohp'] %>"
+                        style="background-color:white; border:hidden; text-align:right; ">
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+
+                    <div class="alert alert-danger" role="alert" style="font-size: 12px; margin-top:5px;"
+                        id="deal_ganti_nmrx">
+                        * Anda menyetujui telah menginput nomor Linkaja yg berbeda dengan yg terdaftar di PNM
+                        Digi.
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+
+
+
+
+        <input type="text" id="biaya_adminy" style="display: none;">
+        <input type="text" id="biaya_asuransi_jiway" style="display: none;">
+        <input type="text" id="biaya_handlingy" style="display: none;">
+        <input type="text" id="biaya_jasa_marginy" style="display: none;">
+
+
+        <hr style="border: 1px dashed grey;" />
+
+        <h6>* Rincian Pembiayaan diatas belum termasuk biaya transfer antar Bank.</h6>
+
+        <hr style="border: 1px dashed grey;" />
+
+        <center>
+            <h5 style="color: #3a4d87;">Jumlah</h5>
+            <input id="total_tagihan" disabled
+                style="color: #3a4d87; background-color:white; border:hidden; text-align:center; font-size: 20pt">
+        </center>
+
+    </div>
+
+
+
+    <div align="center">
+        <div id="lanjut_pengajuan_real" style="background-color: #3a4d87; color:white; padding:15px"
+            onclick="submitFunctPassword()" style="cursor: pointer;">Lanjut
+        </div>
+        <div id="lanjut_pengajuan_simu" style="background-color: #3a4d87; color:white; padding:15px"
+            onclick="submitFunctPassword()" style="cursor: pointer;">Ayo Lakukan Pengajuan Sekarang !
+        </div>
+    </div>
+</div>

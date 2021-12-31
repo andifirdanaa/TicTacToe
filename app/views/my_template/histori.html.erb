@@ -1,0 +1,391 @@
+<%= render "shared/my_css.css" %>
+
+<div>
+    <%= render "/my_template/header_nama" %>
+
+
+    <div id="history_belumpernah" align="center" style="margin-top: 20%; display:none; ">
+
+        <div style="margin-top: 10%;">
+            <img src="https://res.cloudinary.com/officemtm/image/upload/v1574320006/DIGICash/Asset_1_wkx2ys.png" alt=""
+                width="100%" height="100%">
+        </div>
+        <div class="container">
+            <div class="" align="center" style="margin-bottom: 20px">
+
+                <br>
+                <br>
+                <table border="0" width="100%" style="margin-top: 25px;">
+                    <tr>
+                        <td>
+
+                            <div class="alert alert-warning" role="alert">
+                                Opps sepertinya kamu belum pernah melakukan pengajuan pembiayaan di DigiCash.
+                            </div>
+                            <button type="button" id="ke_pengajuan"
+                                style="background-color:#3a4d87; color:white; border-color:#3a4d87;"
+                                class="btn btn-block"><strong><span>Ajukan Pembiayaan Sekarang !</span></strong></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container" style="margin-top: 20%; display:none; " id="history_pengajuanx">
+
+        <center>
+            <h3 style="color: #3a4d87;">Riwayat Transaksi</h3>
+        </center>
+
+
+        <div class="accordion" id="accordionExample">
+
+            <% @data.each do |item| %>
+
+
+            <div id="heading<%= item['id'] %>">
+                <div class="cardxx" height="100%">
+                    <table border="0" width="100%">
+                        <tr>
+                            <td>
+                                Tanggal Pengajuan
+                            </td>
+                            <td class="kanan">
+                                <%= DateTime.parse(item['tanggal_transaksi']).strftime('%d-%m-%Y') %>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Nominal
+                            </td>
+                            <td class="kanan">
+                                <strong><%= number_to_currency(item['plafond'], format: "Rp. %n") %></strong>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Status
+                            </td>
+                            <td class="kanan">
+                                <% 
+                                    if item['status'] == 'pending' 
+                                        badge = 'warning'
+                                        stats_det = 'Pending'
+                                    elsif item['status'] == 'disetujui' 
+                                        badge = 'info'
+                                        stats_det = 'Disetujui'
+                                    elsif item['status'] == 'ditolak' 
+                                        badge = 'danger'
+                                        stats_det = 'Ditolak'
+                                    elsif item['status'] == 'sudah_pencairan' 
+                                        badge = 'success'
+                                        stats_det = 'Sudah Pencairan'
+                                    elsif item['status'] == 'sudah_lunas'
+                                        badge = 'primary'
+                                        stats_det = 'Sudah Lunas'
+                                    else 
+                                        badge = 'primary'
+                                        stats_det = 'Sudah Lunas'
+                                    end
+                                                    %>
+                                <span class="badge badge-<%=badge%>">
+                                    <%= stats_det %>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+
+                    <!-- <a class="badge badge-secondary"> <span class="collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapse<%= item['id'] %>" aria-expanded="false"
+                            aria-controls="collapse<%= item['id'] %>" style="color: white; width:100%;">
+                            Detail Pengajuan
+                        </span></a> -->
+                    <!-- 
+                    <div width="100%">
+                        <button type="button" data-toggle="collapse" data-target="#collapse<%= item['id'] %>"
+                            aria-expanded="false" aria-controls="collapse<%= item['id'] %>"
+                            class="collapsed btn btn-outline-info btn-sm ">
+                            Detail Pengajuan
+                        </button>
+                    </div> -->
+
+                    <a data-toggle="collapse" data-target="#collapse<%= item['id'] %>" aria-expanded="false"
+                        aria-controls="collapse<%= item['id'] %>" class="collapsed"> <span class="badge badge-pill badge-primary">Detail Pengajuan</span></a>
+
+
+                </div>
+
+            </div>
+            <div id="collapse<%= item['id'] %>" class="collapse" aria-labelledby="heading<%= item['id'] %>"
+                data-parent="#accordionExample">
+                <div class="card" style="border-color:white">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <center>
+                                <h5 style="color: #3a4d87;"><strong>Detail Transaksi</strong></h5>
+                            </center>
+                            <table class="card-table table" style="font-size: 15px;">
+                                <tr>
+                                    <td>
+                                        Nama
+                                    </td>
+                                    <td class="kanan">
+                                        <%= item['nama'] %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        NIK
+                                    </td>
+                                    <td class="kanan">
+                                        <strong><%= item['nip'] %></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Jabatan
+                                    </td>
+                                    <td class="kanan">
+                                        <%= item['jabatan'] %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Unit Kerja
+                                    </td>
+                                    <td class="kanan">
+                                        <%= item['unit_kerja'] %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Jumlah Pengajuan
+                                    </td>
+                                    <td class="kanan">
+                                        <%= number_to_currency(item['plafond'], format: "Rp. %n") %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Lender
+                                    </td>
+                                    <td class="kanan">
+                                        <% 
+                                            if item['lenderid'] == 2 
+                                                lender = 'KONVENSIONAL'
+                                            else 
+                                                lender = 'SYARIAH'
+                                            end
+                                        %>
+
+                                        <span><%= lender %></span>
+
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        Tujuan
+                                    </td>
+                                    <td class="kanan">
+                                        <%= item['namabank'] %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Atas Nama
+                                    </td>
+                                    <td class="kanan">
+                                        <%= item['namarek'] %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        No.Tujuan
+                                    </td>
+                                    <td class="kanan">
+                                        <%= item['norek'] %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Tgl. Pengajuan
+                                    </td>
+                                    <td class="kanan">
+                                        <%= DateTime.parse(item['tanggal_transaksi']).strftime('%d-%m-%Y') %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Status
+                                    </td>
+                                    <td class="kanan">
+                                        <% 
+                                            if item['status'] == 'pending' 
+                                                badge = 'warning'
+                                                stats_det = 'Pending'
+                                            elsif item['status'] == 'disetujui' 
+                                                badge = 'info'
+                                                stats_det = 'Disetujui'
+                                            elsif item['status'] == 'ditolak' 
+                                                badge = 'danger'
+                                                stats_det = 'Ditolak'
+                                            elsif item['status'] == 'sudah_pencairan' 
+                                                badge = 'success'
+                                                stats_det = 'Sudah Pencairan'
+                                            elsif item['status'] == 'sudah_lunas'
+                                                badge = 'primary'
+                                                stats_det = 'Sudah Lunas'
+                                            else 
+                                                badge = 'primary'
+                                                stats_det = 'Sudah Lunas'
+                                            end
+                                                            %>
+                                        <span class="badge badge-<%=badge%>">
+                                            <%= stats_det %>
+                                        </span>
+                                    </td>
+                                </tr>
+
+
+                                <% 
+                                    if item['status'] == 'ditolak' 
+                                        set = ''
+                                    else 
+                                        set = 'hidden'
+                                    end
+                                %>
+                                <tr <%= set %>>
+                                    <td>
+                                        Alasan
+                                    </td>
+                                    <td class="kanan">
+                                        <!-- <span class="badge badge-info"><%= item['ket_tolak'] %></span> -->
+                                        <div class="alert alert-danger" role="alert">
+                                                <%= item['ket_tolak'] %>
+                                              </div>
+                                        <!-- 
+                                        <textarea style="background-color:aquamarine; border-color:white;" align="right"
+                                            name="" id="" cols="20" rows="2"><%= item['ket_tolak'] %></textarea> -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Biaya Jasa
+                                    </td>
+                                    <td class="kanan">
+                                        <%= number_to_currency(item['biaya_jasa'], format: "Rp. %n") %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Biaya Admin
+                                    </td>
+                                    <td class="kanan">
+                                        <%= number_to_currency(item['biaya_administrasi'], format: "Rp. %n") %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Biaya Asuransi
+                                    </td>
+                                    <td class="kanan">
+                                        <%= number_to_currency(item['biaya_asuransi'], format: "Rp. %n") %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Biaya Transfer
+                                    </td>
+                                    <td class="kanan">
+                                        <%= number_to_currency(item['biaya_transfer'], format: "Rp. %n") %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 18px;"><strong>Total Diterima</strong></span>
+                                    </td>
+
+                                    <%
+
+                                        total_biaya = item['biaya_transfer'].to_i + item['biaya_asuransi'].to_i + item['biaya_administrasi'].to_i + item['biaya_jasa'].to_i 
+                                        total_cair = item['plafond'].to_i - total_biaya                                  
+                                    %>
+                                    <td class="kanan">
+                                        <span
+                                            style="font-size: 20px;"><u><b><%= number_to_currency(total_cair, format: "Rp. %n") %></b></u></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <% end %>
+
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        if ('<%= @data.count %>' >= 1) {
+
+            $('#history_pengajuanx').show()
+            $('#history_belumpernah').hide()
+
+        } else {
+
+            $('#history_pengajuanx').hide()
+            $('#history_belumpernah').show()
+        }
+
+        $("#ke_pengajuan").click(function () {
+
+
+            var userName = '<%=params['userName']%>';
+            var password = '<%=params['password']%>';
+            myLoadingAjax()
+            $.ajax({
+                url: '/my_template/' + "pengajuan" + "?userName=" + userName + "&password=" +
+                    password,
+                dataType: 'html',
+                beforeSend: function () {
+
+                    //  $('.modal_json').fadeIn('fast');
+                },
+                success: function (data) {
+                    $('#mycontent').html(data)
+                    //  $('#myModal').modal('hide')
+                },
+                error: function () {
+                    $('#mycontent').html("")
+                },
+                complete: function () {}
+            });
+
+        });
+
+
+    });
+</script>

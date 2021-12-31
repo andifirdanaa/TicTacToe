@@ -1,0 +1,102 @@
+<%= tinymce_assets %>
+<%= tinymce %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-title"><h4><i class="fa fa-database"></i> Edit System Setting</h4></div>
+        <div class="card-content">
+        <button type="button" class="btn btn-primary" onclick="back()">Kembali</button>
+        <br>
+            <br>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
+                    <!-- LIST DATA -->
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="POST" class="form-horizontal" action="/backoffice/master/aksi_system_setting" id="form_id" class="uploads" enctype="multipart/form-data">
+                                <input type="text" class="form-control" style="display: none" name="id" id="id_id"  value="<%= params['id'] %>">
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Key:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="sys_key" id="sys_key_id" value="<%= @data['sys_key']%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Preview Image Lama</label>
+                                    <% if @data['sys_val'].present? %>
+                                    <div class="col-sm-12">
+                                        <img src= "<%= ENV['CIRACAS_WEB']+"/"+ @data['sys_val']%>" alt="rss feed" width="350px"/>
+                                    </div>
+                                    <%else%>
+                                    <div class="col-sm-12">
+                                        <img src= "" alt="No Image Cover" />
+                                    </div>
+                                    <%end%>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Upload Image Baru</label><br>
+                                    <div class="col-sm-12">
+                                        <input type="file" name="images" id ="images_id" class="form-control" 
+                                        onchange="tampilkanPreview(this,'preview')">
+                                        <img id="preview" width="350px" style="margin-top:10px" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="pwd">Status:</label>
+                                    <div class="col-sm-6">
+                                        <select id="status_id" name="status" class="form-control">
+                                            <option value="1">Aktif</option>
+                                            <%if @data['status'].to_i == 0%>
+                                                <option value="0" selected>Non Aktif</option>
+                                            <%else%>
+                                                <option value="0">Non Aktif</option>
+                                            <%end%>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btnreset btn btn-warning">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+     function back(){
+            window.location = '/backoffice/master/pages';
+    }
+
+    function tampilkanPreview(userfile, idpreview) {
+        var gb = userfile.files;
+        for (var i = 0; i < gb.length; i++) {
+            var gbPreview = gb[i];
+            var imageType = /image.*/;
+            var preview = document.getElementById(idpreview);
+            var reader = new FileReader();
+            if (gbPreview.type.match(imageType)) {
+                //jika tipe data sesuai
+                preview.file = gbPreview;
+                reader.onload = (function (element) {
+                    return function (e) {
+                        element.src = e.target.result;
+                    };
+                })(preview);
+                //membaca data URL gambar
+                reader.readAsDataURL(gbPreview);
+            } else {
+                //jika tipe data tidak sesuai
+                alert("Tipe file tidak sesuai. Gambar harus bertipe .png, .gif atau .jpg.");
+            }
+        }
+    }
+  
+</script>

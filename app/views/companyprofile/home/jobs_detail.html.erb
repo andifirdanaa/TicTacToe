@@ -1,0 +1,497 @@
+<!-- <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+</head> -->
+<style>
+.container {
+    height: 100%;
+    margin: 0;
+}
+
+.badan {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.flex-header {
+    z-index: 1;
+}
+
+.flex-body {
+    flex: 6;
+    background-color: #FFF;
+    margin-top: 2%;
+}
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+}
+
+.flex-footer {
+    flex: 1;
+    background-color: #272E48;
+}
+
+.textWhiteJudul{
+    color: #FFF;
+    font-size: 30px;
+    padding-top: 100px;
+    text-align: center;
+}
+
+.textInfo{
+  color: #8c8c8c;
+  font-size: 20px;
+}
+.textInfo2{
+  color: #8c8c8c;
+  font-size: 20px;
+}
+
+textarea:focus{
+  border: 1px solid #555;
+}
+
+.btnKirim {
+    background: black;
+    padding: 2px 0px 2px 0px;
+    color: black; 
+    text-align: center;
+    border-radius: 5px;
+    font-size: 12px;
+    width: 40%;
+    border: solid 1px
+}
+
+.cardBlue {
+    background: #3963a3;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 4px;
+    margin-left: 40%;
+}
+
+.textWhitePesan{
+    color: #FFF;
+    font-size: 13px;
+}
+
+.port-item {
+  width: 100%;
+  min-width: 0;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+.judulUtama{
+    color: #050547;
+    font-size: 48px;
+    float: center;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.subJudulUtama{
+    color: #050547;
+    font-size: 16px;
+    float: center;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.judulAccordion{
+    color: #050547;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.subJudulClient{
+    color: #050547;
+    font-size: 20px;
+    float: center;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.subJudulClient2{
+    color: #878787;
+    font-size: 16px;
+    float: center;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+.subJudulClients{
+    color: white;
+    font-size: 20px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.subJudulClients2{
+    color: white;
+    font-size: 16px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+.judulCard{
+    color: white;
+    font-size: 20px;
+    float: center;
+    text-align: left;
+}
+
+.judulCard1{
+    color: white;
+    font-size: 16px;
+    float: center;
+    text-align: center;
+}
+
+.subJudulCard{
+    color: white;
+    font-size: 14px;
+    float: center;
+    text-align: right;
+}
+
+.subJudulRating{
+    color: #050547;
+    font-size: 20px;
+    float: center;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.subJudulRating2{
+    color: #878787;
+    font-size: 16px;
+    float: center;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.subJudulDigi{
+    color: #050547;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.subJudulDigi1{
+    color: #050547;
+    font-size: 16px;
+}
+
+.subJudulDigi2{
+    color: #878787;
+    font-size: 16px;
+    /* float: center; */
+    /* text-align: left; */
+    margin-bottom: 20px;
+}
+.textJudul{
+    color: #050547;
+    font-size: 38px;
+    float: center;
+    text-align: center;
+}
+.textJudul1{
+    color: #050547;
+    font-size: 16px;
+    float: center;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.textJudul2{
+    color: #9d9d9d;
+    font-size: 16px;
+    float: center;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.textReview{
+    color: #050547;
+    font-size: 16px;
+    float: right;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.textReview2{
+    color: #050547;
+    font-size: 16px;
+    float: left;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.teamImg {
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+  border-radius: 50%;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.image-review {
+  opacity: 1;
+  display: block;
+  transition: .5s ease; 
+  padding: 3px;
+  border-radius: 12px;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.image-testimoni {
+  opacity: 1;
+  transition: .5s ease; 
+  padding: 3px;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+  width: 80%;
+  height: 50%;
+}
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+/* .active, .accordion:hover {
+  background-color: #ccc; 
+} */
+input[type="file"] {
+    display: block;
+    color:#6C6C6C;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+.card-header .title {
+    font-size: 17px;
+    color: #000;
+}
+.card-header .accicon {
+  float: right;
+  font-size: 20px;  
+  width: 1.2em;
+}
+.card-header{
+  cursor: pointer;
+  /* border-bottom: 4px solid #ddd;
+  background-color: white; */
+}
+.card{
+  border: 1px solid #ddd;
+}
+.card-body{
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.card-header:not(.collapsed) .rotate-icon {
+  transform: rotate(180deg);
+}
+.vl {
+  border-left: 1px solid #C6C6C6;
+  height: auto;
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 900px) {
+  #bars {
+    flex-direction: column !important;
+  }
+  img { 
+        width: 20%;
+        height: 75%;
+    }
+  #spreadImg{
+    width: 100%;
+    height: 100%;
+  }
+
+  #digiImg{
+    width: 100%;
+    height: 100%;
+  }
+  #dirutImg{
+    width: 100%;
+    height: 100%;
+  }
+}
+ 
+</style>
+
+<div class="container">
+    <div class="badan">
+        <div class="flex-header">
+            <%= render "/companyprofile/home/mtm_menu.html.erb"%>
+        </div>
+        
+        <div class="flex-body">
+          <div style="background-color: #F0F8FF;">
+            <div class="textJudul" style="margin-top: 40px; padding-top: 50px;">
+              <strong>Jobs</strong>
+            </div>
+            <div class="textJudul2" style="padding: 30px;">
+              Get in and Grow
+            </div>
+          </div>
+
+          <div id="bars" class="d-flex justify-content-center" style="margin-left: 5%; ">
+  
+            <div class="port-item p-2" style="text-align:left;">
+              
+              <div style="margin-top: 40px;">
+                <strong><span class="subJudulDigi"><%= @data_detail['judul'] %></span></strong>
+              </div>
+              <div style="margin-top: 40px;">
+                <strong><span class="subJudulDigi1">Description</span></strong>
+              </div> 
+              <%= raw @data_detail['desc'] %>                
+
+              <strong><span class="subJudulDigi1">Additional Information</span></strong>
+              
+              <div class="d-flex flex-row" style="padding-top: 20px; padding-bottom: 50px;">
+
+                <div class="d-flex flex-column" style="margin-top: 20px;">
+
+                      <div class="p-2">
+                        <strong><span class="subJudulDigi1">Career Level</span></strong>
+                        <br>
+                        <span class="subJudulDigi2">
+                          <%= @data_detail['level'] %>
+                        </span>
+                      </div>  
+
+                      <div class="p-2">
+                        <strong><span class="subJudulDigi1">Years of experience</span></strong>
+                        <br>
+                        <span class="subJudulDigi2"><%= @data_detail['tahun'] %></span>
+                      </div>  
+
+                </div>
+
+                <div class="d-flex flex-column" style="padding-top: 20px; margin-left: 90px;">
+
+                      <div class="p-2">
+                        <strong><span class="subJudulDigi1">Qualification</span></strong>
+                        <br>
+                        <span class="subJudulDigi2">
+                          <%= @data_detail['qualification'] %>
+                        </span>
+                      </div>
+
+                      <div class="p-2">
+                        <strong><span class="subJudulDigi1">Job type</span></strong>
+                        <br>
+                        <span class="subJudulDigi2"><%= @data_detail['job_type'] %></span>
+                      </div>
+
+                </div>
+              </div>
+
+            </div>
+            <div class="vl"></div>
+            <div class="port-item p-2">    
+              <div style="text-align: left; padding-top: 45px;padding-left: 2%;">
+                <% if @data_page_jobs != nil %>
+                  <div class="">
+                    <%= raw @data_page_jobs %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+          </div> 
+        </div>
+
+      <div class="flex-footer">
+          <%= render "/companyprofile/home/mtm_footer.html.erb"%>
+      </div>
+    </div>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+    function kirims(){
+
+    var full_name = document.getElementById("full_name").value;
+    var email = document.getElementById("email").value;
+    var referal = document.getElementById("referal").value;
+    var portfolio = document.getElementById("portfolio").value;
+
+    if(full_name == ''){
+      alert("Nama Lengkap Anda Belum Diisi");
+    }else if(email == ''){
+      alert("Email Anda Belum Diisi");
+    }else if(referal == ''){
+      alert("Referal Anda Belum Diisi");
+    }else if(portfolio == ''){
+      alert("Portfolio Anda Belum Diisi");
+    }else{      
+      $("#simpan").trigger("click");
+    }
+  }
+
+    $(document).ready(function (e) {
+
+		$("#jobsForm").on('submit', (function (e) {
+
+			e.preventDefault();
+			$.ajax({
+				url: "/companyprofile/home/aksi_jobs",
+				type: "POST",
+				data: new FormData(this),
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function (result) {
+              
+          if (result.status == true) {
+              swal("Selamat", "Pesan Berhasil Dikirim", "success").then((value) => {
+                    window.location = "";
+                });  
+          } else {
+              swal("Gagal", "Pesan tidak Berhasil Dikirim", "danger").then((value) => {
+                    window.location = "";
+                }); 
+          }
+				}
+			});
+		}));
+	});
+</script>

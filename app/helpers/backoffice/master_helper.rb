@@ -1,0 +1,2 @@
+module Backoffice::MasterHelper
+end

@@ -1,0 +1,11 @@
+
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+
+/log
+/tmp
+Gemfile.lock
+/public/.DS_Store
+/config/digi.yml
