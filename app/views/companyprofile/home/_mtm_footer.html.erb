@@ -25,6 +25,8 @@
 }
 .page-footer .footer-informasi .footer-alamat{
   margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
 }
 .page-footer .footer-informasi .footer-alamat p{
   font-size: 14px;
@@ -32,6 +34,10 @@
   color: #ffffff;
   text-align: left;
   width: 200px;
+}
+.page-footer .footer-informasi .footer-alamat .img-map{
+  width:30%;
+  position: right;
 }
 .page-footer .footer-down{
   display: flex;
@@ -193,6 +199,13 @@ padding: 8px 15px;
   color: #fff;
   background: #1977cc;
 }
+.page-footer .footer-informasi .footer-alamat{
+  display: block;
+}
+.page-footer .footer-informasi .footer-alamat .img-map{
+  width:100%;
+  position: right;
+}
 
 }
 </style>
@@ -207,6 +220,16 @@ padding: 8px 15px;
           </div>
           <div class="footer-alamat">
             <p>Jl. Cibubur I No.RT.3, RT.13/RW.1, Cibubur, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13720</p>
+            <div class="img-map">
+              <iframe 
+                src="<%= @Maps %>" 
+                width=100% 
+                height="150" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+              </iframe>
+            </div>
           </div>
         </div>
         </div>

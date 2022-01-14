@@ -50,12 +50,18 @@
   z-index: 200;
 }
 .navbars{
-  background-color:#ffffff;
+  background-color:#215273;
   /* background: rgba(255, 255, 255, 0.5); */
   opacity: 0.9;
   padding: 20px 55px;
   border-bottom: 2px solid #888AA2;
   
+}
+.navbars .nav-item{
+  color: #f5f5f5;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(232 232 233);
 }
 .navbars .nav-item a{
   color: #888AA2;
@@ -84,14 +90,82 @@
   margin: 0;
     
 }
+.img-logo{
+  max-width:110px;
+  height:auto;
+  margin-right:80px;
+  width: 80px;
+  height:80px
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  .img-logo{
+    margin-right:80px;
+    width: 60px;
+    height:60px
+  }
+  .navbars {
+    background-color: #215273;
+    opacity: 0.9;
+    padding: 8px 15px;
+  }
+  .navbars .nav-item{
+    color: #888AA2;
+  }
+  .navbar-light .navbar-nav .nav-link {
+    color: rgb(80 80 83);
+  }
+  .navbars .nav-item a{
+    color: #888AA2;
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .sub-menu{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    left: 100%;
+    top: 0;
+  }
+  .sub-menu.show {
+    display: block;
+  }
+  .sub-item{
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+  }
+  
+}
 </style>
 
 
   <div class="fix-nav">
-      <nav id="navbars" class="navbar navbar-expand-lg navbar-light navbars">
+      <nav  class="navbar navbar-expand-lg navbar-light navbars" id="bootnavbar">
         <div class="container-fluid">
           <a href="/">
-            <img id="logo" src="/img/icon 1.png" style="max-width:110px;height:auto;margin-right:80px;" />
+            <img class="img-logo" id="logo" src="/img/icon 1.png" />
           </a> 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -99,28 +173,64 @@
         
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-            <% if @menu != nil %>
-             <% @menu.each do |res| %>
-              <li class="nav-item <%= res['rows_child'] == 1 ? 'dropdown' : '' %>" style="padding-right:20px;">
-                <a href="<%= res['url']%>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
-                  <%=res['menu'] %>
-                </a>
-                 <% if res['rows_child'] == 1 %>
-                  <% if res['menu_child'] != nil %>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <% res['menu_child'].each do |ress| %>
-                    <a class="dropdown-item" href="<%= ress['url'] %>"><%= ress['menu'] %></a>
-                  <% end %>     
-                </div>
+              <% if @menu != nil %>
+              <% @menu.each do |res| %>
+                <li class="nav-item <%= res['rows_child'] == 1 ? 'dropdown' : '' %>" style="padding-right:20px;">
+                  <a href="<%= res['url']%>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
+                    <%=res['menu'] %>
+                  </a>
+                  <% if res['rows_child'] == 1 %>
+                    <% if res['menu_child'] != nil %>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <% res['menu_child'].each do |ress| %>
+                      <% if ress['rows_child'] == 2 %>
+                        <li class="dropdown">
+                            <a href="<%= ress['url']%>" class="dropdown-item dropdown-toggle" id="dnavbardropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                              <%=ress['menu'] %>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <% ress['menu_child'].each do |resss| %>
+                                <a class="dropdown-item" href="<%= resss['url']%>" ><%= resss['menu']%></a>
+                                <% end %>
+                            </ul>
+                        </li>
+                            
+                      <%else%>
+                          <% if ress['url'] != "" %>
+                            <li><a class="dropdown-item" href="<%= ress['url'] %>" ><%= ress['menu'] %></a></li>
+                          <% else %>
+
+                              <% 
+                                  url_page = ENV['CIRACAS_WEB']+"page/#{ress['page_id'].to_s}"
+
+                                  res_page = HTTParty.get(
+                                      url_page
+                                  )
+
+                                  @page = res_page['content']['url']
+                                  @keyword = res_page['content']['slug']
+                                  @id = res_page['content']['id']
+                              %>
+                            
+                              <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ress['menu'] %></strong></a></li>
+                          <%end%>
+                      <%end%>
+                        
+                      
+                    <% end %>     
+                  </ul>
+                    <%end%>
                   <%end%>
-                <%end%>
-              </li> 
-             <%end%>
-            <%end%>
-            <div class="d-flex justify-content-end chat" style="padding-left:20px;">
-              <a href="https://wa.me/083890886344"  target="_blank"><button class="btn edit btn-default" class="logoChat" style="margin-left:-10%;padding-left:20px;padding-right:25px;background-image: linear-gradient(to right,#2193b0,  #6dd5ed);border-radius: 4px; cursor: pointer;"><img src="" height="15px"/><span style="color: white; padding-left: 5px; font-size: 14px;">Chat Now</span></button></a>
-            </div>
+                </li> 
+              <%end%>
+              <%end%>
+              <div class="d-flex justify-content-end chat" style="padding-left:20px;">
+                <a href="https://wa.me/083890886344"  target="_blank"><button class="btn edit btn-default" class="logoChat" style="margin-left:-10%;padding-left:20px;padding-right:25px;background-image: linear-gradient(to right,#2193b0,  #6dd5ed);border-radius: 4px; cursor: pointer;"><img src="" height="15px"/><span style="color: white; padding-left: 5px; font-size: 14px;">Chat Now</span></button></a>
+              </div>
+            </ul>
           </div>
         </div>
       </nav>
   </div>
+
+

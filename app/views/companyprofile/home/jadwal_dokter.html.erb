@@ -899,7 +899,7 @@
       position: relative;
   }
   .card0{
-      /* margin: 0 30px; */
+      margin: 0 30px;
       background-size: 100%;
   }
   .card0 .img-dokter{
@@ -1086,6 +1086,12 @@
       color: #fff;
       background: #1977cc;
     }
+    .header-text-nama{
+      font-size: 24px;
+    }
+    .header-text-spesialis{
+      font-size: 20px;
+    }
     
   }
 
@@ -1100,77 +1106,79 @@
             <div class="row">
                 <div class="background-tentang">
                     <div class="judul-bg">
-                        <h3>Dokter</h3>
+                        <h3>Jadwal Dokter</h3>
                     </div>
                 </div>
             </div>
-            <div class="row row-tentang-1">
-              <div class="isi-tentang-1">
-                <div class="row">
-                  <% if @dataspesialis.present? != nil%>
-                    <% @dataspesialis.each do |sp|%>
-                      <div class="col-md-3 col-sm-12">
-                          <div class="card">
-                            <div class="card-front" id="card-id">
-                              <button type="button" id="btn-spe-id" onclick="datasp('<%= sp['id'] %>');" class="btn btn-primary" 
-                              style="background: transparent; width:100%;height:100%;font-size: 24px;font-weight: 800;color: #FFFFFF;position: absolute;">
-                              <%= sp['nama'] %>
-                              </button>
-                            </div>
-                          </div>
-                      </div>
-                      <%end%>
-                  <%end%>
-                </div>
-              </div>
-            </div>
+            
 
-            <div class="row d-flex flex-wrap justify-content-center" style="padding: 60px 30px; ">
-              <%if @data != nil%>
-                <% @data.each do |res|%>
+            <div class="row d-flex flex-wrap justify-content-center" style="padding: 100px 30px; ">
+              <%  if @datajadwal.present? %>
+              <div class="col-lg-6 col-sm-12 d-flex justify-content-center" style="padding-right:auto;">
                 <div class="card card0" style="margin-bottom: 30px; ">
                     <div class="img-dokter">
-                      <img src="<%= ENV['CIRACAS_WEB']+res['image_url']%>" alt="img"/>
+                      <img src="<%= ENV['CIRACAS_WEB']+@datajadwalimage['dokterImage']%>" alt="img"/>
                     </div>
                     <div class="border-dok">
-                      <h3><%= res['name']%></h3>
-                      <p><%= res['spesialis']%></p>
+                      <h3><%= @datajadwalimage['dokterNama']%></h3>
+                      <p><%= @datajadwalimage['spesialisNama']%></p>
                     </div>
                 </div>
-                <%end%>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <h3 class="header-text-nama"><%= @datajadwalimage['dokterNama']%></h3>
+                <h4 class="header-text-spesialis">( <%= @datajadwalimage['spesialisNama']%> )</h4>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Hari</th>
+                             <th scope="col">Nama</th>
+                            <th scope="col">Waktu</th>
+                            <th scope="col">Jam Mulai</th>
+                            <th scope="col">Jam Selesai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <%  if @datajadwal.present?
+
+                       
+                        @no = 0
+                        @datajadwal.each do |resp| 
+                        %>
+                        <tr>
+                            <td><%= @no = @no+1 %></td>
+                            <td><%= resp['hari'] %></td>
+                            <td><%= resp['dokterNama'] %></td>
+                            <td><%= resp['waktu'] %></td>
+                            <td><%= resp['jamMulai'] %></td>
+                            <td><%= resp['jamSelesai'] %></td>
+                        </tr>
+                    <% end %>
+                    <% else %>
+                            <tr>
+                                <td colspan="19" align="center">Maaf, tidak ada data.</td>
+                            </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+              </div>
+              <%else%>
+                <div>
+                  Tidak Ada Data
+                </div>
               <%end%>
             </div>
 
-            
         </div>
     </section>
 
 <%= render "/companyprofile/home/mtm_footer.html.erb"%>
 <script>
 
-  function datasp(id){
-    // alert(id);
-    window.location = '/companyprofile/home/dokter_get?id='+id;
-    //  $.ajax({
-    //     url: "/companyprofile/home/dokter_get",
-    //     type: "GET",
-    //     dataType: "json",
-    //     data: {
-    //         id: id,
-            
-    //     },
-
-    //     success: function(result) {
-    //       console.log(result);
-    //        window.location = '/companyprofile/home/dokter_get';
-         
-          
-    //     }
-
-    // });   
+ 
        
 
-        
-  }
+ 
 
 </script>

@@ -1,7 +1,8 @@
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <%# <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> %>
+  <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
@@ -15,12 +16,12 @@ section {
   text-align: center;
   padding-bottom: 30px;
 }
-.section-title h2{
+.section-title h3{
   font-size: 32px;
   font-weight: 800;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px;
   padding-bottom: 20px;
-  position: relative;
+  position: relative; */
   /* color: #2c4964; */
 }
 .section-title h2::before {
@@ -60,7 +61,7 @@ section {
 }
 .page-home {
   width: 100%;
-  height: 550px;
+  height: 100vh;
   padding: 0;
   overflow: hidden;
   
@@ -72,28 +73,150 @@ section {
 .img-carousel-wrapper .img-carousel{
   width: 100%;
   height: 100%;
-  max-height: 550px;
+  max-height: 760px;
   
 }
+.tentang-wrapper {
+    width: 100%;
+    line-height: 1.6;
+    position: relative;
+    padding: 10px 10px;
+    height: auto;
+}
+.tentang-wrapper .title-bg{
+    color: #777777;
+    position: relative;
+    padding: 50px 100px;
+}
+.tentang-wrapper .title-bg .header-text{
+   display: block;
+}
+.tentang-wrapper .title-bg .header-text .line{
+   margin: 0 0;
+   margin-bottom: 20px;
+   width: 400px;
+}
+.tentang-wrapper .title-bg span{
+   color: #215273;
+}
+.tentang-wrapper .title-bg h4{
+    color: #212529;
+    font-size: 36px;
+    font-weight: 800;
+    padding: 20px 0;
+}
+.tentang-wrapper .title-text p{
+    font-size: 18px;
+    text-align: justify;
+}
 .page-content{
+  background-color: #f0f0f0;
   /* padding-left: 20px; */
   /* padding-right: 20px; */
+}
+/*--------------------------------------------------------------
+  # cari dokter
+  --------------------------------------------------------------*/
+.cari-dokter{
+  padding: 0;
+  background-color: #215273;
+}
+.cari-dokter .module{
+  padding-top: 0;
+}
+.cari-dokter .search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+.cari-dokter .searchTerm {
+  width: 100%;
+  border: 3px solid #359d9e;
+  border-right: none;
+  padding: 5px;
+  height: 50px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+
+.cari-dokter .searchTerm:focus {
+  color: #359d9e;
+}
+.cari-dokter .searchTerm2 {
+  width: 100%;
+  border: 3px solid #359d9e;
+  border-right: none;
+  padding: 5px;
+  height: 50px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+.cari-dokter .searchTerm2:focus {
+  color: #359d9e;
+}
+.cari-dokter .wrap{
+  width: 100%;
+  /* position: absolute; */
+  padding: 20px 0;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+}
+.searchButton {
+  width: 40px;
+  /* height: 36px; */
+  border: 1px solid #359d9e;
+  background: #359d9e;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+.searchButton2 {
+  width: 40px;
+  /* height: 36px; */
+  border: 1px solid #359d9e;
+  background: #359d9e;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
 }
  /*--------------------------------------------------------------
   # abot
   --------------------------------------------------------------*/
 .page-about-1{
-  /* padding: 7em 0; */
-  position: relative;
+  /* padding: 50px 0; */
+  /* position: relative; */
   width: 100%;
   z-index: 0;
-  padding-top: 0;
+  padding: 0 0;
+  /* background: url("/img/IMG_9497\ 1.png"); */
+  height: auto;
+  background-color: #f7fafd;
+  /* background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center; */
+
+  overflow: hidden;
+  /* padding-top: 0; */
+}
+.page-about-1 .page-about-container{
+  /* background: linear-gradient(to bottom right, rgba(8, 116, 162, 0.8), rgba(8, 116, 162, 0.8)); */
+  overflow: hidden;
 }
 .page-about-1 .wrap{
-  margin-top: -80px;
+  /* margin-top: -80px; */
 }
 .page-about-1 .service-wrap{
-  position: relative;
+  /* position: relative; */
   margin-bottom: 25px;
 }
 .service-wrap .services{
@@ -238,6 +361,61 @@ img {
     padding-right: 60px;
     padding-left: 60px;
   }
+  .page-pelayanan .service-box{
+    background-color: #f7fafd;
+    padding: 2.5rem 1.3rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .page-pelayanan .service-box:hover {
+    box-shadow: 0 5px 5px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+  }
+  .page-pelayanan .service-box .service-icon{
+    margin-bottom: 1rem;
+    color: #1e1e1e;
+    height: 100px;
+    width: 100px;
+    font-size: 2rem;
+    border-radius: 30%;
+    line-height: 1.55;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0 0 0 3px #215273;
+    display: block;
+  }
+  .page-pelayanan .service-box .icon{
+    transition: all 500ms ease;
+    font-size: 4rem;
+  }
+  .page-pelayanan .service-content{
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  .page-pelayanan .service-content .h3{
+    font-size: 24px;
+    font-weight: 700px;
+  }
+  .page-pelayanan .service-content img{
+    width: 100%;
+    height: 206px;
+    object-fit: cover;
+  }
+  .page-pelayanan .service-content a{
+    margin: 20px 0;
+    color: #fff;
+    background-color: #215273;
+    border-color: #215273;
+  }
+  .page-pelayanan .service-content a:hover{
+    background-color: #215273;
+    transition: 0.5s ease;
+    transform: scale(1.1);
+  }
   .page-pelayanan .nav-tabs {
     border: 0;
   }
@@ -258,8 +436,8 @@ img {
   }
 
   .page-pelayanan .nav-link.active {
-    color: #1977cc;
-    border-color: #1977cc;
+    color: #215273;
+    border-color: #215273;
   }
 
   .page-pelayanan .tab-pane.active {
@@ -492,7 +670,8 @@ img {
 
   }
   .page-jadwal .jadwal{
-    background: linear-gradient(to bottom right, rgba(8, 116, 162, 0.8), rgba(8, 116, 162, 0.8));
+    background: linear-gradient(to bottom right, rgba(34, 87, 126, 0.8), rgba(34, 87, 126, 0.8));
+    /* background-color: #215273; */
     overflow: hidden;
   }
   .page-jadwal .emergency-wrapper{
@@ -585,6 +764,43 @@ img {
     padding: 0 10px;
   }
   /*--------------------------------------------------------------
+  # sambutan
+  --------------------------------------------------------------*/
+  .page-sambutan{
+    padding-left: 60px;
+    padding-right: 60px;
+    background-color: #f7fafd;
+  }
+  .page-sambutan .text-header-sambutan{
+    display: block;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  .page-sambutan .text-header-sambutan h4{
+    font-size: 36px;
+    font-weight: 800;
+  }
+  .page-sambutan .text-header-sambutan span{
+    color: #215273;
+  }
+  .page-sambutan .body-sambutan{
+    justify-content: center;
+  }
+  .page-sambutan .body-sambutan .text-sambutan{
+    color: #777777;
+    font-style: italic;
+  }
+   .page-sambutan .body-sambutan .author-sambutan{
+    text-align: center;
+    color: #777777;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  /*--------------------------------------------------------------
   # news
   --------------------------------------------------------------*/
   .page-news {
@@ -592,11 +808,21 @@ img {
     padding-right: 60px;
     
   }
+  .line {
+    width: 40px;
+    height: 5px;
+    background-color: #215273;
+    margin: 0 auto;
+  }
   .page-news .text-header-news{
-    display: flex;
+    display: block;
     justify-content: center;
+    text-align: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
+  }
+  .page-news .card-color{
+    background-color: #f7fafd;
   }
   .page-news .text-header-news h4{
     font-size: 36px;
@@ -645,8 +871,8 @@ img {
   }
   .page-news .news-wrapper .btn-news{
     cursor: pointer;
-    background: #207dff;
-    border: 1px solid #207dff;
+    background: #215273;
+    border: 1px solid #215273;
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -673,7 +899,7 @@ img {
   }
   .page-contact .contact{
     padding: 60px 0;
-    background: linear-gradient(to bottom right, rgba(8, 116, 162, 0.8), rgba(8, 116, 162, 0.8));
+    background: linear-gradient(to bottom right, rgba(34, 87, 126, 0.8), rgba(34, 87, 126, 0.8));
     overflow: hidden;
   }
   .page-contact .header-text-contact{
@@ -722,6 +948,11 @@ img {
 ::-webkit-scrollbar {
     width: 0;  /* Remove scrollbar space */
 }
+  
+.ui-menu .ui-menu-item a{
+    background:red;
+    height:10px;
+    font-size:8px;}
 
 
 @import "compass/css3";
@@ -814,7 +1045,7 @@ padding: 8px 15px;
   color: #222534;
 }
 .img-carousel-wrapper{
-  height: 250px;
+  height: 750px;
 }
 .img-carousel-wrapper .img-carousel{
   width: 100%;
@@ -822,9 +1053,12 @@ padding: 8px 15px;
   max-height: 550px;
   
 }
+.img-carousel-wrapper img{
+
+}
 .page-home {
   width: 100%;
-  height: 250px;
+  height: auto;
   padding: 0;
   overflow: hidden;
 }
@@ -901,6 +1135,31 @@ padding: 8px 15px;
   color: #fff;
   background: #1977cc;
 }
+.tentang-wrapper .title-bg .header-text{
+   display: block;
+}
+.tentang-wrapper .title-bg .header-text .line{
+   margin: 0 0;
+   margin-bottom: 20px;
+   width: auto;
+}
+.tentang-wrapper .title-bg span{
+   color: #1977CC;
+}
+.tentang-wrapper .title-bg{
+    color: #777777;
+    position: relative;
+    padding: 50px 50px;
+}
+.tentang-wrapper .title-bg h4{
+    color: #212529;
+    font-size: 28px;
+    padding: 20px 0;
+}
+.tentang-wrapper .title-text p{
+    font-size: 18px;
+    text-align: justify;
+}
 
 }
  
@@ -915,6 +1174,7 @@ padding: 8px 15px;
         <div class="col-lg-12 p-0">
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" >
+            <% if @data_banner['content'] != nil %>
               <%if @databanner != nil%>
                 <% @databanner.each do |item|%>
                   <div class="carousel-item img-carousel-wrapper <%= item == @databanner.first ? 'active' : '' %>">
@@ -926,6 +1186,11 @@ padding: 8px 15px;
                   <img src="/img/poligigi.jpg" class="img-responsive img-carousel" alt="Responsive image"  >
                 </div>
               <%end%>
+            <%else%>
+                <div class="carousel-item img-carousel-wrapper">
+                  <img src="/img/poligigi.jpg" class="img-responsive img-carousel" alt="Responsive image"  >
+                </div>
+            <%end%>
             </div>
             <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -940,81 +1205,109 @@ padding: 8px 15px;
       </div>
     </div>
   </section>
+  
+  <section class="cari-dokter">
+   <div class="module" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+    <div class="container-fluid">
+      <div class="row d-flex">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="wrap">
+            <div class="search">
+                <input type="hidden" id="autocomplete_id" name="cari_id">
+                <input type="text" id="autocomplete" class="searchTerm" placeholder="Cari Dokter?" name="cari">
+                <button type="submit" class="searchButton" onclick="aksidata()">
+                  <i class="fa fa-search"></i>
+              </button>
+            </div>
+            <div class="suggest" id="suggest_id">
+            </div>
+        
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="wrap">
+          
+            <div class="search">
+                <input type="hidden" id="autocompletespes_id" name="cari_id">
+                <input type="text"  id="autocompletespes" class="searchTerm2" placeholder="Cari Spesialis?">
+                <button type="submit" class="searchButton2" onclick="aksidata2()">
+                  <i class="fa fa-search"></i>
+              </button>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </section>
 
-  <section class="page-about-1">
-    <div class="container-xl">
-      <div class="row wrap">
-        <div class="col-md-4 col-lg-4 d-flex align-items-stretch service-wrap">
-          <div class="services">
-            <div class="icon-about">
-              <img src="/img/planner.png" alt="img">
-            </div>
-            <div class="text-about">
-            <%if @data_system.present?%>
-              <h3>Tentang Rumah Sakit Umum Daerah
-                Ciracas</h3>
-              <p style=""><%= @Tentangrsud%></p>
-            <%else%>
-              <h3>Tentang Rumah Sakit Umum Daerah
-                Ciracas</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu egestas auctor blandit proin sed. Turpis ut suspendisse nisl, ultrices in congue et dolor mattis. Congue ullamcorper ac morbi sed adipiscing nibh. Nullam curabitur consectetur velit sit massa. Pellentesque consectetur fames elit</p>
-            <%end%>
-            </div>
-          </div>
+  <section id="pelayanan" class="page-pelayanan">
+    <div class="module" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+      <div class="container-fluid">
+        <div class="section-title">
+          <h3>Layanan</h3>
+          <div class="line"></div>
         </div>
-        <div class="col-md-4 col-lg-4 d-flex align-items-stretch service-wrap">
-          <div class="services">
-            <div class="icon-about">
-              <img src="/img/strategy.png" alt="img">
-            </div>
-            <div class="text-about">
-              <%if @data_system.present?%>
-              <h3>Visi</h3>
-              <p style=""><%= @visi%></p>
-            <%else%>
-              <h3>Visi</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu egestas auctor blandit proin sed. Turpis ut suspendisse nisl, ultrices in congue et dolor mattis. Congue ullamcorper ac morbi sed adipiscing nibh. Nullam curabitur consectetur velit sit massa. Pellentesque consectetur fames elit</p>
-            <%end%>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-4 d-flex align-items-stretch service-wrap">
-          <div class="services">
-            <div class="icon-about">
-              <img src="/img/presentation.png" alt="img">
-            </div>
-            <div class="text-about">
-            <%if @data_system.present?%>
-              <h3>Misi</h3>
-              <ul>
-                <li><p style=""><%= @misi1%></p></li>
-                <li><p style=""><%= @misi2%></p></li>
-                <li><p style=""><%= @misi3%></p></li>
-                <li><p style=""><%= @misi4%></p></li>
-                <li><p style=""><%= @misi5%></p></li>
-              </ul>
-            <%else%>
-              <h3>Misi</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu egestas auctor blandit proin sed. Turpis ut suspendisse nisl, ultrices in congue et dolor mattis. Congue ullamcorper ac morbi sed adipiscing nibh. Nullam curabitur consectetur velit sit massa. Pellentesque consectetur fames elit</p>
-            <%end%>
+        <div class="row d-flex flex-wrap mb-5">
+        <% @datajns.each do |resjns| %>
+          <div class="col-md-4 text-center">
+            <div class="service-box">
+              <div class="service-icon">
+                <span class="icon"></span>
+                <i class="fas fa-stethoscope fa-2x"></i>
+              </div>
+              <div class="service-content">
+                <h3><%= resjns['nama'] %></h3>
+                <%
+                  nama = resjns['nama'].gsub(" ","")
+                %>
+                <a href="/companyprofile/home/layanan?layanan=<%= resjns['nama'] %>-<%= resjns['id'] %>" class="btn btn-sm btn-primary btn-service">Selengkapnya</a>
+                
+              </div>
             </div>
           </div>
+        <%end%>
+
         </div>
       </div>
     </div>
   </section>
 
+  <section class="page-about-1">
+    <div class="page-about-container" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+      <div class="row wrap">
+        <div class="col-md-12 col-sm-12 p-0">
+            <div class="tentang-wrapper">
+              <div class="title-bg">
+                <div class="header-text">
+                  <h4>Tentang <span>RSUD CIRACAS</span></h4>
+                  <div class="line"></div>
+                </div>
+                
+                <div class="title-text">
+                  <p><%= raw @Tentangrsud %></p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% if @data_why['content'] != nil %>
   <section class="page-why-me" id="why-me">
-    <div class="module" >
+    <div class="module" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="container-fluid">
-        <% if @data_why['content']['data'] != nil %>
+        <% if @data_why['content'] != nil %>
           <% @data_why['content']['data'].each do |res| %>
             <% if res['status'] == '1' %>
               <div class="row d-flex align-items-center">
                 <div class="col-md-6 col-sm-12 col-body">
                   <div class="card">
                     <div class="image-whyme">
-                      <img src="<%= ENV['CIRACAS_WEB']+"/"+ res['image_path'] %>" class="card-img-top" alt="..." width="250px;" height="450px">
+                      <iframe width="100%" height="450" src="https://www.youtube.com/embed/lsrxkdGPD2E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      
                     </div>
                   </div>
                 </div>
@@ -1023,7 +1316,7 @@ padding: 8px 15px;
                     <div class="col-12">
                       <h3 class="text-why-me"><%= res['title']%></h3>
                       <div class="title-why-me">
-                        <p><%= res['desc']%></p>
+                        <p><%= raw res['desc']%></p>
                       </div>
                     </div>
                   </div>
@@ -1040,99 +1333,40 @@ padding: 8px 15px;
       </div>
     </div>
   </section>
+  <%end%>
 
-  <section id="pelayanan" class="page-pelayanan">
-    <div class="module">
-      <div class="container-fluid">
-        <div class="section-title">
-          <h2>Pelayanan</h2>
-          
-        </div>
-  
-        <div class="row">
-          <div class="col-lg-3">
-            <ul class="nav nav-tabs flex-column">
-              <% if @datapelayanan != nil %>
-                <% @datapelayanan.each do |res| %>
-                  <li class="nav-item">
-                    <a class="nav-link <%= res == @datapelayanan.first ? 'active' : '' %> " data-toggle="tab" role="tab"  aria-selected="<%= res == @datapelayanan.first ? 'true' : 'false' %>" href="#tab-<%=res['id']%>"><%= res['nama']%></a>
-                  </li>
-                <%end%>
-              <%end%>
-            </ul>
-          </div>
-          <div class="col-lg-9 mt-4 mt-lg-0">
-            <div class="tab-content">
-              <% if @datapelayanan != nil %>
-                <% @datapelayanan.each do |res| %>
-                  <div class="tab-pane <%= res == @datapelayanan.first ? 'active' : '' %>" id="tab-<%=res['id']%>">
-                    <div class="row">
-                      <div class="col-lg-8 details order-2 order-lg-1">
-                        <h3><%= res['nama']%></h3>
-                        <p class="fst-italic"><%= res['subdesc']%></p>
-                        <p><%= raw res['desc']%></p>
-                      </div>
-                      <div class="col-lg-4 text-center order-1 order-lg-2">
-                        <img src="<%= ENV['CIRACAS_WEB']+"/"+res['image_url']%>" alt="" class="img-fluid">
-                      </div>
-                    </div>
+  <% if @data_sam['content'] != nil %>
+  <section class="page-sambutan" id="sambutan-id">
+    <div class="module" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+       <div class="container-fluid">
+       <% if @data_sam['content'] != nil %>
+          <% @data_sam['content']['data'].each do |res| %>
+            <% if res['status'] == '1' %>
+              <div class="text-header-sambutan">
+                <h4>Sambutan Direktur <span>RSUD Ciracas</span></h4>
+                <div class="line"></div>
+              </div>
+              <div class="row d-flex">
+                <div class="body-sambutan">
+                  <div class="text-sambutan">
+                    <p><%= raw res['desc']%></p>
                   </div>
-                <% end%>
-              <%end%>
-               
-                
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section><!-- End Layanan Section -->
-
-  <section class="page-dokter">
-    <div class="module">
-      <div class="dokter">
-        <div class="container-fluid">
-          <div class="row d-flex justify-content-center mb-5">
-            <h2 class="text-header-dokter">Dokter Spesialis</h2>
-          </div>
-          <div class="row d-flex flex-wrap mb-5">
-            <% if @datadokter != nil %>
-              <% @datadokter.each do |res| %>
-                <% if res['status'] == '1' %>
-                <div class="col-md-3 col-lg-3 col-sm-12 mx-auto">
-                  <div class="card">
-                      <div class="imgBx">
-                        <%if res['image_url'].present? %>
-                        <img src="<%= ENV['CIRACAS_WEB']+"/"+res['image_url']%>" onerror="this.src='/img/logorsudciracas.png'">
-                        <%else%>
-                         <img src="/img/logorsudciracas.png" onerror="this.src='/img/logorsudciracas.png'">
-                        <%end%>
-                      </div>
-                      <div class="contentBx">
-                        <h2><%= res['name']%></h2>
-                        <div class="size">
-                          <h3><%= res['spesialis']%></h3>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="author-sambutan">
+                    <%# <p>dr. Murniasih Hutapea, MPH - Direktur RSUD Ciracas</p> %>
+                  </div>
                 </div>
-                <%end%>
-              <%end%>
+              </div>
             <%end%>
-          </div>
-          <div class="row btn-dktr">
-            <div class="button-dokter">
-              <a href="/dokter">Selengkapnya</a>
-            </div>
-          </div>
-        </div>
-      </div>
+          <%end%>
+       <%end%>
+       </div>
     </div>
   </section>
+  <%end%>
+
 
   <section class="page-jadwal">
-    <div class="jadwal">
+    <div class="jadwal" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 col-sm-12 p-0">
@@ -1151,18 +1385,20 @@ padding: 8px 15px;
     </div>
   </section>
 
+  <% if @data_news['content'] != nil %>
   <section class="page-news">
-    <div class="module">
+    <div class="module" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="container-fluid">
         <div class="text-header-news">
-          <h4>News</h4>
+          <h4>Informasi Publik</h4>
+          <div class="line"></div>
         </div>
         <div class="row d-flex">
           <% if @datanews != nil %>
             <% @datanews.each do |res| %>
               <% if res['status'] == 1 %>
                 <div class="col-md-3 col-lg-4 col-sm-12">
-                  <div class="card">
+                  <div class="card card-color">
                     <div class="news-wrapper">
                       <div class="card-body">
                         <% url_image = ENV['CIRACAS_WEB']+res['image_url'].to_s%>
@@ -1187,25 +1423,11 @@ padding: 8px 15px;
       </div>
     </div>
   </section>
+  <%end%>
 
   <section class="page-contact">
-    <div class="contact">
+    <div class="contact" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="container-fluid">
-        <div class="header-text-contact">
-          <h4>Kontak</h4>
-        </div>
-        <div class="row">
-          <div class="image-maps">
-            <iframe 
-              src="<%= @Maps %>" 
-              width=100% 
-              height="350" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy">
-            </iframe>
-          </div>
-        </div>
         <div class="row d-flex justify-content-center align-items-center">
           <div class="col-md-3 col-lg-3 col-sm-6">
             <div class="sosmed">
@@ -1240,42 +1462,134 @@ padding: 8px 15px;
 </div>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
  <script type="text/javascript">
-  $.fn.visible = function(partial) {
-    var $t            = $(this),
-        $w            = $(window),
-        viewTop       = $w.scrollTop(),
-        viewBottom    = viewTop + $w.height(),
-        _top          = $t.offset().top,
-        _bottom       = _top + $t.height(),
-        compareTop    = partial === true ? _bottom : _top,
-        compareBottom = partial === true ? _top : _bottom;
-  
-  return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
-  
-  };
-  
-  var win = $(window);
-  
-  var allMods = $(".module");
-  
-  allMods.each(function(i, el) {
-  var el = $(el);
-  if (el.visible(true)) {
-    el.addClass("already-visible"); 
-  } 
-  });
-  
-  win.scroll(function(event) {
-  
-  allMods.each(function(i, el) {
-    var el = $(el);
-    if (el.visible(true)) {
-      el.addClass("come-in"); 
-    } 
-  });
-  
-  });
+   $(function () {
+        $('#bootnavbar').bootnavbar({
+          //options
+
+          //animation: false
+
+        });
+    })
+   AOS.init();
+
+    $(function(){
+      var data = [];
+      $("#autocomplete").autocomplete({
+        source: function( request, response ) {
+        // Fetch data
+          $.ajax({
+            url: "/companyprofile/home/dokter_list?keyword="+request.term,
+            type: 'post',
+            dataType: "json",
+          
+            success: function( result ) {
+              // console.log(result);
+              dataa = []
+              dataaa = []
+              for (var i = 0; i < result.length; ++i) {
+                    // console.log(result[i].id);
+                    dataa.push(result[i].name);
+                    dataaa.push(result[i].id);
+                    
+              }
+              
+              response(dataa);
+            }
+          });
+        },
+        minLength: 2,
+        select: function(e, ui) {
+          f = ui.item.value
+          $.ajax({
+            url: "/companyprofile/home/dokter_list?keyword="+f,
+            type: 'post',
+            dataType: "json",
+          
+            success: function( resp ) {
+              dataaa = []
+              for (var i = 0; i < resp.length; ++i) {
+                    dataaa.push(resp[i].id);  
+              }
+              $('#autocomplete_id').val(dataaa);
+              // alert(dataaa);
+            }
+          });
+        }
+      });
+    
+    });
+
+
+    $(function(){
+      var data = [];
+      $("#autocompletespes").autocomplete({
+        source: function( request, response ) {
+        // Fetch data
+          $.ajax({
+            url: "/companyprofile/home/dokter_spesialis?keyword="+request.term,
+            type: 'post',
+            dataType: "json",
+          
+            success: function( result ) {
+              // console.log(result);
+              dataa = []
+              dataaa = []
+              for (var i = 0; i < result.length; ++i) {
+                    // console.log(result[i].id);
+                    dataa.push(result[i].nama);
+                    dataaa.push(result[i].id);
+                    
+              }
+              response(dataa);
+            }
+          });
+        },
+        minLength: 2,
+        select: function(e, ui) {
+          f = ui.item.value
+          $.ajax({
+            url: "/companyprofile/home/dokter_spesialis?keyword="+f,
+            type: 'post',
+            dataType: "json",
+          
+            success: function( resp ) {
+              dataaa = []
+              for (var i = 0; i < resp.length; ++i) {
+                    dataaa.push(resp[i].id);  
+              }
+              $('#autocompletespes_id').val(dataaa);
+            }
+          });
+        }
+      });
+    
+    });
+
+    function aksidata(){
+        var id = $("#autocomplete_id").val();
+        var name = $("#autocomplete").val();
+
+        // alert(id);
+        var mix = name+'-'+id;
+
+        window.location = '/companyprofile/home/jadwal_dokter?dokter='+mix;
+    }
+
+    function aksidata2(){
+      var id = $("#autocompletespes_id").val();
+      var name = $("#autocompletespes").val();
+
+      // alert(id);
+      var mix = name+'-'+id;
+
+      window.location = '/companyprofile/home/jadwal_dokter_spesialis?dokter='+mix;
+    }
+   
+
+
     
   </script>

@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-body">
-        <div class="card-title"><h4><i class="fa fa-database"></i> Pages </h4></div>
+        <div class="card-title"><h4><i class="fa fa-database"></i> Jadwal Dokter </h4></div>
         <div class="card-content">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -45,13 +45,12 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Page</th>
-                                            <th scope="col">Short Desc</th>
-                                            <th scope="col">Slug</th>
-                                            <th scope="col">Content</th>
-                                            <th scope="col">URL</th>
-                                            <th scope="col">Cover</th>
-                                            <th scope="col">Keyword</th>
+                                            <th scope="col">Layanan</th>
+                                            <th scope="col">Dokter</th>
+                                            <th scope="col">Hari</th>
+                                            <th scope="col">Waktu</th>
+                                            <th scope="col">Jam Mulai</th>
+                                            <th scope="col">Jam Selesai</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -69,27 +68,19 @@
                                          %>
                                             <tr>
                                                 <td><%= @no = @no+1 %></td>
-                                                <td><%= res['page'] %></td>
-                                                <td><%= res['short_desc'] %></td>
-                                                <td><%= res['slug'] %></td>
-                                                <td style = "overflow: hidden; text-overflow: ellipsis; max-width: 100px; white-space: nowrap;"><%= res['content'] %></td>
-                                                <td><%= res['url'] %></td>
-                                                <% if res['image_url'].present? %>
-                                                <td>
-                                                <img src= "<%= ENV['CIRACAS_WEB']+"/"+ res['image_url']%>" alt="rss feed"
-                                                     width='100px' height='60px'/>
-                                                </td>
-                                                <%else%>
-                                                    <td>No Image</td>
-                                                <%end%>
-                                                <td><%= res['keyword'] %></td>
+                                                <td><%= res['spesialisNama'] %></td>
+                                                <td><%= res['dokterNama'] %></td>
+                                                <td><%= res['hari'] %></td>
+                                                <td><%= res['waktu'] %></td>
+                                                <td><%= res['jamMulai'] %></td>
+                                                <td><%= res['jamSelesai'] %></td>
                                                 <td align="center">
                                                     <i class="fa <%= res['status'].to_i == 1 ? 'fa fa-check' : 'fa fa-close' %>"
                                                             data-toggle="tooltip" data-placement="top" title="<%= res['status'].to_i == 1 ? 'Aktif' : 'Tidak Aktif' %>">
                                                     </i>
                                                 </td>
                                                 <td>
-                                                    <button class="btnedit btn btn-sm btn-primary" id="aksi_id" onclick="update('<%= res['id'] %>')" title="Edit">
+                                                    <button class="btnedit btn btn-sm btn-primary" id="aksi_id" onclick="aksi('<%=res.to_json %>')" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     <a href="/backoffice/master/delete_pages?id=<%= res['id'] %>" class="btnedit btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" type="button">
@@ -123,48 +114,69 @@
                     <strong id="titleEdit"><i class="fa fa-edit"></i> Ubah Data</strong>
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" class="form-horizontal" action="/backoffice/master/aksi_pages" id="form_id" class="uploads" enctype="multipart/form-data">
+                            <form method="POST" class="form-horizontal" action="/backoffice/master/aksi_jadwal_dokter" id="form_id" class="uploads" enctype="multipart/form-data">
                                 <input type="text" class="form-control" style="display: none" name="id" id="id_id" >
-                
+            
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Page:</label>
+                                    <label class="control-label col-sm-2" for="pwd">Nama Spesialis:</label>
+                                    <div class="col-sm-6">
+                                        <select id="nama_id" name="nama" class="form-control">
+                                            <% @data_spes['content']['data'].each do |resp| %>
+                                                <option value="<%= resp['id'] %>"><%= resp['nama'] %></option>
+                                            <% end %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="pwd">Dokter:</label>
+                                    <div class="col-sm-6">
+                                        <select id="dokterID_id" name="dokterID" class="form-control">
+                                            <% @data_dokter['content']['data'].each do |ress| %>
+                                                <option value="<%= ress['id'] %>"><%= ress['name'] %></option>
+                                            <% end %>
+                                        </select>
+                                    </div>
+                                </div>
+                               <%# <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Hari</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="page" id="page_id" >
+                                        <input type="text" class="form-control" name="hari" id="hari_id" >
+                                    </div>
+                                </div> %>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="pwd">Hari:</label>
+                                    <div class="col-sm-6">
+                                        <select id="hari_id" name="hari" class="form-control">
+                                            <option value="Senin">Senin</option>
+                                            <option value="Selasa">Selasa</option>
+                                            <option value="Rabu">Rabu</option>
+                                            <option value="Kamis">Kamis</option>
+                                            <option value="Jumat">Jumat</option>
+                                            <option value="Sabtu">Sabtu</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Short Desc</label>
+                                    <label class="control-label col-sm-2" for="pwd">Waktu:</label>
+                                    <div class="col-sm-6">
+                                        <select id="waktu_id" name="waktu" class="form-control">
+                                            <option value="Pagi">Pagi</option>
+                                            <option value="Sore">Sore</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Jam Mulai</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="short_desc" id="short_desc_id" >
+                                        <input type="time" class="form-control" name="jamMulai" id="jamMulai_id" >
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Upload Gambar</label><br>
-                                    <label class="control-label col-sm-2" for="email">Ukuran 400x200</label>
-                                    <div class="col-sm-12">
-                                        <input type="file" name="cover" id ="cover_id" class="form-control"  onchange="tampilkanPreview(this,'preview')">
-                                        <img id="preview" width="350px" style="margin-top:10px" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Content:</label>
+                                    <label class="control-label col-sm-2" for="email">Jam Selesai</label>
                                     <div class="col-sm-10">
-                                        <textarea id="content_id" name="content" rows="30" cols="80" ></textarea>
+                                        <input type="time" class="form-control" name="jamSelesai" id="jamSelesai_id" >
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">URL:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="url" id="url_id" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Keyword:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text"  class="form-control" name="keyword" id="keyword_id" data-role="tagsinput" />
-                                    </div>
-                                </div>
-                                
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="pwd">Status:</label>
                                     <div class="col-sm-6">
@@ -174,13 +186,15 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btnreset btn btn-warning">Reset</button>
-                                    </div>
-                                </div>
+                               
                             </form>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary" onclick="submit()">Submit</button>
+                                    <button type="reset" class="btnreset btn btn-danger">Reset</button>
+                                    <button type="back" class="btnreset btn btn-warning" onclick="back()">Back</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,11 +202,37 @@
         </div>
     </div>
 <script>
+    function back(){
+        window.location = '/backoffice/master/jadwal_dokter';
+    }
+    function submit(){
+        $('#form_id').submit();
+    }
+     function aksi(data_edit)
+    {
+        parse = JSON.parse(data_edit);
+        console.log(parse);
+        id = parse.id
+        nama = parse.nama
+        dokterID = parse.dokterID
+        dokterNama = parse.dokterNama
+        hari = parse.hari
+        waktu = parse.waktu
+        jamMulai = parse.jamMulai
+        status_id = parse.status
+        jamSelesai = parse.jamSelesai
+        
+        $('#id_id').val(id)
+        $('#nama_id').val(nama)
+        $('#dokterID_id').val(dokterID)
+        $('#hari_id').val(hari)
+        $('#waktu_id').val(waktu)
+        $('#jamMulai_id').val(jamMulai)
+        $('#jamSelesai_id').val(jamSelesai)
+      
 
-    
-    function update(id){
-        var id = id;
-        window.location = '/backoffice/master/edit_pages?id='+id;
+        
+        $('#form-tab').click();
     }
 
     function tampilkanPreview(userfile, idpreview) {

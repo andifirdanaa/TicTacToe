@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   post 'backoffice/master/aksi_dokter'
 
 
+  get 'backoffice/master/jadwal_dokter'
+  post 'backoffice/master/aksi_jadwal_dokter'
+
   get 'backoffice/master/faq'
   post 'backoffice/master/aksi_faq'
 
@@ -92,6 +95,7 @@ Rails.application.routes.draw do
   # Company Profile
 
   get 'companyprofile/home/index'
+  get 'companyprofile/home/dokter'
   get 'companyprofile/home/about'
   get 'companyprofile/home/logout_members'
   
@@ -114,6 +118,18 @@ Rails.application.routes.draw do
   # get '/produk/:slug', to: 'companyprofile/home#productdetail'
   # get 'companyprofile/home/productdetail'
   get 'companyprofile/home/lyt_network_error'
+  post '/companyprofile/home/dokter_list'
+  post '/companyprofile/home/dokter_list_id'
+  post '/companyprofile/home/dokter_spesialis'
+  post '/companyprofile/home/dokter_spesialis_id'
+  post '/companyprofile/home/jadwal_dokter'
+  get '/companyprofile/home/jadwal_dokter'
+  post '/companyprofile/home/jadwal_dokter_spesialis'
+  get '/companyprofile/home/jadwal_dokter_spesialis'
+  get '/companyprofile/home/dokter_get'
+  get '/companyprofile/home/pelayanan_get'
+  get '/companyprofile/home/layanan'
+  get '/pelayanan/detail/:nama', to: 'companyprofile/home#pelayanan_detail'
   # get ':key/:slug', to: 'companyprofile/home#pages'
   # Tutup Company Profile
 
@@ -125,7 +141,9 @@ Rails.application.routes.draw do
   get '/mtm_home', to: 'companyprofile/home#mtm_home'
   get '/about_us', to: 'companyprofile/home#about_us'
   get '/newsdetail/:subtitle', to: 'companyprofile/home#newsdetail'
+  get '/news', to: 'companyprofile/home#news'
   get '/contact_us', to: 'companyprofile/home#contact_us'
+  get '/kontak', to: 'companyprofile/home#kontak'
   get '/dokter', to: 'companyprofile/home#dokter'
   get '/jobs_detail/:id', to: 'companyprofile/home#jobs_detail'
   get ':key/:slug', to: 'companyprofile/home#pages'

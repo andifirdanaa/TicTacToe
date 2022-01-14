@@ -329,7 +329,7 @@ class Backoffice::MasterController < ApplicationController
     # render json: data
     # return
     if params['id'] == '' # simpan
-      url = "pages"
+      url = "page"
       @aksi = ApplicationHelper.req_post(url,data,session['sess']['my_token'])
      
     else # update 
@@ -391,6 +391,8 @@ class Backoffice::MasterController < ApplicationController
     end
     
     @data = ApplicationHelper.req_get(url,session['sess']['my_token'])
+   
+
     urlpages = "page/alldata"
     @datapages = ApplicationHelper.req_get(urlpages,session['sess']['my_token'])
     @meta = @data['content']['meta'] rescue ""
@@ -612,6 +614,64 @@ class Backoffice::MasterController < ApplicationController
     end
     
     redirect_to '/backoffice/master/dokter'
+  end
+
+  def jadwal_dokter
+    @limit =  params[:limit].present? ? params[:limit].to_i : 10
+    @page = params[:page].present? ? params[:page].to_i : 1
+    @keyword = params[:keyword].present? ? params[:keyword] : ''
+
+    if @keyword.present?
+      url = "jadwal_praktek?keyword=#{@keyword}"
+    else
+      url = "jadwal_praktek?limit=#{@limit}&page=#{@page}&keyword=#{@keyword}"
+    end
+
+    @data = ApplicationHelper.req_get(url,session['sess']['my_token'])
+    @meta = @data['content']['meta'] rescue ""
+
+    url_dokter = "dokter/listdok"
+    @data_dokter = ApplicationHelper.req_get(url_dokter,session['sess']['my_token'])
+
+    url_spes = "spesialis/listfe"
+    @data_spes = ApplicationHelper.req_get(url_spes,session['sess']['my_token'])
+  end
+
+  def aksi_jadwal_dokter
+    data = {
+      nama: params['nama'],
+      dokterID: params['dokterID'],
+      hari: params['hari'],
+      waktu: params['waktu'],
+      jamMulai: params['jamMulai'],
+      jamSelesai: params['jamSelesai'],
+      status: params['status'],
+    }
+    # render json: data
+    # return
+    if params['id'] == '' # simpan
+      url = "jadwal_praktek"
+      @aksi = ApplicationHelper.req_post(url,data,session['sess']['my_token'])
+     
+    else # update 
+      url = "jadwal_praktek/"+params['id']
+      @aksi = ApplicationHelper.req_put(url,data,session['sess']['my_token'])
+    end
+
+
+    if @aksi['status'] == true
+      flash[:alert] = "success"
+    else
+      flash[:alert] = "danger"
+    end
+    
+    if @aksi['status'] == true
+      flash[:notice] = @aksi['message']
+    else
+      flash[:notice] = @aksi['content']
+    end
+    
+    redirect_to '/backoffice/master/jadwal_dokter'
   end
 
   def hubungi 
@@ -961,9 +1021,9 @@ class Backoffice::MasterController < ApplicationController
     #  render json: params
     # return
     data = {
-      nama: params['nama'],
+      title: params['title'],
       desc: params['desc'],
-      subdesc: params['subdesc'],
+      subtitle: params['subtitle'],
       flagging: params['flagging'],
       urutan: params['urutan'],
       status: params['status'],

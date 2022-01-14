@@ -55,9 +55,18 @@ class Companyprofile::HomeController < ApplicationController
 		@data_banner = res_banner.parsed_response
 		@databanner = @data_banner['content']['data']
 
+		url_jns = ENV['CIRACAS_WEB']+"jenis_rawat/list"
+		res_jns = HTTParty.get(url_jns)
+		@data_jns = res_jns.parsed_response
+		@datajns = @data_jns['content']['data']
+
 		url_why = ENV['CIRACAS_WEB']+"aset/list_by_flagging?flagging=why-choose"
 		res_why = HTTParty.get(url_why)
 		@data_why = res_why.parsed_response
+
+		url_sam = ENV['CIRACAS_WEB']+"aset/list_by_flagging?flagging=sambutan-direktur"
+		res_sam = HTTParty.get(url_sam)
+		@data_sam = res_sam.parsed_response
 
 		url_pel = ENV['CIRACAS_WEB']+"pelayanan/list"
 		res_pel = HTTParty.get(url_pel)
@@ -164,6 +173,73 @@ class Companyprofile::HomeController < ApplicationController
 		# return
 	end
 
+	def pelayanan_get
+		@_id = params[:id].present? ? params[:id] : 1
+		url_pel_jenis1 = ENV['CIRACAS_WEB']+"pelayanan/listjenis?jenis_rawat_id=#{@_id}"
+		res_pel_jenis1 = HTTParty.get(url_pel_jenis1)
+		@data_pel_jenis1 = res_pel_jenis1.parsed_response
+		@datapeljenis = @data_pel_jenis1['content']['data'] rescue ''
+	end
+
+	def pelayanan_detail
+		@nama = params[:nama].present? ? params[:nama] : ''
+		
+		@namaa = @nama.split('-')
+		@namasplit = @namaa[1]
+		# render json: @namasplit 
+		# return
+		url_peldet = ENV['CIRACAS_WEB']+"pelayanan/detail/"+@namasplit
+		res_peldet = HTTParty.get(url_peldet)
+		@data_peldet = res_peldet.parsed_response
+		@datapeldet = @data_peldet['content']
+
+		if @datapeldet.present?
+			@img_news = @datapeldet['image_url']
+			@nama = @datapeldet['nama']
+			@contents = @datapeldet['desc']
+			@subdesc = @datapeldet['subdesc']
+			@created_at = @datapeldet['created_at']
+		else
+			@datapeldet = ''
+		end
+		# render json: @datanewsdet
+		# return
+	end
+
+	def layanan
+		@_id = params['layanan'].present? ? params['layanan'] : 1
+
+		@ids = @_id.split('-')
+
+		url_pel_jenis1 = ENV['CIRACAS_WEB']+"pelayanan/listjenis?jenis_rawat_id=#{@ids[1]}"
+		res_pel_jenis1 = HTTParty.get(url_pel_jenis1)
+		@data_pel_jenis1 = res_pel_jenis1.parsed_response
+		@datapeljenis = @data_pel_jenis1['content']['data'] rescue ''
+		
+	end
+
+	def news
+		
+		@page = params[:page].present? ? params[:page].to_i : 1
+		@keyword = params[:keyword].present? ? params[:keyword] : ''
+
+		if @keyword.present?
+			url = ENV['CIRACAS_WEB']+"news/listfe?keyword=#{@keyword}"
+		else
+			url = ENV['CIRACAS_WEB']+"news/listfe?page=#{@page}&keyword=#{@keyword}"
+		end
+		
+		res_newsdet = HTTParty.get(url)
+		@data = res_newsdet.parsed_response
+		# @datanewsdet = @data_newsdet['content']
+		# @data = ApplicationHelper.req_get(url,session['sess']['my_token'])
+		# @datanews = HTTParty.get(url)
+		# @data = @datanews.parsed_response
+		# render json: @data
+		# return
+		@meta = @data['content']['meta'] rescue ""
+	end
+
 	def newsdetail
 		@subtitle = params[:subtitle].present? ? params[:subtitle] : ''
 
@@ -209,21 +285,6 @@ class Companyprofile::HomeController < ApplicationController
 	end
 
 	def dokter
-		# render json: rand(1..8)
-		# return
-		# @page = params[:page].present? ? params[:page] : 1
-		
-		# if @page.present?
-		# 	url_dokter = ENV['CIRACAS_WEB']+"dokter/listall"
-		# else
-		# 	url_dokter = ENV['CIRACAS_WEB']+"dokter/listall?page=#{@page}"
-		# end
-
-		# res_dokter = HTTParty.get(url_dokter)
-
-		# @list_dokter = res_dokter.parsed_response
-
-		# @data = @list_dokter['content']['data']
 		
 		url_spesialis = ENV['CIRACAS_WEB']+"spesialis"
 		res_spesialis = HTTParty.get(url_spesialis)
@@ -231,25 +292,142 @@ class Companyprofile::HomeController < ApplicationController
 		@dataspesialis = @list_spesialis['content']['data']
 		@dataa= []
 		@dataa2 = []
+
+	
+
+		# render json: @dataspe1
+		# return @dataspe1
+
+	end
+
+	def dokter_list
+		@keyword = params['keyword'].present? ? params['keyword'] : ''
+	
+		if @keyword.present?
+			url_spesialis = ENV['CIRACAS_WEB']+"/dokter/listdok?keyword=#{@keyword}"
+		else
+			url_spesialis = ENV['CIRACAS_WEB']+"/dokter/listdok"
+		end
+		res_spesialis = HTTParty.get(url_spesialis)
+		@list_spesialis = res_spesialis.parsed_response
+		@dataspesialis = @list_spesialis['content']['data']
+		
+		# data=[]
+		# @dataspesialis.each do |re|
+		# 	var = "#{re['name']}-#{re['id']}"
+		# 	data.push(var)
+		# end
+
+		render json: @dataspesialis
+		return
+
+	end
+
+	def dokter_list_id
+		@keyword = params['keyword'].present? ? params['keyword'] : ''
+	
+		if @keyword.present?
+			url_spesialis = ENV['CIRACAS_WEB']+"/dokter/listdok?keyword=#{@keyword}"
+		else
+			url_spesialis = ENV['CIRACAS_WEB']+"/dokter/listdok"
+		end
+		res_spesialis = HTTParty.get(url_spesialis)
+		@list_spesialis = res_spesialis.parsed_response
+		@dataspesialis = @list_spesialis['content']['data']
+		
+		data=[]
 		@dataspesialis.each do |re|
-			url_spe1 = ENV['CIRACAS_WEB']+"dokter/listjenis?spesialis_id=#{re['id']}"
+			
+			data.push(re['id'])
+		end
+		
+		render json: data
+		return
+
+	end
+
+	def jadwal_dokter
+	  	@keyword = params['dokter']
+		
+	  	@key_split = @keyword.split("-")
+		
+		if @keyword.present?
+			url_jadwal = ENV['CIRACAS_WEB']+"/jadwal_praktek/list?keyword=#{@key_split[1]}"
+		else
+			url_jadwal = ENV['CIRACAS_WEB']+"/jadwal_praktek/list"
+		end
+
+		res_jadwal = HTTParty.get(url_jadwal)
+		@list_jadwal = res_jadwal.parsed_response
+		@datajadwal = @list_jadwal['content']['data']
+		@datajadwalimage = @datajadwal[0]
+
+	#   render json:  @keyword
+	#   return
+
+	end
+	
+	def dokter_spesialis
+		@keyword = params['keyword'].present? ? params['keyword'] : ''
+	
+		if @keyword.present?
+			url_spesialis = ENV['CIRACAS_WEB']+"/spesialis/list?keyword=#{@keyword}"
+		else
+			url_spesialis = ENV['CIRACAS_WEB']+"/spesialis/list"
+		end
+		res_spesialis = HTTParty.get(url_spesialis)
+		@list_spesialis = res_spesialis.parsed_response
+		@dataspesialis = @list_spesialis['content']['data']
+
+		render json: @dataspesialis
+		return
+	end
+
+	def jadwal_dokter_spesialis
+		@keyword = params['dokter']
+	  
+		@key_split = @keyword.split("-")
+	  
+		if @keyword.present?
+			url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?keyword=#{@key_split[1]}"
+		else
+			url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis"
+		end
+
+		res_jadwal = HTTParty.get(url_jadwal)
+		@list_jadwal = res_jadwal.parsed_response
+		@datajadwal = @list_jadwal['content']['data']
+		@datajadwalimage = @datajadwal[0]
+
+		# render json:  @datajadwal
+		# return
+
+  end
+
+	def dokter_get
+		url_spesialis = ENV['CIRACAS_WEB']+"spesialis"
+		res_spesialis = HTTParty.get(url_spesialis)
+		@list_spesialis = res_spesialis.parsed_response
+		@dataspesialis = @list_spesialis['content']['data']
+
+		@spes_id = params[:id].present? ? params[:id] : 1
+		
+			url_spe1 = ENV['CIRACAS_WEB']+"dokter/listjenis?spesialis_id=#{@spes_id}"
 			res_spe1 = HTTParty.get(url_spe1)
 			@data_spe1 = res_spe1.parsed_response
 			@dataspe1 = @data_spe1['content']['data'] rescue ''
 
-			@dataa.push(@dataspe1)
-		end
+			# @dataspe1.each do |rep|
+			# 	rep['image_url'] = "#{ENV['CIRACAS_WEB']}#{rep['image_url']}"
+			# end
 
-		# @dataa.each do |re2|
-		# 	@datai = re2
-
-
-		# 	@dataa2.push(@datai)
-		# end
-		
-		# render json: @dataa2
+		# render json: @spes_id
 		# return
 
+	end
+
+	def kontak
+		
 	end
 
 	def about_us

@@ -1,12 +1,7 @@
 <!-- <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 </head> -->
-<style>
-
-    * {
-        font-family: 'Lato', sans-serif;
-        box-sizing: border-box;
-    } 
+ <style>
     section {
       padding: 50px 0;
       
@@ -540,7 +535,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: top center;
-      /* height: 250px; */
+      height: 250px;
       width: 100%;
       position: relative;
       display: block;
@@ -778,110 +773,81 @@
         font-size: 30px;
         font-weight: 800;
     }
-    .row-tentang-1{
-      justify-content: center;
-    }
-    .isi-tentang-1{
-        margin: 50px;
-        /* position: absolute; */
-        height: 300px;
-        width: 600px;
-        top: 60px;
-        left: calc(50% - 300px);
-        display: flex;
-       
-    }
-    .isi-tentang-1 .card{
-        display: flex;
-        height: 280px;
-        width: 200px;
-        background-image: url("/img/IMG_9453\ 1.png");
-        overflow:hidden;
-        background-repeat: no-repeat;
-        background-size: cover;
-        position: relative;
-        background-attachment: fixed;
-        background-position: center;
-        border-radius: 10px;
-        box-shadow: -1rem 0 3rem #000;
-      /*   margin-left: -50px; */
-        transition: 0.4s ease-out;
-        position: relative;
-        left: 0px;
-    }
-    .isi-tentang-1  .card:not(:first-child){
-       margin-left: -50px;
-    }
-    .isi-tentang-1 .card:hover{
-      transform: translateY(-20px);
-      transition: 0.4s ease-out;
-      left: -50px;
-      cursor: pointer;
-    }
-    .isi-tentang-1 .card-front{
-       background: linear-gradient(to bottom right, rgba(8, 116, 162, 0.8), rgba(8, 116, 162, 0.8));
-       width: 100%;
-       height: 100%;
-       overflow: hidden;
-    }
-    .isi-tentang-1 .card-front p {
-      font-size: 24px;
-      font-weight: 800;
-      color: #FFFFFF;
-      position: absolute;
-      left: 20px;
-      top: 15px;
+    .line {
+        width: 40px;
+        height: 5px;
+        background-color: #1977cc;
+        margin: 0 auto;
     }
     .isi-tentang{
         height: auto;
         width: 100%;
+        padding: 0 100px;
     }
-    .isi-tentang .judul-isi{
-        text-align: center;
-        color: #000000;
-        padding: 20px;
+    .isi-tentang a{
+       text-decoration: none;
+       color: #1e1e1e;
+       transition: all 0.5s ease-in-out;
     }
-    .isi-tentang .judul-isi img{
-        width: 750px;
-        height: 350px;
-        overflow: hidden;
+    .isi-tentang a:hover {
+        color: #09635E;
+        text-decoration: none;
+        transition: all 0.5s ease-in-out;
     }
-    .isi-tentang .judul-isi h3{
-        font-weight: 800;
+    
+    .tentang-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background-image: none;
+        min-height: 751px;
+        color: #111111;
+        background-color: #f0f0f0;
     }
-    .isi-tentang .isi-konten{
-        height: auto;
-        color: #000000;
+    .tentang-body .wrapper{
+        width: 100%;
+        box-shadow: 0 21px 41px -13px rgb(0 0 0 / 18%)
     }
-    .isi-tentang .isi-konten p{
-        text-align: center;
+    .tentang-body .wrapper .dbox{
+        width: 100%;
+        color: rgba(255,255,255,.8);
+        margin-bottom: 25px;
     }
-    .tab-content > .active {
-      display: flex;
-      flex-wrap: wrap;
+    .tentang-body .dbox .icon{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid rgba(255,255,255,.2);
     }
-    .tab-content > .tab-pane > .active{
-      display: flex;
-      flex-wrap: wrap;
-
+    .tentang-body .dbox .icon span{
+        font-size: 20px;
+        color: #fff;
     }
-    .news-wrapper{
-    margin-bottom: 60px;
+    .tentang-body .dbox  p a{
+        /* font-size: 20px; */
+        color: #fff;
     }
-    .news-wrapper .img-bx{
-      overflow: hidden;
-      object-fit: cover;
-      height: 174px;
-      /* width: 100%; */
-      position: relative;
-      margin-bottom: 20px;
+    .contact-wrap{
+        background-color: #ffffff;
     }
-    .news-wrapper .img-bx img {
-      overflow: hidden;
-      object-fit: cover;
-      width:100%;
-
+    #contactForm .label {
+        color: #000;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 600;
     }
+    #contactForm .form-control {
+        font-size: 16px;
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,.1);
+        padding: 0;
+    }
+    
+    
+    
+   
+    
     @import "compass/css3";
 
     .module {
@@ -1037,242 +1003,175 @@
         color: #fff;
         background: #1977cc;
       }
-      .tab-content > .active {
-       display: block;
+      .isi-tentang {
+        padding: 0 0;
       }
-      .tab-content > .tab-pane > .active{
-        display: block;
+      .isi-tentang .detail-wrapper{
+        padding: 50px 0;
+        height: 350px;
       }
-      .isi-tentang-1{
-        height: auto;
-        padding: 0 50px;
+      .isi-tentang .detail-wrapper img{
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          object-fit: cover;
       }
       
     }
-
-                    
-
 </style>
 
 <%= render "/companyprofile/home/mtm_menu.html.erb"%>
 
-<section class="tentang p-0">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="background-tentang">
-                <div class="judul-bg">
-                    <h3>Pelayanan</h3>
+    <section class="tentang p-0">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="background-tentang">
+                    <div class="judul-bg">
+                        <h3>Kontak Kami</h3>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row row-tentang-1">
-          <div class="isi-tentang-1">
-            <div class="row">
-             <% if @datajenis.present? != nil%>
-             <% @datajenis.each do |jns|%>
-              <div class="col-md-3 col-sm-12">
-               
-                  <div class="card">
-                    <div class="card-front">
-                      <button type="button" onclick="data('<%= jns['id'] %>');" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%=jns['id']%>"
-                      style="background: transparent; width:100%;height:100%;font-size: 24px;font-weight: 800;color: #FFFFFF;position: absolute;">
-                      <%= jns['nama'] %>
-                      </button>
-                    </div>
-                  </div>
-              </div>
+    </section>
 
-             
-              <%end%>
-              <%end%>
-             
-              
-            </div>
-          </div>
-        </div>
-        <div class="row" style="padding: 60px 30px;">
-            <div class="isi-tentang">
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                      <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-lantai-1" role="tab" aria-controls="nav-home" aria-selected="true">Lantai 1</a>
-                      <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-lantai-2" role="tab" aria-controls="nav-profile" aria-selected="false">Lantai 2</a>
-                      <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-lantai-3" role="tab" aria-controls="nav-contact" aria-selected="false">Lantai 3</a>
-                      <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-lantai-4" role="tab" aria-controls="nav-contact" aria-selected="false">Lantai 4</a>
-                    </div>
-                  </nav>
-                  <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-lantai-1" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <%if @datapel != nil%>
-                      <% @datapel.each do |res| %>
-                        <div class="col-md-3 col-lg-4 col-sm-12">
-                            <div class="card">
-                                <div class="news-wrapper">
-                                <div class="card-body">
-                                    <%if res['image_url'].present? %>
-                                       <% 
-                                            url = ENV['CIRACAS_WEB']+"pelayanan/detail/#{res['id'].to_s}"
-
-                                            resss = HTTParty.get(
-                                                url
-                                            )
-                                            # resss['content'].each do |sp|
-                                            #   sp['nama'] = sp['nama'].split(' ','')
-                                            # end
-                                          
-                                            @id = resss['content']['id']
-                                            @splitnama = resss['content']['nama'].gsub(" ","").to_s
-                                            @nama = "#{@splitnama}-#{resss['content']['id']}"
-                                        %>
-                                      <a href="/pelayanan/detail/<%= @nama%>"><img src="<%= ENV['CIRACAS_WEB']+"/"+res['image_url']%>" onerror="this.src='/img/logorsudciracas.png'"></a>
-                                    <%else%>
-                                      <img src="/img/logorsudciracas.png" onerror="this.src='/img/logorsudciracas.png'">
-                                    <%end%>
-                                    <div class="text-news d-block">
-
-                                    <h3><%= res['nama']%></h3>
-                                   
+    <section class="tentang-body">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="wrapper">
+                        <div class="row no-gutters">
+                            <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
+                                <div class="info-wrap bg-primary w-100 p-md-5 p-4">
+                                    <h3>Let's get in touch</h3>
+                                    <p class="mb-4">We're open for any suggestion or just to have a chat</p>
+                                    <div class="dbox w-100 d-flex align-items-start">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <span class="fas fa-map-marker-alt fa-2x"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p>
+                                                <span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-start">
+                                        <div class=" d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-phone fa-2x"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p>
+                                                <span>Phone:</span> (021) 87711249 / 8718995
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-start">
+                                        <div class=" d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-paper-plane fa-2x"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p>
+                                                <span>Email:</span><a href="mailto:rsuciracas@gmail.com"> rsuciracas@gmail.com</a>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                <div class="contact-wrap w-100 p-md-5 p-4">
+                                    <h3 class="mb-4">Get in touch</h3>
+                                    <form method="POST" id="contactForm" name="contactForm" novalidate="novalidate">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="name">Full Name</label>
+                                                    <input type="text" class="form-control" name="name" id="name_id" placeholder="Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="email">Email</label>
+                                                    <input type="email" class="form-control" name="email" id="email_id" placeholder="Email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="subject">Subject</label>
+                                                    <input type="text" class="form-control" name="subject" id="subject_id" placeholder="Subject">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="message">Message</label>
+                                                    <textarea class="form-control" name="message" id="message_id" cols="30" rows="4" placeholder="Message"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                   <input type="submit" value="Send Message" class="btn btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                      <%end%>
-                    <%end%>
                     </div>
-                    <div class="tab-pane fade" id="nav-lantai-2" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <%if @datapel1 != nil%>
-                      <% @datapel1.each do |res| %>
-                        <div class="col-md-3 col-lg-4 col-sm-12">
-                            <div class="card">
-                              <div class="news-wrapper">
-                                <div class="card-body">
-                                    <div class="img-bx">
-                                      <%if res['image_url'].present? %>
-                                         <% 
-                                            url = ENV['CIRACAS_WEB']+"pelayanan/detail/#{res['id'].to_s}"
-
-                                            resss = HTTParty.get(
-                                                url
-                                            )
-                                            # resss['content'].each do |sp|
-                                            #   sp['nama'] = sp['nama'].split(' ','')
-                                            # end
-                                          
-                                            @id = resss['content']['id']
-                                            @splitnama = resss['content']['nama'].gsub(" ","").to_s
-                                            @nama = "#{@splitnama}-#{resss['content']['id']}"
-                                        %>
-                                      <a href="/pelayanan/detail/<%= @nama%>"><img src="<%= ENV['CIRACAS_WEB']+"/"+res['image_url']%>" onerror="this.src='/img/logorsudciracas.png'"></a>
-                                      <%else%>
-                                          <img src="/img/logorsudciracas.png" onerror="this.src='/img/logorsudciracas.png'">
-                                      <%end%>
-                                    </div>
-                                   
-                                    <div class="text-news d-block">
-
-                                    <h3><%= res['nama']%></h3>
-                                   
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                      <%end%>
-                    <%end%>
-                    </div>
-                    <div class="tab-pane fade " id="nav-lantai-3" role="tabpanel" aria-labelledby="nav-contact-tab">
-                      <%if @datapel2 != nil%>
-                        <% @datapel2.each do |res| %>
-                          <div class="col-md-3 col-lg-4 col-sm-12">
-                              <div class="card">
-                                  <div class="news-wrapper">
-                                  <div class="card-body">
-                                      <%if res['image_url'].present? %>
-                                        <% 
-                                            url = ENV['CIRACAS_WEB']+"pelayanan/detail/#{res['id'].to_s}"
-
-                                            resss = HTTParty.get(
-                                                url
-                                            )
-                                            # resss['content'].each do |sp|
-                                            #   sp['nama'] = sp['nama'].split(' ','')
-                                            # end
-                                          
-                                            @id = resss['content']['id']
-                                            @splitnama = resss['content']['nama'].gsub(" ","").to_s
-                                            @nama = "#{@splitnama}-#{resss['content']['id']}"
-                                        %>
-                                      <a href="/pelayanan/detail/<%= @nama%>"><img src="<%= ENV['CIRACAS_WEB']+"/"+res['image_url']%>" onerror="this.src='/img/logorsudciracas.png'"></a>
-                                      <%else%>
-                                        <img src="/img/logorsudciracas.png" onerror="this.src='/img/logorsudciracas.png'">
-                                      <%end%>
-                                      <div class="text-news d-block">
-
-                                      <h3><%= res['nama']%></h3>
-                                    
-                                      </div>
-                                  </div>
-                                  </div>
-                              </div>
-                          </div>
-                        <%end%>
-                      <%end%>
-                    </div>
-                    <div class="tab-pane fade " id="nav-lantai-4" role="tabpanel" aria-labelledby="nav-contact-tab">
-                      <%if @datapel3 != nil%>
-                        <% @datapel3.each do |res| %>
-                            <div class="col-md-3 col-lg-4 col-sm-12">
-                              <div class="card">
-                                <div class="news-wrapper">
-                                  <div class="card-body">
-                                      <%if res['image_url'].present? %>
-                                        <% 
-                                            url = ENV['CIRACAS_WEB']+"pelayanan/detail/#{res['id'].to_s}"
-
-                                            resss = HTTParty.get(
-                                                url
-                                            )
-                                            # resss['content'].each do |sp|
-                                            #   sp['nama'] = sp['nama'].split(' ','')
-                                            # end
-                                          
-                                            @id = resss['content']['id']
-                                            @splitnama = resss['content']['nama'].gsub(" ","").to_s
-                                            @nama = "#{@splitnama}-#{resss['content']['id']}"
-                                        %>
-                                      <a href="/pelayanan/detail/<%= @nama%>"><img src="<%= ENV['CIRACAS_WEB']+"/"+res['image_url']%>" onerror="this.src='/img/logorsudciracas.png'"></a>
-                                      <%else%>
-                                        <img src="/img/logorsudciracas.png" onerror="this.src='/img/logorsudciracas.png'">
-                                      <%end%>
-                                      <div class="text-news d-block">
-
-                                      <h3><%= res['nama']%></h3>
-                                    
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                           </div>
-                        <%end%>
-                      <%else%>
-                        <div class="d-flex justify-content-center">
-                          <h1>Tidak ada data</h1>
-                        </div>
-                      <%end%>
-                    </div>
-                  </div>
+                </div>
             </div>
-        </div>
+        </div>  
+    </section>
 
-       
-    </div>
+    <%= render "/companyprofile/home/mtm_footer.html.erb"%>
 
-  
-</section>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<%= render "/companyprofile/home/mtm_footer.html.erb"%>
 <script>
-function data(id){
- window.location = '/companyprofile/home/pelayanan_get?id='+id;
-}
+    function kirims(){
+
+    var first_name = document.getElementById("first_name").value;
+    var last_name = document.getElementById("last_name").value;
+    var email = document.getElementById("email").value;
+    var message = document.getElementById("message").value;
+
+    if(first_name == ''){
+      alert("Nama Anda Belum Diisi");
+    }else if(email == ''){
+      alert("Alamat Email Belum Diisi");
+    }else if(last_name == ''){
+      alert("Nama Anda Belum Diisi");
+    }else if(message == ''){
+      alert("Pesan Anda Belum Diisi");
+    }else{      
+      $("#simpan").trigger("click");
+    }
+  }
+
+    $(document).ready(function (e) {
+
+		$("#myformHubungi").on('submit', (function (e) {
+
+			e.preventDefault();
+			$.ajax({
+				url: "/companyprofile/home/aksi_about_us",
+				type: "POST",
+				data: new FormData(this),
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function (result) {
+                console.log(result);
+                // return
+          if (result.status == true) {
+              swal("Selamat", "Pesan Berhasil Dikirim", "success").then((value) => {
+                    window.location = "";
+                });  
+          } else {
+              swal("Gagal", "Pesan tidak Berhasil Dikirim", "danger").then((value) => {
+                    window.location = "";
+                }); 
+          }
+				}
+			});
+		}));
+	});
 </script>

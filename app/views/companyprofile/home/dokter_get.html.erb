@@ -899,7 +899,7 @@
       position: relative;
   }
   .card0{
-      /* margin: 0 30px; */
+      margin: 0 30px;
       background-size: 100%;
   }
   .card0 .img-dokter{
@@ -1100,34 +1100,15 @@
             <div class="row">
                 <div class="background-tentang">
                     <div class="judul-bg">
-                        <h3>Dokter</h3>
+                        <h3><%=@dataspe1[0]['spesialis']%></h3>
                     </div>
                 </div>
             </div>
-            <div class="row row-tentang-1">
-              <div class="isi-tentang-1">
-                <div class="row">
-                  <% if @dataspesialis.present? != nil%>
-                    <% @dataspesialis.each do |sp|%>
-                      <div class="col-md-3 col-sm-12">
-                          <div class="card">
-                            <div class="card-front" id="card-id">
-                              <button type="button" id="btn-spe-id" onclick="datasp('<%= sp['id'] %>');" class="btn btn-primary" 
-                              style="background: transparent; width:100%;height:100%;font-size: 24px;font-weight: 800;color: #FFFFFF;position: absolute;">
-                              <%= sp['nama'] %>
-                              </button>
-                            </div>
-                          </div>
-                      </div>
-                      <%end%>
-                  <%end%>
-                </div>
-              </div>
-            </div>
+            
 
             <div class="row d-flex flex-wrap justify-content-center" style="padding: 60px 30px; ">
-              <%if @data != nil%>
-                <% @data.each do |res|%>
+              <%if @dataspe1 != nil%>
+                <% @dataspe1.each do |res|%>
                 <div class="card card0" style="margin-bottom: 30px; ">
                     <div class="img-dokter">
                       <img src="<%= ENV['CIRACAS_WEB']+res['image_url']%>" alt="img"/>
@@ -1141,7 +1122,6 @@
               <%end%>
             </div>
 
-            
         </div>
     </section>
 
@@ -1150,24 +1130,22 @@
 
   function datasp(id){
     // alert(id);
-    window.location = '/companyprofile/home/dokter_get?id='+id;
-    //  $.ajax({
-    //     url: "/companyprofile/home/dokter_get",
-    //     type: "GET",
-    //     dataType: "json",
-    //     data: {
-    //         id: id,
+     $.ajax({
+        url: "/companyprofile/home/dokter_get",
+        type: "GET",
+        dataType: "json",
+        data: {
+            id: id,
             
-    //     },
+        },
 
-    //     success: function(result) {
-    //       console.log(result);
-    //        window.location = '/companyprofile/home/dokter_get';
-         
+        success: function(result) {
+          console.log(result);
+          window.location.href = '/companyprofile/home/dokter_get';
           
-    //     }
+        }
 
-    // });   
+    });   
        
 
         
