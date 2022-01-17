@@ -290,8 +290,8 @@ class Companyprofile::HomeController < ApplicationController
 		res_spesialis = HTTParty.get(url_spesialis)
 		@list_spesialis = res_spesialis.parsed_response
 		@dataspesialis = @list_spesialis['content']['data']
-		@dataa= []
-		@dataa2 = []
+
+		
 
 	
 
@@ -299,6 +299,48 @@ class Companyprofile::HomeController < ApplicationController
 		# return @dataspe1
 
 	end
+
+	def dokter_
+
+		if params['id'] == 'semua'
+			@keyword = ''
+		else
+			@keyword = params['id']
+		end
+	  
+		if @keyword.present?
+			url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?keyword=#{@keyword}"
+		else
+			url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis"
+		end
+
+		res_jadwal = HTTParty.get(url_jadwal)
+		@list_jadwal = res_jadwal.parsed_response
+		@datajadwal = @list_jadwal['content']['data']
+		@datajadwalimage = @datajadwal[0]
+
+		render json:  @datajadwal
+		return
+	end
+
+	def jadwal_dokter_all
+		@keyword = params['id']
+	  
+		if @keyword.present?
+			url_jadwal = ENV['CIRACAS_WEB']+"/jadwal_praktek/list?keyword=#{@keyword}"
+		else
+			url_jadwal = ENV['CIRACAS_WEB']+"/jadwal_praktek/list"
+		end
+
+		res_jadwal = HTTParty.get(url_jadwal)
+		@list_jadwal = res_jadwal.parsed_response
+		@datajadwal = @list_jadwal['content']['data']
+		@datajadwalimage = @datajadwal[0]
+
+		render json:  @datajadwal
+		return
+
+  	end
 
 	def dokter_list
 		@keyword = params['keyword'].present? ? params['keyword'] : ''

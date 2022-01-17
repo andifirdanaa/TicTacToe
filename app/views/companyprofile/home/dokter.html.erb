@@ -868,7 +868,114 @@
       cursor: pointer;
   }
   .border-dok{
-      top: -20%;
+      top: -30%;
+      height: 100%;
+      width: 100%;
+      background: transparent;
+      border-radius: 10px;
+      transition: border 1s;
+      /* border: -9px solid #dee2e6 !important; */
+      position: relative;
+  }
+  .border-dok:hover{
+      top: 0;
+      /* border: 1px solid white; */
+      transition: .2s;
+      background: #135fc93f;
+
+  }
+  .card{
+      height: 279px;
+      width: 200px;
+      background: grey;
+      border-radius: 10px;
+      transition:  0.8s;
+      overflow: hidden;
+      background: black;
+      box-shadow: 0 70px 63px -60px #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  }
+  .card0{
+  
+      background-size: 100%;
+  }
+  .card0 .img-dokter{
+    position: absolute;
+    width:100%;
+    height:100%;
+  }
+  .card0 .img-dokter img{
+    width: 100%;
+    height: 100%;
+  }
+  .card0 .border-dok h3{
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+    color: #b30c0c;
+    margin: 0;
+  }
+  .card0 .border-dok p{
+    font-size: 16px;
+    font-weight: 800;
+    color: #b30c0c;
+    text-align: center; 
+    margin: 0;
+  }
+  .card .card0:hover{
+      /* background: url('/dr.\ Budi\ Satria\,\ MSc\,\ Sp\ 1.png') left center no-repeat; */
+      background-size: 600px;
+  }
+  .tentang-body{
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      position: relative;
+      background-image: none;
+      min-height: 751px;
+      color: #111111;
+      background-color: #f0f0f0;
+  }
+  .tentang-body .wrapper{
+      width: 100%;
+      box-shadow: 0 21px 41px -13px rgb(0 0 0 / 18%)
+  }
+  .tentang-body .wrapper .jadwal{
+     background-color: #FFFFFF;
+     margin: 50px 0;
+     display: flex;
+     flex-wrap: wrap;
+  }
+  .tentang-body .wrapper .jadwal .btn{
+     padding: 0;
+  }
+  .tentang-body .wrapper .jadwal .btn:focus,.btn.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 0%);
+  }
+  .tentang-body .wrapper .jadwal h3{
+     font-size: 20px;
+     font-weight: 700;
+     /* text-align: left; */
+     /* padding: 0 30px; */
+  }
+  .body-jadwal{
+    /* display:flex; */
+    /* justify-content: center; */
+    background-color: #FFFFFF;
+    margin: 50px 0;
+    padding: 20px 0;
+  }
+  .body-jadwal h3{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .border-dok{
+      top: -30%;
       height: 100%;
       width: 100%;
       background: transparent;
@@ -929,6 +1036,7 @@
       /* background: url('/dr.\ Budi\ Satria\,\ MSc\,\ Sp\ 1.png') left center no-repeat; */
       background-size: 600px;
   }
+  
   
 
   @import "compass/css3";
@@ -1095,82 +1203,223 @@
 
 <%= render "/companyprofile/home/mtm_menu.html.erb"%>
 
-<section class="tentang p-0">
+    <section class="tentang p-0">
         <div class="container-fluid">
             <div class="row">
                 <div class="background-tentang">
                     <div class="judul-bg">
-                        <h3>Dokter</h3>
+                        <h3>Jadwal</h3>
                     </div>
                 </div>
             </div>
-            <div class="row row-tentang-1">
-              <div class="isi-tentang-1">
-                <div class="row">
-                  <% if @dataspesialis.present? != nil%>
-                    <% @dataspesialis.each do |sp|%>
-                      <div class="col-md-3 col-sm-12">
-                          <div class="card">
-                            <div class="card-front" id="card-id">
-                              <button type="button" id="btn-spe-id" onclick="datasp('<%= sp['id'] %>');" class="btn btn-primary" 
-                              style="background: transparent; width:100%;height:100%;font-size: 24px;font-weight: 800;color: #FFFFFF;position: absolute;">
-                              <%= sp['nama'] %>
-                              </button>
-                            </div>
-                          </div>
-                      </div>
+        </div>
+    </section>
+
+    <section class="tentang-body">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div class="wrapper">
+                <div class="no-gutters">
+                  <div class="col-lg-12 col-sm-12 d-flex">
+                    <select id="spesialis_id" name="spesialis" class="form-control" value="">
+                      <option value=""  disabled style="background:#515050;">-- Pilih --</option>
+                      <option value="semua" selected>Semua Dokter</option>
+                      <% @dataspesialis.each do |re| %>
+                        <option value="<%= re['id'] %>"><%= re['nama']%></option>
                       <%end%>
-                  <%end%>
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="row d-flex flex-wrap justify-content-center" style="padding: 60px 30px; ">
-              <%if @data != nil%>
-                <% @data.each do |res|%>
-                <div class="card card0" style="margin-bottom: 30px; ">
-                    <div class="img-dokter">
-                      <img src="<%= ENV['CIRACAS_WEB']+res['image_url']%>" alt="img"/>
-                    </div>
-                    <div class="border-dok">
-                      <h3><%= res['name']%></h3>
-                      <p><%= res['spesialis']%></p>
-                    </div>
+              <div class="wrapper body-jadwal">
+                <div class="no-gutters">
+                  <h3>Jadwal Dokter</h3>
+                  <div class="jadwal" id="jadwal_id">
+                   
+                  </div>
                 </div>
-                <%end%>
-              <%end%>
+              </div>
+               
             </div>
+          </div>
+        </div>
 
-            
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="modal-body-id">
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
     </section>
 
 <%= render "/companyprofile/home/mtm_footer.html.erb"%>
+<
 <script>
-
-  function datasp(id){
-    // alert(id);
-    window.location = '/companyprofile/home/dokter_get?id='+id;
-    //  $.ajax({
-    //     url: "/companyprofile/home/dokter_get",
-    //     type: "GET",
-    //     dataType: "json",
-    //     data: {
-    //         id: id,
+  var p = $('#spesialis_id option:selected').val();
+    $.ajax({
+        url: "/companyprofile/home/dokter_",
+        type: "GET",
+        dataType: "json",
+        data: {
+            id: p,
             
-    //     },
+        },
 
-    //     success: function(result) {
-    //       console.log(result);
-    //        window.location = '/companyprofile/home/dokter_get';
-         
+        success: function(result) {
+          console.log(result);
+          this.rowHtml = ''; 
+          this.rowHtml2 ='';
           
-    //     }
+          for (var i = 0; i < result.length; ++i) {
+            var img = "http://localhost:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
+            this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
+              this.rowHtml += '<h3>';
+              this.rowHtml += result[i].name;
+              this.rowHtml    += '</h3>';
+              this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
+                this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=data('"+result[i].id+"')>";
+                  this.rowHtml += '<div class="img-dokter">';
+                    this.rowHtml += "<img alt='img' id='image1' src='http://localhost:4002/"+result[i].image_url+"'/>";
+                  this.rowHtml += '</div>';
+                  this.rowHtml += '<div class="border-dok">';
+                    this.rowHtml += '<h3 class="name-card">';
+                      this.rowHtml += result[i].name;
+                    this.rowHtml += '</h3>';
+                    this.rowHtml += '<p class="spesialis-card">';
+                      this.rowHtml += result[i].spesialis;
+                    this.rowHtml += '</p>';
+                  this.rowHtml += '</div>';
+                this.rowHtml += '</div>';
+              this.rowHtml += '</button>';
+            this.rowHtml += '</div>';
+                  
+          }
+          document.getElementById('jadwal_id').innerHTML = this.rowHtml;
+          
+        }
 
-    // });   
-       
+    });   
 
+  $(document).ready(function() {
+    // var p = $('#spesialis_id option:selected').val('semua');
+   
+    $("#spesialis_id").change(function(){ 
+        var p = $('#spesialis_id option:selected').val();
         
+        $.ajax({
+            url: "/companyprofile/home/dokter_",
+            type: "GET",
+            dataType: "json",
+            data: {
+                id: p,
+                
+            },
+
+            success: function(result) {
+              console.log(result);
+              this.rowHtml = ''; 
+              this.rowHtml2 ='';
+              
+              for (var i = 0; i < result.length; ++i) {
+                var img = "http://localhost:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
+                this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
+                  this.rowHtml += '<h3>';
+                  this.rowHtml += result[i].name;
+                  this.rowHtml    += '</h3>';
+                  this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
+                    this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=data('"+result[i].id+"')>";
+                      this.rowHtml += '<div class="img-dokter">';
+                        this.rowHtml += "<img alt='img' id='image1' src='http://localhost:4002/"+result[i].image_url+"'/>";
+                      this.rowHtml += '</div>';
+                      this.rowHtml += '<div class="border-dok">';
+                        this.rowHtml += '<h3 class="name-card">';
+                          this.rowHtml += result[i].name;
+                        this.rowHtml += '</h3>';
+                        this.rowHtml += '<p class="spesialis-card">';
+                          this.rowHtml += result[i].spesialis;
+                        this.rowHtml += '</p>';
+                      this.rowHtml += '</div>';
+                    this.rowHtml += '</div>';
+                  this.rowHtml += '</button>';
+                this.rowHtml += '</div>';
+                      
+              }
+              document.getElementById('jadwal_id').innerHTML = this.rowHtml;
+              
+            }
+
+        });   
+      
+    });
+    
+  });
+
+  function data(id){
+     $.ajax({
+            url: "/companyprofile/home/jadwal_dokter_all",
+            type: "GET",
+            dataType: "json",
+            data: {
+                id: id,
+                
+            },
+
+            success: function(result) {
+              // console.log(result);
+              this.rowHtml = ''; 
+              
+                this.rowHtml += "<div class='col-12' style='mb-5'>";
+                  this.rowHtml += "<h3 class='header-text-nama'>";
+                    this.rowHtml += $('.name-card').val();
+                  this.rowHtml += "</h3>";
+                  this.rowHtml += "<h4 class='header-text-spesialis'>";
+                    this.rowHtml += $('.spesialis-card').val();
+                  this.rowHtml += "</h4>";
+                  this.rowHtml += "<table class='table table-responsive'>";
+                    this.rowHtml += "<thead>"
+                      this.rowHtml += "<tr>"
+                        this.rowHtml += "<th scope='col'>No</th>"
+                        this.rowHtml += "<th scope='col'>Hari</th>"
+                        this.rowHtml += "<th scope='col'>Waktu</th>"
+                        this.rowHtml += "<th scope='col'>Jam Mulai</th>"
+                        this.rowHtml += "<th scope='col'>Jam Selesai</th>"
+                      this.rowHtml += "</tr>"
+                      this.rowHtml += "<tbody>"
+                      var a = 0;
+                      for (var i = 0; i < result.length; ++i) {
+                        var a = 1+i;
+                        this.rowHtml += "<tr>"
+                          this.rowHtml += "<td>"+a+"</td>"
+                          this.rowHtml += "<td>"+result[i].hari+"</td>"
+                          this.rowHtml += "<td>"+result[i].waktu+"</td>"
+                          this.rowHtml += "<td>"+result[i].jamMulai+"</td>"
+                          this.rowHtml += "<td>"+result[i].jamSelesai+"</td>"
+                        this.rowHtml += "</tr>"
+                      }
+                      this.rowHtml += "</tbody>"
+                    this.rowHtml += "</thead>"
+                  this.rowHtml += "</table>";
+                this.rowHtml += "</div>";
+                      
+               document.getElementById('modal-body-id').innerHTML = this.rowHtml;
+              
+            }
+
+        }); 
   }
+ 
 
 </script>
