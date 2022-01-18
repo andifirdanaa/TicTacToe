@@ -681,9 +681,9 @@ class Backoffice::MasterController < ApplicationController
     @keyword = params[:keyword].present? ? params[:keyword] : ''
 
     if @keyword.present?
-      url = "hubungi/list?keyword=#{@keyword}"
+      url = "hubungi?keyword=#{@keyword}"
     else
-      url = "hubungi/list?limit=#{@limit}&page=#{@page}&keyword=#{@keyword}"
+      url = "hubungi?limit=#{@limit}&page=#{@page}&keyword=#{@keyword}"
     end
 
     @data = ApplicationHelper.req_get(url,session['sess']['my_token'])

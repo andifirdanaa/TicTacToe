@@ -54,6 +54,7 @@ class Companyprofile::HomeController < ApplicationController
 		res_banner = HTTParty.get(url_banner)
 		@data_banner = res_banner.parsed_response
 		@databanner = @data_banner['content']['data']
+		
 
 		url_jns = ENV['CIRACAS_WEB']+"jenis_rawat/list"
 		res_jns = HTTParty.get(url_jns)
@@ -286,7 +287,7 @@ class Companyprofile::HomeController < ApplicationController
 
 	def dokter
 		
-		url_spesialis = ENV['CIRACAS_WEB']+"spesialis"
+		url_spesialis = ENV['CIRACAS_WEB']+"spesialis/list"
 		res_spesialis = HTTParty.get(url_spesialis)
 		@list_spesialis = res_spesialis.parsed_response
 		@dataspesialis = @list_spesialis['content']['data']
@@ -470,6 +471,23 @@ class Companyprofile::HomeController < ApplicationController
 
 	def kontak
 		
+	end
+
+	def aksi_kontak
+		nama = params['name']
+		email = params['email']
+		pesan = params['message']
+
+		data = {
+			nama: nama,
+			email: email,
+			pesan: pesan
+		}
+		
+		@hubungiPesan = ApplicationHelper.req_post('hubungi',data,"token")
+		
+		render json: @hubungiPesan
+		return
 	end
 
 	def about_us

@@ -64,7 +64,7 @@
                                                 <td><%= res['nama'] %></td>
                                                 <td style = "overflow: hidden; text-overflow: ellipsis; max-width: 100px; white-space: nowrap;"><%= res['pesan'] %></td>
                                                 <td><%= res['email'] %></td>
-                                                <td><%= res['created_at'].to_s %></td>
+                                                <td><%= res['created_at'].to_date %></td>
                                                 <td>
                                                 
                                                     <button class="btnedit btn btn-sm btn-danger" id="aksi_id" onclick="del('<%= res['id'] %>')" title="Delete">

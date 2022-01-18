@@ -1088,7 +1088,7 @@
                             <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
                                 <div class="contact-wrap w-100 p-md-5 p-4">
                                     <h3 class="mb-4">Get in touch</h3>
-                                    <form method="POST" id="contactForm" name="contactForm" novalidate="novalidate" action="mailto:rsuciracas@gmail.com">
+                                    <form method="POST" id="myformHubungi" name="contactForm" novalidate="novalidate" action="/companyprofile/home/aksi_kontak">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -1116,7 +1116,8 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                   <input type="submit" value="Send Message" class="btn btn-primary">
+                                                   <input type="submit" value="Send Message" class="btn btn-primary" onclick="kirims()">
+                                                  <button id="simpan" type="submit" class="btnPilih" hidden></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -1137,12 +1138,11 @@
 <script>
     function kirims(){
 
-    var first_name = document.getElementById("first_name").value;
-    var last_name = document.getElementById("last_name").value;
-    var email = document.getElementById("email").value;
-    var message = document.getElementById("message").value;
+    var fullname = document.getElementById("name_id").value;
+    var email = document.getElementById("email_id").value;
+    var message = document.getElementById("message_id").value;
 
-    if(first_name == ''){
+    if(fullname == ''){
       alert("Nama Anda Belum Diisi");
     }else if(email == ''){
       alert("Alamat Email Belum Diisi");
@@ -1161,7 +1161,7 @@
 
 			e.preventDefault();
 			$.ajax({
-				url: "/companyprofile/home/aksi_about_us",
+				url: "/companyprofile/home/aksi_kontak",
 				type: "POST",
 				data: new FormData(this),
 				contentType: false,

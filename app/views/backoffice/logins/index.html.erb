@@ -7,6 +7,169 @@
     -ms-user-select: none;
     user-select: none;
   }
+  .container-login100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #f0f0f0;
+  }
+  .wrap-login100 {
+    width: 500px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 20px 0px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 3px 20px 0px rgb(0 0 0 / 10%);
+    -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  }
+  .login100-form {
+    width: 100%;
+  }
+  .login100-form-title {
+    display: block;
+    font-family: OpenSans-Regular;
+    font-size: 30px;
+    color: #555555;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .validate-input {
+    position: relative;
+  }
+  .wrap-input100 {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+  }
+  input.input100 {
+    height: 68px;
+    padding: 0 25px 0 25px;
+  }
+  .input100 {
+    display: block;
+    width: 100%;
+    background: transparent;
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: #666666;
+    line-height: 1.2;
+  }
+  .focus-input100-1, .focus-input100-2 {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  .focus-input100-1::before {
+    top: -1px;
+    left: 0;
+  }
+  .focus-input100-2::before {
+    bottom: -1px;
+    right: 0;
+  }
+  .focus-input100-1::before, .focus-input100-2::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background-color: #4272d7;
+  }
+  .focus-input100-1::after {
+    top: 0;
+    right: -1px;
+  }
+  .focus-input100-2::after {
+    bottom: 0;
+    left: -1px;
+  }
+  .focus-input100-1::after, .focus-input100-2::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1px;
+      height: 0;
+      background-color: #4272d7;
+  }
+  .wrap-input100.rs1 {
+    border-top: none;
+  }
+  .p-r-55 {
+    padding-right: 55px;
+  }
+  .p-l-55 {
+      padding-left: 55px;
+  }
+  .p-b-50 {
+      padding-bottom: 50px;
+  }
+  .p-t-65 {
+      padding-top: 65px;
+  }
+  .p-b-33 {
+    padding-bottom: 33px;
+  }
+  .container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .m-t-20 {
+      margin-top: 20px;
+  }
+  .login100-form-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 60px;
+    background-color: #4272d7;
+    font-family: OpenSans-Regular;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+  button {
+      outline: none !important;
+      border: none;
+      background: transparent;
+  }
+  .login100-form-btn:hover {
+    background-color: #333333;
+  }
+  button:hover {
+      cursor: pointer;
+  }
 
   @media (min-width: 768px) {
     .bd-placeholder-img-lg {
@@ -15,50 +178,31 @@
   }
 </style>
 
-<form class="form-signin" method="post" action="/backoffice/logins">
-  <div style="margin-top: 5%;margin-left:30%;margin-right:30%;">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header text-center">
-          <img class="col-md-2"
-          src="" alt=""
-          width="100">
-          <p>
-          <h4>Ciracas Back-office</h4>
+<div class="container-login100">
+  <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+    <form class="login100-form validate-form" method="post" action="/backoffice/logins">
+      <% if flash[:notice] %>
+        <div class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <%= flash[:notice] %>
         </div>
-        <div class="card-body">
-          <% if flash[:notice] %>
-          <div class="alert alert-danger alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <%= flash[:notice] %></div>
-          <% end %>
-          <div class="form-label-group">
-            <!-- <label for="inputEmail">Username</label> -->
-            <input autocomplete="off" type="text" id="inputEmail" name="userName" class="form-control" placeholder="Username"
-              required autofocus>
-          </div>
-          <br>
-          <div class="form-label-group">
-            <!-- <label for="inputPassword">Password</label> -->
-            <input autocomplete="off" type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-          </div>
-          <br>
-          <div class="form-label-group" align="center" >
-            <!-- <label for="inputPassword">Password</label> -->
-          </div>
-
-          <div class="checkbox mb-3">
-            <!-- <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label> -->
-          </div>
-          <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
-        </div>
-        <div class="card-footer">
-          <p class="text-muted text-center"> </p>
-        </div>
+      <% end %>
+      <span class="login100-form-title p-b-33">Backoffice</span>
+      <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name="userName" placeholder="Username" autocomplete="off">
+        <span class="focus-input100-1"></span>
+        <span class="focus-input100-2"></span>
       </div>
-    </div>
-
+      <div class="wrap-input100 rs1 validate-input alert-validate" data-validate="Password is required" autocomplete="off">
+        <input class="input100" type="password" name="password" placeholder="Password">
+        <span class="focus-input100-1"></span>
+        <span class="focus-input100-2"></span>
+      </div>
+      <div class="container-login100-form-btn m-t-20">
+        <button class="login100-form-btn">
+          Sign in
+        </button>
+      </div>
+    </form>
   </div>
-</form>
+</div>

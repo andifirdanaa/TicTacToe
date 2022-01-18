@@ -112,6 +112,7 @@ Rails.application.routes.draw do
 
   get '/pendaftaran', to: 'companyprofile/home#pendaftaran'
   post '/companyprofile/home/aksi_sub'
+  post '/companyprofile/home/aksi_kontak'
   post '/companyprofile/home/hubungi_insert'
   post '/companyprofile/home/pendaftaran_insert'
   # get 'companyprofile/home/hubungi'
