@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>RSUD Ciracas</title>
+    <title><%= yield(:title) %></title>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,12 +13,13 @@
     <meta name="keywords" content="<%= @keyword_ ? @keyword_ : 'RSUD Ciracas'%>">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="<%="/img/logorsudciracas.png"%>" type="image/gif" sizes="16x16">
+    <link rel="icon" href="<%="/img/logors.png"%>" type="image/gif" sizes="16x16">
 
 
     <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet"> -->
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kmlpandey77/bootnavbar/css/bootnavbar.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
@@ -30,14 +31,19 @@
     
     <style>
 
-        * {
+        /* * {
             font-family: 'Open Sans', sans-serif;
             box-sizing: border-box;
-        }
+        } */
         /* * {
             font-family: 'Lato', sans-serif;
             box-sizing: border-box;
-        }     */
+        }   */
+        * {
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }    
+        
                         
     
     </style>

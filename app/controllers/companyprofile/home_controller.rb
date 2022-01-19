@@ -217,6 +217,13 @@ class Companyprofile::HomeController < ApplicationController
 		@data_pel_jenis1 = res_pel_jenis1.parsed_response
 		@datapeljenis = @data_pel_jenis1['content']['data'] rescue ''
 		
+		if @datapeljenis.present?
+			@title_header = @datapeljenis[0]['jenis']
+			
+		else
+			@datapeljenis = ''
+		end
+		
 	end
 
 	def news
@@ -291,10 +298,6 @@ class Companyprofile::HomeController < ApplicationController
 		res_spesialis = HTTParty.get(url_spesialis)
 		@list_spesialis = res_spesialis.parsed_response
 		@dataspesialis = @list_spesialis['content']['data']
-
-		
-
-	
 
 		# render json: @dataspe1
 		# return @dataspe1

@@ -1,3 +1,4 @@
+<% content_for :title, 'RSUD Ciracas'%>
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -670,7 +671,7 @@ img {
 
   }
   .page-jadwal .jadwal{
-    background: linear-gradient(to bottom right, rgba(34, 87, 126, 0.8), rgba(34, 87, 126, 0.8));
+    background: linear-gradient(to bottom right,rgb(34 87 126), rgb(240 240 240 / 80%));
     /* background-color: #215273; */
     overflow: hidden;
   }
@@ -899,7 +900,7 @@ img {
   }
   .page-contact .contact{
     padding: 60px 0;
-    background: linear-gradient(to bottom right, rgba(34, 87, 126, 0.8), rgba(34, 87, 126, 0.8));
+    background: linear-gradient(to bottom right,rgb(34 87 126), rgb(240 240 240 / 80%));
     overflow: hidden;
   }
   .page-contact .header-text-contact{
@@ -1172,7 +1173,7 @@ padding: 8px 15px;
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12 p-0">
-          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-pause="false">
             <div class="carousel-inner" >
             <% if @data_banner['content'] != nil %>
               <%if @databanner != nil%>
@@ -1588,6 +1589,7 @@ padding: 8px 15px;
 
       window.location = '/companyprofile/home/jadwal_dokter_spesialis?dokter='+mix;
     }
+    
    
 
 

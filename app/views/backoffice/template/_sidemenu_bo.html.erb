@@ -1,7 +1,7 @@
 <nav id="sidebar">
     <div class="sidebar-header">
     <br>
-        <h3>BackOffice</h3>
+        <h3 style="padding-left:20px;">RSUD Ciracas</h3>
     </div>
 
     <ul class="list-unstyled components">
@@ -13,11 +13,11 @@
         </li>
         <% @list['content']['data'].each do | item | %>
         <li class="<%= current_class?('/'+item['url']) %>">
-            <a href="/<%= item['url'] %>"><i class="fa fa-cube"></i> <%= item['name'] %></a>
+            <a href="/<%= item['url'] %>"><i class="fas fa-box"></i> <%= item['name'] %></a>
         </li>
         <% end %>
         <li>
-            <a href="/backoffice/home/logout"><i class="fa fa-power-off"></i> Keluar</a>
+            <a href="/backoffice/home/logout"><i class="fas fa-door-open"></i> Keluar</a>
         </li>
     
     </ul>

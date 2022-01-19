@@ -50,17 +50,33 @@
   z-index: 200;
 }
 .navbars{
-  background-color:#f0f0f0;
+  /* background-color:#f0f0f0; */
+  background-color: transparent;
   /* background: rgba(255, 255, 255, 0.5); */
   opacity: 0.9;
-  padding: 20px 55px;
-  border-bottom: 2px solid #888AA2;
+  /* padding: 20px 55px; */
+  /* padding-top: 1.563rem; */
+  /* padding-bottom: 1.563rem; */
+  /* border-bottom: 2px solid #888AA2; */
+  transition: background-color 1s ease 0s;
   
 }
+.navbar.solid {
+  background-color:#f0f0f0;
+  transition: background-color 1s ease 0s;
+  box-shadow: 0 0 4px #888AA2;
+  border-bottom: 2px solid #888AA2;
+}
 .navbars .nav-item{
-  color: #215273;
+  color: #ffffff;
 }
 .navbar-light .navbar-nav .nav-link {
+  color: #ffffff;
+}
+.navbars .nav-item .solid{
+  color: #215273;
+}
+.navbar-light .navbar-nav .nav-link .solid{
   color: #215273;
 }
 .navbars .nav-item a{
@@ -91,17 +107,20 @@
     
 }
 .img-logo{
-  max-width:110px;
+  /* max-width:110px;
   height:auto;
   margin-right:80px;
   width: 160px;
-  height:80px
+  height:80px */
+  position: relative;
+  height: 100px;
+  width: 160px;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 768px) {
   .img-logo{
     margin-right:80px;
-    width: 60px;
+    width: 90px;
     height:60px
   }
   .navbars {
@@ -175,7 +194,7 @@
             <ul class="navbar-nav ml-auto">
               <% if @menu != nil %>
               <% @menu.each do |res| %>
-                <li class="nav-item <%= res['rows_child'] == 1 ? 'dropdown' : '' %>" style="padding-right:20px;">
+                <li class="nav-item <%= res['rows_child'] == 1 ? 'dropdown' : '' %>" style="padding-left:10px;">
                   <a href="<%= res['url']%>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
                     <%=res['menu'] %>
                   </a>
@@ -234,3 +253,21 @@
   </div>
 
 
+<script>
+  $(document).ready(function() {
+        // Transition effect for navbar 
+        $(window).scroll(function() {
+          // checks if window is scrolled more than 500px, adds/removes solid class
+          if($(this).scrollTop() > 100) { 
+              $('.navbars').addClass('solid');
+              $('.nav-item').addClass('solid');
+              $('.nav-link').addClass('solid');
+              
+          } else {
+              $('.navbars').removeClass('solid');
+              $('.nav-item').removeClass('solid');
+              $('.nav-link').removeClass('solid');
+          }
+        });
+  });
+</script>
