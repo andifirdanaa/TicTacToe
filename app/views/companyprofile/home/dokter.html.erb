@@ -1225,9 +1225,9 @@
                   <div class="col-lg-12 col-sm-12 d-flex">
                     <select id="spesialis_id" name="spesialis" class="form-control" value="">
                       <option value=""  disabled style="background:#515050;">-- Pilih --</option>
-                      <option value="semua" selected>Semua Dokter</option>
+                      <option value="0" >Semua Dokter</option>
                       <% @dataspesialis.each do |re| %>
-                        <option value="<%= re['id'] %>"><%= re['nama']%></option>
+                        <option value="<%= re['id'] %>" <%= @keywordes == re['id'] ? 'selected' : ' ' %>><%= re['nama']%></option>
                       <%end%>
                     </select>
                   </div>
@@ -1238,6 +1238,13 @@
                   <h3>Jadwal Dokter</h3>
                   <div class="jadwal" id="jadwal_id">
                    
+                  </div>
+                  <div class="d-flex justify-content-center flex-wrap" id="pagination_id">
+                    <input type="hidden" name="page" id="page_id" value="<%= @pagese %>">
+                    <input type="hidden" name="keyword" id="keyword_id" value="<%= @keywordes %>">
+                    <input type="hidden" name="key" id="key_id" value="">
+
+
                   </div>
                 </div>
               </div>
@@ -1267,40 +1274,46 @@
     </section>
 
 <%= render "/companyprofile/home/mtm_footer.html.erb"%>
-<
+
 <script>
   var p = $('#spesialis_id option:selected').val();
+  var page_id = $('#page_id').val();
+  var keyword_id = $('#keyword_id').val();
+  // alert(keyword_id);
     $.ajax({
         url: "/companyprofile/home/dokter_",
         type: "GET",
         dataType: "json",
         data: {
-            id: p,
-            
+            id: keyword_id,
+            page: page_id,
         },
 
         success: function(result) {
           console.log(result);
+          data = result.data;
+          meta = result.meta;
+          spesialis_id = result.data[0].spesialis_id;
           this.rowHtml = ''; 
           this.rowHtml2 ='';
           
-          for (var i = 0; i < result.length; ++i) {
+          for (var i = 0; i < data.length; ++i) {
             var img = "http://localhost:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
             this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
               this.rowHtml += '<h3>';
-              this.rowHtml += result[i].name;
+              this.rowHtml += data[i].name;
               this.rowHtml    += '</h3>';
               this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
-                this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=data('"+result[i].id+"')>";
+                this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=dataa('"+data[i].id+"')>";
                   this.rowHtml += '<div class="img-dokter">';
-                    this.rowHtml += "<img alt='img' id='image1' src='http://localhost:4002/"+result[i].image_url+"'/>";
+                    this.rowHtml += "<img alt='img' id='image1' src='http://localhost:4002/"+data[i].image_url+"'/>";
                   this.rowHtml += '</div>';
                   this.rowHtml += '<div class="border-dok">';
                     this.rowHtml += '<h3 class="name-card">';
-                      this.rowHtml += result[i].name;
+                      this.rowHtml += data[i].name;
                     this.rowHtml += '</h3>';
                     this.rowHtml += '<p class="spesialis-card">';
-                      this.rowHtml += result[i].spesialis;
+                      this.rowHtml += data[i].spesialis;
                     this.rowHtml += '</p>';
                   this.rowHtml += '</div>';
                 this.rowHtml += '</div>';
@@ -1308,49 +1321,75 @@
             this.rowHtml += '</div>';
                   
           }
+          this.rowHtml2 += '<div class="d-flex justify-content-center flex-wrap">';
+            this.rowHtml2 += '<nav aria-label="Page navigation example">';
+              this.rowHtml2 += '<ul class="pagination">';
+              if(meta.prev_page != 0){
+                this.rowHtml2 += '<li class="page-item">';
+                  this.rowHtml2 += '<a class="page-link" onclick="metaa('+meta.prev_page+','+keyword_id+')" >Previous</a>'
+                this.rowHtml2 += '</li>';
+              }
+                for(var j = 0; j < meta.total_pages.length; ++j){
+                  this.rowHtml2 += '<li class="page-item">';
+                    this.rowHtml2 += '<a class="page-link" onclick="metaa('+meta.total_pages+','+keyword_id+')" >'+meta.total_pages+'</a>'
+                  this.rowHtml2 += '</li>';
+                }
+              if(meta.next_page != 0){
+                this.rowHtml2 += '<li class="page-item">';
+                  this.rowHtml2 += '<a class="page-link" onclick="metaa('+meta.next_page+','+keyword_id+')" >Next</a>'
+                this.rowHtml2 += '</li>';
+              }
+              this.rowHtml2 += '</ul>';
+            this.rowHtml2 += '</nav>';
+          this.rowHtml2 += '</div>';
+          
           document.getElementById('jadwal_id').innerHTML = this.rowHtml;
+          document.getElementById('pagination_id').innerHTML = this.rowHtml2;
           
         }
 
-    });   
+    });
+
+ 
 
   $(document).ready(function() {
     // var p = $('#spesialis_id option:selected').val('semua');
-   
     $("#spesialis_id").change(function(){ 
         var p = $('#spesialis_id option:selected').val();
-        
         $.ajax({
             url: "/companyprofile/home/dokter_",
             type: "GET",
             dataType: "json",
             data: {
                 id: p,
-                
+                page: 1,
             },
 
             success: function(result) {
               console.log(result);
+              data = result.data;
+              meta = result.meta;
+              spesialis_id = result.data[0].spesialis_id;
               this.rowHtml = ''; 
               this.rowHtml2 ='';
               
-              for (var i = 0; i < result.length; ++i) {
+              for (var i = 0; i < data.length; ++i) {
                 var img = "http://localhost:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
                 this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
                   this.rowHtml += '<h3>';
-                  this.rowHtml += result[i].name;
+                  this.rowHtml += data[i].name;
                   this.rowHtml    += '</h3>';
                   this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
-                    this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=data('"+result[i].id+"')>";
+                    this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=dataa('"+data[i].id+"')>";
                       this.rowHtml += '<div class="img-dokter">';
-                        this.rowHtml += "<img alt='img' id='image1' src='http://localhost:4002/"+result[i].image_url+"'/>";
+                        this.rowHtml += "<img alt='img' id='image1' src='http://localhost:4002/"+data[i].image_url+"'/>";
                       this.rowHtml += '</div>';
                       this.rowHtml += '<div class="border-dok">';
                         this.rowHtml += '<h3 class="name-card">';
-                          this.rowHtml += result[i].name;
+                          this.rowHtml += data[i].name;
                         this.rowHtml += '</h3>';
                         this.rowHtml += '<p class="spesialis-card">';
-                          this.rowHtml += result[i].spesialis;
+                          this.rowHtml += data[i].spesialis;
                         this.rowHtml += '</p>';
                       this.rowHtml += '</div>';
                     this.rowHtml += '</div>';
@@ -1358,7 +1397,30 @@
                 this.rowHtml += '</div>';
                       
               }
+              this.rowHtml2 += '<div class="d-flex justify-content-center flex-wrap">';
+                this.rowHtml2 += '<nav aria-label="Page navigation example">';
+                  this.rowHtml2 += '<ul class="pagination">';
+                  if(meta.prev_page != 0){
+                    this.rowHtml2 += '<li class="page-item">';
+                      this.rowHtml2 += "<a class='page-link'  onclick='metaa("+meta.prev_page+","+p+")'>Previous</a>"
+                    this.rowHtml2 += '</li>';
+                  }
+                    for(var j = 0; j < meta.total_pages.length; ++j){
+                      this.rowHtml2 += '<li class="page-item">';
+                        this.rowHtml2 += "<a class='page-link' onclick='metaa("+meta.total_pages+")' </a>"
+                      this.rowHtml2 += '</li>';
+                    }
+                  if(meta.next_page != 0){
+                    this.rowHtml2 += '<li class="page-item">';
+                      this.rowHtml2 += "<a class='page-link' onclick='metaa("+meta.next_page+","+p+")' >Next</a>"
+                    this.rowHtml2 += '</li>';
+                  }
+                  this.rowHtml2 += '</ul>';
+                this.rowHtml2 += '</nav>';
+              this.rowHtml2 += '</div>';
+          
               document.getElementById('jadwal_id').innerHTML = this.rowHtml;
+              document.getElementById('pagination_id').innerHTML = this.rowHtml2;
               
             }
 
@@ -1368,7 +1430,7 @@
     
   });
 
-  function data(id){
+  function dataa(id){
      $.ajax({
             url: "/companyprofile/home/jadwal_dokter_all",
             type: "GET",
@@ -1421,6 +1483,16 @@
 
         }); 
   }
- 
+  
+  function metaa(page,key){
+    // alert(key);
+    // var p = $('#spesialis_id option:selected').val();
+    // var keyword_id = $('#keyword_id').val();
+    // if(keyword_id == key){
+    //   $("#spesialis_id option[value='8']").selected = true;
+    // }
+    $('#key_id').val(key);
+    window.location = "/dokter?keyword="+key+"&page="+page;
+  }   
 
 </script>

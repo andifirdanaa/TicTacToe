@@ -301,30 +301,88 @@ class Companyprofile::HomeController < ApplicationController
 
 		# render json: @dataspe1
 		# return @dataspe1
-
+		
+		@pagese = params[:page].present? ? params[:page].to_i : 1
+		@keywordes = params['keyword'].present? ? params['keyword'].to_i : '0'
+		# render json: @dataspe1
+		# return @dataspe1
 	end
 
 	def dokter_
 
-		if params['id'] == 'semua'
+		@page = params[:page].present? ? params[:page].to_i : 1
+		
+		if params['id'] == '0'
 			@keyword = ''
 		else
 			@keyword = params['id']
 		end
-	  
+		
 		if @keyword.present?
-			url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?keyword=#{@keyword}"
+			url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?keyword=#{@keyword}&page=#{@page}"
 		else
-			url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis"
+			url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?page=#{@page}"
 		end
 
 		res_jadwal = HTTParty.get(url_jadwal)
 		@list_jadwal = res_jadwal.parsed_response
-		@datajadwal = @list_jadwal['content']['data']
-		@datajadwalimage = @datajadwal[0]
+		@datajadwal = @list_jadwal['content']
+		# @datajadwalimage = @datajadwal[0]
+
+		# render json:  @datajadwal
+		# return
+
+		# dokter = "redis_dokter"
+		# get_cache_dokter = $redis.get(dokter)
+
+		# if get_cache_dokter.present?
+		# 	Rails.logger.info "\n\n### get_cache_ FROM REDIS \n #####\n\n"
+		# 	# @datajadwal = JSON.parse get_cache_dokter
+		# 	if params['id'] == 'semua'
+		# 		@keyword = ''
+		# 		@datajadwal = JSON.parse get_cache_dokter
+		# 	else
+		# 		@keyword = params['id']
+		# 		@datajadwal = JSON.parse get_cache_dokter
+		# 	end
+		  
+		# 	if @keyword.present?
+		# 		$redis.del(get_cache_dokter)
+		# 		url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?keyword=#{@keyword}&page=#{@page}"
+		# 	else
+		# 		url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?page=#{@page}"
+		# 	end
+	
+		# 	res_jadwal = HTTParty.get(url_jadwal)
+		# 	@list_jadwal = res_jadwal.parsed_response
+		# 	@datajadwal = @list_jadwal['content']
+		# else
+		# 	@page = params[:page].present? ? params[:page].to_i : 1
+
+		# 	if params['id'] == 'semua'
+		# 		@keyword = ''
+		# 	else
+		# 		@keyword = params['id']
+		# 	end
+		  
+		# 	if @keyword.present?
+		# 		url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?keyword=#{@keyword}&page=#{@page}"
+		# 	else
+		# 		url_jadwal = ENV['CIRACAS_WEB']+"/dokter/jenis?page=#{@page}"
+		# 	end
+	
+		# 	res_jadwal = HTTParty.get(url_jadwal)
+		# 	@list_jadwal = res_jadwal.parsed_response
+		# 	@datajadwal = @list_jadwal['content']
+
+		# 	Rails.logger.info "\n\n####################### get_cache_system_setting FROM DB #######################\n\n"
+		# 	$redis.setex(dokter, 120, @datajadwal.to_json) #set
+	
+		# end
 
 		render json:  @datajadwal
 		return
+
 	end
 
 	def jadwal_dokter_all
