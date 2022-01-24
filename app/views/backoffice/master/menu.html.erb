@@ -150,14 +150,14 @@
                                             </button>
                                         </span>
                                          <% 
-                                            url = ENV['CIRACAS_WEB']+"menu"
+                                            url = ENV['CIRACAS_WEB']+"menu/count"
 
                                             resss = HTTParty.get(
                                                 url
                                             )
                     
                                           
-                                            @count = resss['content']['data'].count + 1
+                                            @count = resss['content'] + 1
                                           
                                         %>
                                         <input type="number" id="quantity"  name="urutan" class="form-control input-number col-md-3" value="<%= @count %>" min="0" max="100">

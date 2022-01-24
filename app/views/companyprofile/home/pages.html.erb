@@ -791,7 +791,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        object-fit: cover;
+        object-fit: contain;
     }
     .isi-tentang .judul-isi{
         text-align: center;
@@ -974,7 +974,7 @@
           width: 100%;
           height: 100%;
           overflow: hidden;
-          object-fit: cover;
+          object-fit: contain;
       }
       
     }
@@ -996,7 +996,7 @@
             <div class="isi-tentang d-block">
                 <div class="detail-wrapper">
                   <% if @image_pages.present? %>
-                    <img src="<%= @image_pages %>" alt="" onerror="this.src='/img/logorsudciracas.png'">
+                    <img src="<%= @image_pages %>" alt="" onerror="this.src='/img/logors.png'">
                   <%end%>
                 </div>
                 

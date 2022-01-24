@@ -116,6 +116,9 @@
   height: 100px;
   width: 160px;
 }
+.ground-img{
+  background-color: #f0f0f0;
+}
 
 @media only screen and (min-width: 320px) and (max-width: 768px) {
   .img-logo{
@@ -183,9 +186,11 @@
   <div class="fix-nav">
       <nav  class="navbar navbar-expand-lg navbar-light navbars" id="bootnavbar">
         <div class="container-fluid">
-          <a href="/">
-            <img class="img-logo" id="logo" src="/img/logors.png" />
-          </a> 
+          <div class="ground-img">
+            <a href="/">
+              <img class="img-logo" id="logo" src="/img/logors.png" />
+            </a>
+          </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
