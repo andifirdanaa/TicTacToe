@@ -1,10 +1,8 @@
-<%= tinymce_assets %>
-<%= tinymce %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="card">
     <div class="card-body">
-        <div class="card-title"><h4><i class="fab fa-buffer"></i> Pelayanan</h4></div>
-        <div class="card-content">    
+        <div class="card-title"><h4><i class="fab fa-buffer"></i> Master Galeri</h4></div>
+        <div class="card-content">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data"
@@ -39,18 +37,14 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive-sm">
-                                <table class="table table-hover table-sm table-bordered table-striped">
+                                <table class="table table-hover table-striped table-sm table-bordered">
                                     <!-- table-striped -->
                                     <thead>
                                         <tr>
-                                            <!-- <tr style="background: rgb(156, 173, 240);"> -->
+                                                <!-- <tr style="background: rgb(156, 173, 240);"> -->
                                             <th scope="col">#</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Sub Desc</th>
-                                            <th scope="col">Desc</th>
                                             <th scope="col">Image</th>
-                                             <th scope="col">Lantai</th>
-                                            <th scope="col">urutan</th>
+                                            <th scope="col">Title</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -66,32 +60,24 @@
                                             end
 
                                             @data['content']['data'].each do |res| 
-                                        %>
+                                            
+                                            %>
                                             <tr>
                                                 <td><%= @no = @no+1 %></td>
-                                                <td><%= res['nama'] %></td>
-                                                <td><%= res['subdesc'] %></td>
-                                                <td style = "overflow: hidden; text-overflow: ellipsis; max-width: 100px; white-space: nowrap;"><%= res['desc'] %></td>
-                                                 <% if res['image_url'].present? %>
-                                                <td><img src= "<%= ENV['CIRACAS_WEB']+"/"+ res['image_url']%>" alt="rss feed"
-                                                     width='80px' height='80px'/></td>
-                                                <%else%>
-                                                 <td><img src= "" alt="rss feed"
-                                                     width='80px' height='80px'/></td>
-                                                <%end%>
-                                                <td><%= res['lantai'] %></td>
-                                                <td><%= res['urutan'] %></td>
+                                                <td align="center" style="margin-top: 10%;"><img src="<%=ENV['CIRACAS_WEB'] %><%=res['image_url'] %>" width="100px" height="100px"></td>
+                                                <td><%= res['title'] %></td>
                                                 <td align="center">
                                                     <i class="fa <%= res['status'].to_i == 1 ? 'fa fa-check' : 'fa fa-close' %>"
                                                             data-toggle="tooltip" data-placement="top" title="<%= res['status'].to_i == 1 ? 'Aktif' : 'Tidak Aktif' %>">
                                                     </i>
                                                 </td>
                                                 <td>
-                                                    <button class="btnedit btn btn-sm btn-primary" id="aksi_id" onclick="update('<%=res['id'] %>')" title="Edit">
+                                                    <button class="btnedit btn btn-sm btn-primary" id="aksi_id" onclick="update('<%= res['id'] %>')" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </td>
                                             </tr>
+                                        
                                         <% end %>
                                         <% else %>
                                                 <tr>
@@ -101,7 +87,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- PAGINATION aja -->
+                             <!-- PAGINATION aja -->
                                 
                                     <%= 
                                         @myparaam = '&keyword='+@key.to_s
@@ -112,70 +98,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+               <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
                     <strong id="titleAdd"><i  class="fa fa-plus-square"></i> Tambah Data</strong>
                     <strong id="titleEdit"><i class="fa fa-edit"></i> Ubah Data</strong>
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" class="form-horizontal" action="/backoffice/master/aksi_pelayanan" id="form_id" class="uploads" enctype="multipart/form-data">
-                                <input type="text" class="form-control" style="display: none" name="id" id="id_id">
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Nama:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="nama" id="nama_id" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Sub Desc:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="subdesc" id="subdesc_id" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Desc:</label>
-                                    <div class="col-sm-10">
-                                        <textarea id="content_id" name="content"  rows="30" cols="80" ></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Upload Gambar</label><br>
-                                    <label class="control-label col-sm-2" for="email">Ukuran 450x450</label>
-                                    <div class="col-sm-12">
-                                        <input type="file" name="images" id ="images" class="form-control" multiple onchange="tampilkanPreview(this,'preview')">
+                            <form method="POST" class="form-horizontal" action="/backoffice/master/aksi_galeri" id="form_id" class="uploads" enctype="multipart/form-data">
+                                <input type="text" class="form-control" style="display: none" name="id" id="id_id" >
+                                
+                                <div class="form-group" >
+                                    <label class="control-label col-sm-2" for="email">Upload Images</label>
+                                    <div class="col-sm-12" style="overflow:hidden">
+                                        <input type="file" name="image" id ="images_id" class="form-control" 
+                                        onchange="tampilkanPreview(this,'preview')">
                                         <img id="preview" width="350px" style="margin-top:10px" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2" for="email">Lantai:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="lantai" id="nama_id" >
-                                    </div>
-                                </div>
-                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="pwd">Urutan:</label>
-                                    <div class="input-group ml-3">
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-danger btn-number minus"  data-type="minus" data-field="quant[2]">
-                                                <span class="fa fa-minus"></span>
-                                            </button>
-                                        </span>
-                                        <input type="number" id="quantity"  name="urutan" class="form-control input-number col-md-3" value="0" min="0" max="100">
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-success btn-number plus" data-type="plus" data-field="quant[2]">
-                                                <span class="fa fa-plus"></span>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="pwd">Jenis:</label>
+                                <label class="control-label col-sm-2" for="pwd">Title:</label>
                                     <div class="col-sm-6">
-                                        <select id="jenis_rawat_id" name="jenis_rawat_id" class="form-control">
-                                           <option value="1">Rawat Inap</option>
-                                           <option value="2">Rawat Jalan</option>
-                                           <option value="3">IGD</option>
-                                           <option value="4">Penunjang</option>
-                                        </select>
+                                        <input type="text" name="title" id ="title_id" class="form-control">
+                                      
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -203,48 +146,28 @@
 </div>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
-
-     tinymce.init({
-        selector: '#content_id',
-        plugins: 'image code table advtable',
-        toolbar: 'undo redo | link image | table | code styleselect | bold italic ',
-        // enable title field in the Image dialog
-        image_title: true, 
-        // enable automatic uploads of images represented by blob or data URIs
-        automatic_uploads: true,
-        // add custom filepicker only to Image dialog
-        file_picker_types: 'image',
-        file_picker_callback: function(cb, value, meta) {
-            var input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-
-            input.onchange = function() {
-            var file = this.files[0];
-            var reader = new FileReader();
-            
-            reader.onload = function () {
-                var id = 'blobid' + (new Date()).getTime();
-                var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-                var base64 = reader.result.split(',')[1];
-                var blobInfo = blobCache.create(id, file, base64);
-                blobCache.add(blobInfo);
-
-                // call the callback and populate the Title field with the file name
-                cb(blobInfo.blobUri(), { title: file.name });
-            };
-            reader.readAsDataURL(file);
-            };
-            
-            input.click();
-        }
-    });
-    
-     function update(id){
-       
+    function update(id){
         var id = id;
+        window.location = '/backoffice/master/edit_galeri?id='+id;
+    }
+    
+    function aksi(data_edit)
+    {
+        parse = JSON.parse(data_edit);
+        //console.log(parse.id);
+        id = parse.id
+        image = parse.image
+        urutan = parse.urutan
+        status_id = parse.status
+        uploadGambardone = parse.image_file_name
 
-        window.location = '/backoffice/master/edit_pelayanan?id='+id;
+        $('#id_id').val(id)
+        $('#urutan').val(urutan)
+        $('#status_id').val(status_id)
+        $('#uploadGambardone_id').val(uploadGambardone)
+       
+        
+        $('#form-tab').click();
     }
 
     function tampilkanPreview(userfile, idpreview) {
@@ -269,12 +192,6 @@
                 alert("Tipe file tidak sesuai. Gambar harus bertipe .png, .gif atau .jpg.");
             }
         }
-    }
-
-    function delete_(_id){
-        var id_ = _id
-
-        window.location = '/backoffice/master/delete_akses?delete_modul='+id_;
     }
 
     $(document).ready(function(){
@@ -311,5 +228,4 @@
         });
         
     });
-   
 </script>

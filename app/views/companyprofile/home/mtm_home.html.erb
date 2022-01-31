@@ -311,6 +311,7 @@ img {
   box-sizing: border-box;
   margin-top:10px;
   margin-bottom:10px;
+  height: 100%;
 }
 .card:hover {
     box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -852,7 +853,8 @@ img {
     margin-bottom: 1rem 
   } 
   .page-news .news-wrapper .text-news{
-    margin-bottom: 1rem 
+    margin-bottom: 1rem;
+    
   } 
   .page-news .news-wrapper .text-news h3{
     font-size: 22px;
@@ -1409,9 +1411,9 @@ padding: 8px 15px;
                             <%= res['created_at'].to_date %>
                           </div>
                           <h3><%= res['title']%></h3>
-                          <p class="text-desc"><%= res['desc']%></p>
-                          <p style="margin-top:20px;"><a href="/newsdetail/<%= res['subtitle'] %>" class="btn-news">Selengkapnya</a></p>
+                          <div class="text-desc"><%= raw res['desc']%></div>
                         </div>
+                        <p style="margin-top:20px;"><a href="/newsdetail/<%= res['subtitle'] %>" class="btn-news">Selengkapnya</a></p>
                       </div>
                     </div>
                   </div>

@@ -674,6 +674,55 @@ class Backoffice::MasterController < ApplicationController
     redirect_to '/backoffice/master/jadwal_dokter'
   end
 
+  def galeri
+    @limit =  params[:limit].present? ? params[:limit].to_i : 10
+    @page = params[:page].present? ? params[:page].to_i : 1
+    @keyword = params[:keyword].present? ? params[:keyword] : ''
+
+    if @keyword.present?
+      url = "galeri?keyword=#{@keyword}"
+    else
+      url = "galeri?limit=#{@limit}&page=#{@page}&keyword=#{@keyword}"
+    end
+
+    @data = ApplicationHelper.req_get(url,session['sess']['my_token'])
+    @meta = @data['content']['meta'] rescue ""
+  end
+
+  def edit_galeri
+    url = "galeri/#{params['id']}"
+    @data = ApplicationHelper.req_get(url,session['sess']['my_token'])['content']
+    # render json: @data
+    # return
+  end
+
+  def aksi_galeri
+    images = params['image'] if params['image'].present?
+    data = {
+      status: params['status'],
+      title: params['title'],
+      image: images
+    }
+   
+    if params['id'] == '' # simpan
+      url = "galeri"
+      @aksi = ApplicationHelper.req_post(url,data,session['sess']['my_token'])
+     
+    else # update 
+      url = "galeri/"+params['id']
+      @aksi = ApplicationHelper.req_put(url,data,session['sess']['my_token'])
+    end
+
+    if @aksi['status'] == true
+      flash[:alert] = "success"
+    else
+      flash[:alert] = "danger"
+    end
+    flash[:notice] = @aksi['message']
+    redirect_to '/backoffice/master/galeri'
+
+  end
+
   def hubungi 
     
     @limit =  params[:limit].present? ? params[:limit].to_i : 10

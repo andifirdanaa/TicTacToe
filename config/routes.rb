@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   get 'backoffice/master/edit_pelayanan'
   post 'backoffice/master/aksi_pelayanan'
 
+  get 'backoffice/master/galeri'
+  get 'backoffice/master/edit_galeri'
+  post 'backoffice/master/aksi_galeri'
+
   get 'backoffice/master/dokter'
   get 'backoffice/master/edit_dokter'
   post 'backoffice/master/aksi_dokter'
@@ -150,6 +154,8 @@ Rails.application.routes.draw do
   get '/contact_us', to: 'companyprofile/home#contact_us'
   get '/kontak', to: 'companyprofile/home#kontak'
   get '/dokter', to: 'companyprofile/home#dokter'
+  get '/galeri', to: 'companyprofile/home#galeri'
+  get '/layanan_rsud', to: 'companyprofile/home#layanan_rsud'
   get '/jobs_detail/:id', to: 'companyprofile/home#jobs_detail'
   get ':key/:slug', to: 'companyprofile/home#pages'
   get '/struktur-organisasi', to: 'companyprofile/home#struktur'

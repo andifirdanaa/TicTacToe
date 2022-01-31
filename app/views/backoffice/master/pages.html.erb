@@ -223,9 +223,10 @@
 
 tinymce.init({
   selector: '#content_id',
-  plugins: 'image code table advtable',
-  toolbar: 'undo redo | link image | table | code styleselect | bold italic ',
+  plugins: 'image code table advtable media',
+  toolbar: 'undo redo | link image | table | code styleselect | bold italic | media',
   // enable title field in the Image dialog
+  media_live_embeds: true,
   image_title: true, 
   // enable automatic uploads of images represented by blob or data URIs
   automatic_uploads: true,

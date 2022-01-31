@@ -225,6 +225,24 @@ class Companyprofile::HomeController < ApplicationController
 		end
 		
 	end
+	
+	def layanan_rsud
+		@_id = params['nama']
+
+		@ids = @_id.split('-')
+
+		url_layanan = ENV['CIRACAS_WEB']+"pelayanan/detail/#{@ids[1]}"
+		res_layanan = HTTParty.get(url_layanan)
+		@data_layanan = res_layanan.parsed_response
+		@datalayanan = @data_layanan['content'] rescue ''
+		
+		if @datalayanan.present?
+			@title_header = @datalayanan['jenis']
+			
+		else
+			@datalayanan = ''
+		end
+	end
 
 	def news
 		
@@ -532,6 +550,14 @@ class Companyprofile::HomeController < ApplicationController
 
 	def kontak
 		
+	end
+
+	def galeri
+		url_galeri = ENV['CIRACAS_WEB']+"galeri/list"
+		res_galeri = HTTParty.get(url_galeri)
+		@list_galeri = res_galeri.parsed_response
+		@datagaleri = @list_galeri['content']['data'] rescue ''
+
 	end
 
 	def aksi_kontak
