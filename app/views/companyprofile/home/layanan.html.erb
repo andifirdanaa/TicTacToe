@@ -824,7 +824,7 @@
     }
     <% @datapeljenis.each do |res2|%>
     .isi-tentang .lay-<%= res2['id']%>:hover {
-        background-image: url("<%= ENV['CIRACAS_WEB']+res2['image_url']%>");
+        background-image: url("<%= res2['image_url'] != nil  ? ENV['CIRACAS_WEB']+res2['image_url'] : "/img/logors.png"%>");
         background-size: cover;
         background-position: center center;
         background-attachment: local;

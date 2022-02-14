@@ -1058,7 +1058,11 @@
                     <% @data['content']['data'].each do |res| %>
                         <div class="box-news">
                             <div class="box-header">
-                                <img src="<%= ENV['CIRACAS_WEB']+res['image_url']%>" alt="no-image">
+                              <% if res['image_url'].present? %>
+                                <img src="<%= ENV['CIRACAS_WEB']+res['image_url']%>" alt="no-image" onerror="this.src='/img/logors.png'">
+                              <%else%>
+                                <img src="/img/logors.png" alt="no-image">
+                              <%end%>
                             </div>
                             <div class="box-desc">
                                 <a href="/newsdetail/<%= res['subtitle'] %>"><h1 class="title-news"><%= res['title']%></h1></a>

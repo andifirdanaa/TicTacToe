@@ -244,6 +244,44 @@ class Companyprofile::HomeController < ApplicationController
 		end
 	end
 
+	def rawat_inap
+		url_rawat_inap = ENV['CIRACAS_WEB']+"pelayanan/listjenis?jenis_rawat_id=1"
+		res_rawat_inap = HTTParty.get(url_rawat_inap)
+		@data_rawat_inap = res_rawat_inap.parsed_response
+		@datarawatinap = @data_rawat_inap['content']['data'] rescue ''
+		
+
+		url_kamar = ENV['CIRACAS_WEB']+"pelayanan?keyword=Ruang-Isolasi"
+		res_kamar = HTTParty.get(url_kamar)
+		@data_kamar = res_kamar.parsed_response
+		@datakamar = @data_kamar['content']['data'] rescue ''
+
+		url_kamar_non = ENV['CIRACAS_WEB']+"pelayanan?keyword=Ruang-non-covid"
+		res_kamar_non = HTTParty.get(url_kamar_non)
+		@data_kamar_non = res_kamar_non.parsed_response
+		@datakamarnon = @data_kamar_non['content']['data'] rescue ''
+
+		if @datarawatinap.present?
+			@title_header = @datarawatinap[0]['jenis']
+		else
+			@datarawatinap = ''
+		end
+	end
+
+	def rawat_jalan
+		url_rawat_jalan = ENV['CIRACAS_WEB']+"pelayanan/listjenis?jenis_rawat_id=2"
+		res_rawat_jalan = HTTParty.get(url_rawat_jalan)
+		@data_rawat_jalan = res_rawat_jalan.parsed_response
+		@datarawatjalan = @data_rawat_jalan['content']['data'] rescue ''
+		
+
+		if @datarawatjalan.present?
+			@title_header = @datarawatjalan[0]['jenis']
+		else
+			@datarawatjalan = ''
+		end
+	end
+
 	def news
 		
 		@page = params[:page].present? ? params[:page].to_i : 1

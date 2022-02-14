@@ -1011,7 +1011,11 @@
         <div class="row" style="padding: 60px 30px;">
             <div class="isi-tentang">
                 <div class="news-detail-wrapper">
+                <%if @img_news.present? %>
                     <img src="<%= ENV['CIRACAS_WEB']+"/"+@img_news %>" alt="" onerror="this.src='/img/logors.png'">
+                <%else%>
+                    <img src="/img/logors.png" alt="" onerror="this.src='/img/logors.png'">
+                <%end%>
                 </div>
                 <div class="body-news">
                     <span><%= @created_at.to_date %></span>

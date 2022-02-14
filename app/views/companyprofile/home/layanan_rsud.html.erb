@@ -1012,7 +1012,11 @@
             <div class="isi-tentang">
             <% if @data_layanan != nil %>
                 <div class="news-detail-wrapper">
+                  <% if @datalayanan['image_url'].present? %>
                     <img src="<%= ENV['CIRACAS_WEB']+"/"+@datalayanan['image_url'] %>" alt="" onerror="this.src='/img/logors.png'">
+                  <%else%>
+                    <img src="/img/logors.png" alt="" onerror="this.src='/img/logors.png'">
+                  <%end%>
                 </div>
                 <div class="body-news">
                     <span><%=@datalayanan['created_at'].to_date %></span>

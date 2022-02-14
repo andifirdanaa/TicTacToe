@@ -155,6 +155,8 @@ Rails.application.routes.draw do
   get '/kontak', to: 'companyprofile/home#kontak'
   get '/dokter', to: 'companyprofile/home#dokter'
   get '/galeri', to: 'companyprofile/home#galeri'
+  get '/rawat_inap', to: 'companyprofile/home#rawat_inap'
+  get '/rawat_jalan', to: 'companyprofile/home#rawat_jalan'
   get '/layanan_rsud', to: 'companyprofile/home#layanan_rsud'
   get '/jobs_detail/:id', to: 'companyprofile/home#jobs_detail'
   get ':key/:slug', to: 'companyprofile/home#pages'

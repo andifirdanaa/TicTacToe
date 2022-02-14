@@ -997,6 +997,8 @@
                 <div class="detail-wrapper">
                   <% if @image_pages.present? %>
                     <img src="<%= @image_pages %>" alt="" onerror="this.src='/img/logors.png'">
+                  <%else%>
+                    <img src="/img/logors.png" alt="" onerror="this.src='/img/logors.png'">
                   <%end%>
                 </div>
                 
