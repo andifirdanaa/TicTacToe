@@ -213,27 +213,39 @@
                               <%=ress['menu'] %>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <% ress['menu_child'].each do |resss| %>
+                              <% ress['menu_child'].each do |resss| %>
+                                <% if resss['rows_child'] == 3 %>
+                                  <li class="dropdown">
+                                    <a href="<%= resss['url']%>" class="dropdown-item dropdown-toggle" id="dnavbardropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                      <%=resss['menu'] %>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <% resss['menu_child'].each do |ressss| %>
+                                        <li><a class="dropdown-item" href="<%= ressss['url'] %>" ><%= ressss['menu'] %></a></li>
+                                      <%end%>
+                                    </ul>
+                                  </li>
+                                <%else%>
                                   <% if resss['url'] != "" %>
-                                  <li><a class="dropdown-item" href="<%= resss['url']%>" ><%= resss['menu']%></a></li>
-                                <% else %>
-      
+                                    <li><a class="dropdown-item" href="<%= resss['url'] %>" ><%= resss['menu'] %></a></li>
+                                  <% else %>
+
                                     <% 
                                         url_page = ENV['CIRACAS_WEB']+"page/#{resss['page_id'].to_s}"
-      
+
                                         res_page = HTTParty.get(
                                             url_page
                                         )
-      
+
                                         @page = res_page['content']['url']
                                         @keyword = res_page['content']['slug']
                                         @id = res_page['content']['id']
                                     %>
-                                  
-                                    <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=resss['menu'] %></strong></a></li>
+                                        
+                                      <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=resss['menu'] %></strong></a></li>
+                                  <%end%>
                                 <%end%>
-                               
-                                <% end %>
+                              <% end %>
                             </ul>
                         </li>
                             
