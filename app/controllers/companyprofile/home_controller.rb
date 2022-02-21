@@ -43,6 +43,8 @@ class Companyprofile::HomeController < ApplicationController
 					@Tentangrsud = val['sys_val'] rescue ''
 				elsif val['sys_key'] == 'Telephone'
 					@Telephone = val['sys_val'] rescue ''
+				elsif val['sys_key'] == 'Whatsapp'
+					@whatsapp = val['sys_val'] rescue ''
 				elsif val['sys_key'] == 'Maps'
 					@Maps = val['sys_val'] rescue ''
 				end

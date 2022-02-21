@@ -173,7 +173,7 @@
                                     <div class="col-sm-6">
                                         <select id="parents_id" name="parents" class="form-control">
                                             <option value="0">Tidak ada</option>
-                                            <% @data['content']['data'].each do |res2| %>
+                                            <% @dataall['content']['data'].each do |res2| %>
                                                 <option value="<%= res2['id'] %>"><%= res2['menu'] %></option>
                                             <% end %>
                                             

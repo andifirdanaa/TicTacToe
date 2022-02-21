@@ -27,13 +27,14 @@ class Backoffice::MasterController < ApplicationController
     
     data = {
       phone: params['phone'],
-      password: Digest::MD5.hexdigest(params[:password]),
+      # password: Digest::MD5.hexdigest(params[:password]),
+      password: params[:password],
       name: params['name'],
       email: params['email'],
       status: params['status'],
       user_role_id: params['user_role_id']
     }
-
+    
     if params['id'] == '' # simpan
       url = "users"
       @aksi = ApplicationHelper.req_post(url,data,session['sess']['my_token'])
@@ -391,7 +392,7 @@ class Backoffice::MasterController < ApplicationController
     end
     
     @data = ApplicationHelper.req_get(url,session['sess']['my_token'])
-   
+    @dataall = ApplicationHelper.req_get('menu/listfe',session['sess']['my_token'])
 
     urlpages = "page/alldata"
     @datapages = ApplicationHelper.req_get(urlpages,session['sess']['my_token'])

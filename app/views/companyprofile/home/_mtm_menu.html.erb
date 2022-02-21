@@ -214,7 +214,25 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <% ress['menu_child'].each do |resss| %>
-                                <a class="dropdown-item" href="<%= resss['url']%>" ><%= resss['menu']%></a>
+                                  <% if resss['url'] != "" %>
+                                  <li><a class="dropdown-item" href="<%= resss['url']%>" ><%= resss['menu']%></a></li>
+                                <% else %>
+      
+                                    <% 
+                                        url_page = ENV['CIRACAS_WEB']+"page/#{resss['page_id'].to_s}"
+      
+                                        res_page = HTTParty.get(
+                                            url_page
+                                        )
+      
+                                        @page = res_page['content']['url']
+                                        @keyword = res_page['content']['slug']
+                                        @id = res_page['content']['id']
+                                    %>
+                                  
+                                    <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=resss['menu'] %></strong></a></li>
+                                <%end%>
+                               
                                 <% end %>
                             </ul>
                         </li>
@@ -249,7 +267,7 @@
               <%end%>
               <%end%>
               <div class="d-flex justify-content-end chat" style="padding-left:20px;">
-                <a href="https://wa.me/083890886344"  target="_blank"><button class="btn edit btn-default" class="logoChat" style="margin-left:-10%;padding-left:20px;padding-right:25px;background-image: linear-gradient(to right,#2193b0,  #6dd5ed);border-radius: 4px; cursor: pointer;"><img src="" height="15px"/><span style="color: white; padding-left: 5px; font-size: 14px;">Chat Now</span></button></a>
+                <a href="https://wa.me/08118860030"  target="_blank"><button class="btn edit btn-default" class="logoChat" style="margin-left:-10%;padding-left:20px;padding-right:25px;background-image: linear-gradient(to right,#2193b0,  #6dd5ed);border-radius: 4px; cursor: pointer;"><img src="" height="15px"/><span style="color: white; padding-left: 5px; font-size: 14px;">Chat Now</span></button></a>
               </div>
             </ul>
           </div>
