@@ -221,7 +221,23 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                       <% resss['menu_child'].each do |ressss| %>
-                                        <li><a class="dropdown-item" href="<%= ressss['url'] %>" ><%= ressss['menu'] %></a></li>
+                                        <% if ressss['url'] != "" %>
+                                          <li><a class="dropdown-item" href="<%= ressss['url'] %>" ><%= ressss['menu'] %></a></li>
+                                        <%else%>
+                                          <% 
+                                                url_page = ENV['CIRACAS_WEB']+"page/#{ressss['page_id'].to_s}"
+
+                                                res_page = HTTParty.get(
+                                                    url_page
+                                                )
+
+                                                @page = res_page['content']['url']
+                                                @keyword = res_page['content']['slug']
+                                                @id = res_page['content']['id']
+                                            %>
+                                        
+                                            <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ressss['menu'] %></strong></a></li>
+                                        <%end%>
                                       <%end%>
                                     </ul>
                                   </li>

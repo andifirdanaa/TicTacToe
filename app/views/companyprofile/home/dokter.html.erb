@@ -942,6 +942,7 @@
   }
   .tentang-body .wrapper{
       width: 100%;
+      margin-bottom: 30px;
       box-shadow: 0 21px 41px -13px rgb(0 0 0 / 18%)
   }
   .tentang-body .wrapper .jadwal{
@@ -1224,12 +1225,28 @@
                 <div class="no-gutters">
                   <div class="col-lg-12 col-sm-12 d-flex">
                     <select id="spesialis_id" name="spesialis" class="form-control" value="">
-                      <option value=""  disabled style="background:#515050;">-- Pilih --</option>
-                      <option value="0" >Semua Dokter</option>
+                      <option value="" selected disabled style="background:#515050;">-- Pilih --</option>
                       <% @dataspesialis.each do |re| %>
                         <option value="<%= re['id'] %>" <%= @keywordes == re['id'] ? 'selected' : ' ' %>><%= re['nama']%></option>
                       <%end%>
                     </select>
+                  </div>
+                </div>
+              </div>
+              <div class="wrapper">
+                <div class="no-gutters">
+                  <div class="row">
+                    <div class="col-lg-12 col-sm-12 d-flex">
+                      <select id="hari_id" name="hari" class="form-control" value="" style="display:none;">
+                        <option value="" selected disabled style="background:#515050;">-- Pilih hari --</option>
+                        <option value="Senin" >Senin</option>
+                        <option value="Selasa" >Selasa</option>
+                        <option value="Rabu" >Rabu</option>
+                        <option value="Kamis" >Kamis</option>
+                        <option value="Jumat" >Jumat</option>
+                        <option value="Sabtu" >Sabtu</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1280,24 +1297,50 @@
   var page_id = $('#page_id').val();
   var keyword_id = $('#keyword_id').val();
   // alert(keyword_id);
-    $.ajax({
-        url: "/companyprofile/home/dokter_",
+   
+
+   $(document).ready(function() {
+     $("#hari_id").change(function(){ 
+      var h = $('#hari_id option:selected').val();
+      var p = $('#spesialis_id option:selected').val();
+      var page_id = $('#page_id').val();
+      var keyword_id = $('#keyword_id').val();
+
+      $.ajax({
+        url: "/companyprofile/home/jadwal_dokter_spe",
         type: "GET",
         dataType: "json",
         data: {
-            id: keyword_id,
+            id: p,
+            hari: h,
             page: page_id,
         },
 
-        success: function(result) {
-          console.log(result);
-          data = result.data;
-          meta = result.meta;
-          spesialis_id = result.data[0].spesialis_id;
+        success: function(res) {
+          console.log(res);
+          datares = res.data;
+          meta = res.meta;
+          spesialis_id = res.data[0].spesialis_id;
           this.rowHtml = ''; 
           this.rowHtml2 ='';
-          
+
+          // let data = [];
+          // datares.forEach((c) => {
+          //     if (!data.includes(c)) {
+          //         data.push(c);
+          //     }
+          // });
+          // console.log(data);
+          var data = datares.reduce((unique, o) => {
+              if(!unique.some(obj => obj.id === o.id && obj.name === o.name)) {
+                unique.push(o);
+              }
+              return unique;
+          },[]);
+          console.log(data);
           for (var i = 0; i < data.length; ++i) {
+            
+
             var img = "http://192.168.1.177:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
             this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
               this.rowHtml += '<h3>';
@@ -1321,41 +1364,24 @@
             this.rowHtml += '</div>';
                   
           }
-          this.rowHtml2 += '<div class="d-flex justify-content-center flex-wrap">';
-            this.rowHtml2 += '<nav aria-label="Page navigation example">';
-              this.rowHtml2 += '<ul class="pagination">';
-              if(meta.prev_page != 0){
-                this.rowHtml2 += '<li class="page-item">';
-                  this.rowHtml2 += '<a class="page-link" onclick="metaa('+meta.prev_page+','+keyword_id+')" >Previous</a>'
-                this.rowHtml2 += '</li>';
-              }
-                for(var j = 0; j < meta.total_pages.length; ++j){
-                  this.rowHtml2 += '<li class="page-item">';
-                    this.rowHtml2 += '<a class="page-link" onclick="metaa('+meta.total_pages+','+keyword_id+')" >'+meta.total_pages+'</a>'
-                  this.rowHtml2 += '</li>';
-                }
-              if(meta.next_page != 0){
-                this.rowHtml2 += '<li class="page-item">';
-                  this.rowHtml2 += '<a class="page-link" onclick="metaa('+meta.next_page+','+keyword_id+')" >Next</a>'
-                this.rowHtml2 += '</li>';
-              }
-              this.rowHtml2 += '</ul>';
-            this.rowHtml2 += '</nav>';
-          this.rowHtml2 += '</div>';
+         
           
           document.getElementById('jadwal_id').innerHTML = this.rowHtml;
           document.getElementById('pagination_id').innerHTML = this.rowHtml2;
           
         }
 
-    });
+      });
 
+     });
+   });
  
 
   $(document).ready(function() {
     // var p = $('#spesialis_id option:selected').val('semua');
     $("#spesialis_id").change(function(){ 
         var p = $('#spesialis_id option:selected').val();
+        $("#hari_id").css("display", "block");
         $.ajax({
             url: "/companyprofile/home/dokter_",
             type: "GET",
@@ -1372,31 +1398,32 @@
               spesialis_id = result.data[0].spesialis_id;
               this.rowHtml = ''; 
               this.rowHtml2 ='';
+
               
               for (var i = 0; i < data.length; ++i) {
-                var img = "http://192.168.1.177:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
-                this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
-                  this.rowHtml += '<h3>';
-                  this.rowHtml += data[i].name;
-                  this.rowHtml    += '</h3>';
-                  this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
-                    this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=dataa('"+data[i].id+"')>";
-                      this.rowHtml += '<div class="img-dokter">';
-                        this.rowHtml += "<img alt='img' id='image1' src='http://192.168.1.177:4002/"+data[i].image_url+"'/>";
-                      this.rowHtml += '</div>';
-                      this.rowHtml += '<div class="border-dok">';
-                        this.rowHtml += '<h3 class="name-card">';
-                          this.rowHtml += data[i].name;
-                        this.rowHtml += '</h3>';
-                        this.rowHtml += '<p class="spesialis-card">';
-                          this.rowHtml += data[i].spesialis;
-                        this.rowHtml += '</p>';
-                      this.rowHtml += '</div>';
+                    var img = "http://192.168.1.177:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
+                    this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
+                      this.rowHtml += '<h3>';
+                      this.rowHtml += data[i].name;
+                      this.rowHtml    += '</h3>';
+                      this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
+                        this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=dataa('"+data[i].id+"')>";
+                          this.rowHtml += '<div class="img-dokter">';
+                            this.rowHtml += "<img alt='img' id='image1' src='http://192.168.1.177:4002/"+data[i].image_url+"'/>";
+                          this.rowHtml += '</div>';
+                          this.rowHtml += '<div class="border-dok">';
+                            this.rowHtml += '<h3 class="name-card">';
+                              this.rowHtml += data[i].name;
+                            this.rowHtml += '</h3>';
+                            this.rowHtml += '<p class="spesialis-card">';
+                              this.rowHtml += data[i].spesialis;
+                            this.rowHtml += '</p>';
+                          this.rowHtml += '</div>';
+                        this.rowHtml += '</div>';
+                      this.rowHtml += '</button>';
                     this.rowHtml += '</div>';
-                  this.rowHtml += '</button>';
-                this.rowHtml += '</div>';
-                      
               }
+              
               this.rowHtml2 += '<div class="d-flex justify-content-center flex-wrap">';
                 this.rowHtml2 += '<nav aria-label="Page navigation example">';
                   this.rowHtml2 += '<ul class="pagination">';

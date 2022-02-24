@@ -361,7 +361,7 @@ class Companyprofile::HomeController < ApplicationController
 		# return @dataspe1
 		
 		@pagese = params[:page].present? ? params[:page].to_i : 1
-		@keywordes = params['keyword'].present? ? params['keyword'].to_i : '0'
+		@keywordes = params['keyword'].present? ? params['keyword'].to_i : ''
 		# render json: @dataspe1
 		# return @dataspe1
 	end
@@ -461,6 +461,35 @@ class Companyprofile::HomeController < ApplicationController
 		return
 
   	end
+
+	def jadwal_dokter_spe
+		@page = params[:page].present? ? params[:page].to_i : 1
+		
+		if params['id'] == '0'
+			@keyword = ''
+		else
+			@keyword = params['id']
+		end
+
+		if params['hari'] == ''
+			@hari = ''
+		else
+			@hari = params['hari']
+		end
+		
+		if @keyword.present?
+			url_jdwl = ENV['CIRACAS_WEB']+"/dokter/jadwal?hari=#{@hari}&keyword=#{@keyword}&page=#{@page}"
+		else
+			url_jdwl = ENV['CIRACAS_WEB']+"/dokter/jadwal?page=#{@page}"
+		end
+
+		res_jdwl = HTTParty.get(url_jdwl)
+		@list_jdwl = res_jdwl.parsed_response
+		@datajdwl = @list_jdwl['content']
+
+		render json:  @datajdwl
+		return
+	end
 
 	def dokter_list
 		@keyword = params['keyword'].present? ? params['keyword'] : ''
