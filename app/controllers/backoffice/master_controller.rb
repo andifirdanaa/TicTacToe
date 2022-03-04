@@ -481,18 +481,27 @@ class Backoffice::MasterController < ApplicationController
   end
 
   def aksi_news
-    data = {
-      title: params['title'],
-      image: params['images'],
-      status: params['status'],
-      desc: params['content']
-    }
+    
    
     if params['id'] == '' # simpan
+      data = {
+        title: params['title'],
+        image: params['images'],
+        status: params['status'],
+        desc: params['content'],
+        created_by: session['sess']['name'],
+      }
       url = "news"
       @aksi = ApplicationHelper.req_post(url,data,session['sess']['my_token'])
      
     else # update 
+      data = {
+        title: params['title'],
+        image: params['images'],
+        status: params['status'],
+        desc: params['content'],
+        updated_by: session['sess']['name'],
+      }
       url = "news/"+params['id']
       @aksi = ApplicationHelper.req_put(url,data,session['sess']['my_token'])
     end
