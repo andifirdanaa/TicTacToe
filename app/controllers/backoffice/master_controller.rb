@@ -306,34 +306,59 @@ class Backoffice::MasterController < ApplicationController
   end
   
   def aksi_pages
-    
-    if params['cover'].present?
-      data = {
-        page: params['page'],
-        short_desc: params['short_desc'],
-        content: params['content'],
-        url: params['url'],
-        cover: params['cover'],
-        status: params['status'],
-        keyword: params['keyword']
-      }
-    else
-      data = {
-        page: params['page'],
-        short_desc: params['short_desc'],
-        content: params['content'],
-        url: params['url'],
-        status: params['status'],
-        keyword: params['keyword']
-      }
-    end
     # render json: data
     # return
     if params['id'] == '' # simpan
+      if params['cover'].present?
+        data = {
+          page: params['page'],
+          short_desc: params['short_desc'],
+          content: params['content'],
+          url: params['url'],
+          cover: params['cover'],
+          status: params['status'],
+          keyword: params['keyword'],
+          created_by: session['sess']['name'],
+        }
+      else
+        data = {
+          page: params['page'],
+          short_desc: params['short_desc'],
+          content: params['content'],
+          url: params['url'],
+          status: params['status'],
+          keyword: params['keyword'],
+          created_by: session['sess']['name'],
+        }
+      end
+
       url = "page"
       @aksi = ApplicationHelper.req_post(url,data,session['sess']['my_token'])
      
     else # update 
+      if params['cover'].present?
+        data = {
+          page: params['page'],
+          short_desc: params['short_desc'],
+          content: params['content'],
+          url: params['url'],
+          cover: params['cover'],
+          status: params['status'],
+          keyword: params['keyword'],
+          updated_by: session['sess']['name'],
+        }
+      else
+        data = {
+          page: params['page'],
+          short_desc: params['short_desc'],
+          content: params['content'],
+          url: params['url'],
+          status: params['status'],
+          keyword: params['keyword'],
+          updated_by: session['sess']['name'],
+        }
+      end
+
       url = "page/"+params['id']
       @aksi = ApplicationHelper.req_put(url,data,session['sess']['my_token'])
     end
@@ -515,23 +540,36 @@ class Backoffice::MasterController < ApplicationController
   end
 
   def aksi_pelayanan
-    data = {
-      nama: params['nama'],
-      subdesc: params['subdesc'],
-      desc: params['content'],
-      images: params['images'],
-      urutan: params['urutan'],
-      status: params['status'],
-      lantai: params['lantai'],
-      jenis_rawat_id: params['jenis_rawat_id'].to_s,
-    }
+   
     # render json: data
     # return
     if params['id'] == '' # simpan
+      data = {
+        nama: params['nama'],
+        subdesc: params['subdesc'],
+        desc: params['content'],
+        images: params['images'],
+        urutan: params['urutan'],
+        status: params['status'],
+        lantai: params['lantai'],
+        jenis_rawat_id: params['jenis_rawat_id'].to_s,
+        created_by: session['sess']['name'],
+      }
       url = "pelayanan"
       @aksi = ApplicationHelper.req_post(url,data,session['sess']['my_token'])
      
     else # update 
+      data = {
+        nama: params['nama'],
+        subdesc: params['subdesc'],
+        desc: params['content'],
+        images: params['images'],
+        urutan: params['urutan'],
+        status: params['status'],
+        lantai: params['lantai'],
+        jenis_rawat_id: params['jenis_rawat_id'].to_s,
+        updated_by: session['sess']['name'],
+      }
       url = "pelayanan/"+params['id']
       @aksi = ApplicationHelper.req_put(url,data,session['sess']['my_token'])
     end
