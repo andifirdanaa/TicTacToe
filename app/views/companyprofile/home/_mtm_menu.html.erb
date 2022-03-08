@@ -242,7 +242,11 @@
                                                 end
                                             %>
                                         
-                                            <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ressss['menu'] %></strong></a></li>
+                                            <%if @keyword != ''%>
+                                              <a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ressss['menu'] %></strong></a>
+                                            <%else%>
+                                              <a class="dropdown-item" href=''><%=ressss['menu'] %></strong></a>
+                                            <%end%>
                                         <%end%>
                                       <%end%>
                                     </ul>
@@ -270,7 +274,11 @@
                                         end
                                     %>
                                         
-                                      <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=resss['menu'] %></strong></a></li>
+                                      <%if @keyword != ''%>
+                                        <a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=resss['menu'] %></strong></a>
+                                      <%else%>
+                                        <a class="dropdown-item" href=''><%=resss['menu'] %></strong></a>
+                                      <%end%>
                                   <%end%>
                                 <%end%>
                               <% end %>
@@ -302,7 +310,13 @@
                                   
                               %>
                                   
-                              <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ress['menu'] %></strong></a></li>
+                              <li>
+                              <%if @keyword != ''%>
+                                <a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ress['menu'] %></strong></a>
+                              <%else%>
+                                <a class="dropdown-item" href=''><%=ress['menu'] %></strong></a>
+                              <%end%>
+                              </li>
                           <%end%>
                       <%end%>
                         
