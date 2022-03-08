@@ -231,9 +231,15 @@
                                                     url_page
                                                 )
 
-                                                @page = res_page['content']['url']
-                                                @keyword = res_page['content']['slug']
-                                                @id = res_page['content']['id']
+                                                if res_page['status'] != false
+                                                  @page = res_page['content']['url']
+                                                  @keyword = res_page['content']['slug']
+                                                  @id = res_page['content']['id']
+                                                else
+                                                  @page = ''
+                                                  @keyword = ''
+                                                  @id = ''
+                                                end
                                             %>
                                         
                                             <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ressss['menu'] %></strong></a></li>
@@ -253,9 +259,15 @@
                                             url_page
                                         )
 
-                                        @page = res_page['content']['url']
-                                        @keyword = res_page['content']['slug']
-                                        @id = res_page['content']['id']
+                                        if res_page['status'] != false
+                                          @page = res_page['content']['url']
+                                          @keyword = res_page['content']['slug']
+                                          @id = res_page['content']['id']
+                                        else
+                                          @page = ''
+                                          @keyword = ''
+                                          @id = ''
+                                        end
                                     %>
                                         
                                       <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=resss['menu'] %></strong></a></li>
@@ -276,12 +288,20 @@
                                   res_page = HTTParty.get(
                                       url_page
                                   )
+                                  
+                                  if res_page['status'] != false
+                                    @page = res_page['content']['url']
+                                    @keyword = res_page['content']['slug']
+                                    @id = res_page['content']['id']
+                                  else
+                                    @page = ''
+                                    @keyword = ''
+                                    @id = ''
+                                  end
 
-                                  @page = res_page['content']['url']
-                                  @keyword = res_page['content']['slug']
-                                  @id = res_page['content']['id']
+                                  
                               %>
-                            
+                                  
                               <li><a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ress['menu'] %></strong></a></li>
                           <%end%>
                       <%end%>
