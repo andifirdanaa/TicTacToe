@@ -200,9 +200,27 @@
               <% if @menu != nil %>
               <% @menu.each do |res| %>
                 <li class="nav-item <%= res['rows_child'] == 1 ? 'dropdown' : '' %>" style="padding-left:10px;">
-                  <a href="<%= res['url']%>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
+                  <% 
+                        url_page = ENV['CIRACAS_WEB']+"page/#{res['page_id'].to_s}"
+
+                        res_page = HTTParty.get(
+                            url_page
+                        )
+
+                        if res_page['status'] != false
+                          @page = res_page['content']['url']
+                          @keyword = res_page['content']['slug']
+                          @id = res_page['content']['id']
+                        else
+                          @page = ''
+                          @keyword = ''
+                          @id = ''
+                        end
+                    %>
+                  <a href="<%= res['page_id'] == '' ? res['url']  :  @keyword.to_s  %>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
                     <%=res['menu'] %>
                   </a>
+                 
                   <% if res['rows_child'] == 1 %>
                     <% if res['menu_child'] != nil %>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
