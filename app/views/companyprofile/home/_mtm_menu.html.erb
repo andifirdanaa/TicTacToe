@@ -217,7 +217,7 @@
                           @id = ''
                         end
                     %>
-                  <a href="<%= res['page_id'] == '' ? res['url']  :  @keyword.to_s  %>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
+                  <a href="<%= res['url'] != '' && res['page_id'] == '' ? res['url']  :  "../../../pages/"+@keyword.to_s  %>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
                     <%=res['menu'] %>
                   </a>
                  
