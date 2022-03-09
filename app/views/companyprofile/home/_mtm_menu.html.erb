@@ -200,24 +200,8 @@
               <% if @menu != nil %>
               <% @menu.each do |res| %>
                 <li class="nav-item <%= res['rows_child'] == 1 ? 'dropdown' : '' %>" style="padding-left:10px;">
-                  <% 
-                        url_page = ENV['CIRACAS_WEB']+"page/#{res['page_id'].to_s}"
-
-                        res_page = HTTParty.get(
-                            url_page
-                        )
-
-                        if res_page['status'] != false
-                          @page = res_page['content']['url']
-                          @keyword = res_page['content']['slug']
-                          @id = res_page['content']['id']
-                        else
-                          @page = ''
-                          @keyword = ''
-                          @id = ''
-                        end
-                    %>
-                  <a href="<%= res['url'] != '' ? res['url']  :  "../../../pages/"+@keyword.to_s  %>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
+                 
+                  <a href="<%= res['url'] != '' ? res['url']  :  "../../../pages/"+res['slug']  %>" class="nav-link <%= res['rows_child'] == 1 ? 'dropdown-toggle' :''%>" id="dnavbardropdown" role="button" data-toggle="<%= res['rows_child'] == 1 ? 'dropdown' :''%>" aria-haspopup="true" aria-expanded="false" >
                     <%=res['menu'] %>
                   </a>
                  
@@ -242,26 +226,10 @@
                                         <% if ressss['url'] != "" %>
                                           <li><a class="dropdown-item" href="<%= ressss['url'] %>" ><%= ressss['menu'] %></a></li>
                                         <%else%>
-                                          <% 
-                                                url_page = ENV['CIRACAS_WEB']+"page/#{ressss['page_id'].to_s}"
-
-                                                res_page = HTTParty.get(
-                                                    url_page
-                                                )
-
-                                                if res_page['status'] != false
-                                                  @page = res_page['content']['url']
-                                                  @keyword = res_page['content']['slug']
-                                                  @id = res_page['content']['id']
-                                                else
-                                                  @page = ''
-                                                  @keyword = ''
-                                                  @id = ''
-                                                end
-                                            %>
+                                          
                                         
-                                            <%if @keyword != ''%>
-                                              <a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ressss['menu'] %></strong></a>
+                                            <%if ressss['slug'] != ''%>
+                                              <a class="dropdown-item" href=../../../<%= "pages/"+ressss['slug'] %>><%=ressss['menu'] %></strong></a>
                                             <%else%>
                                               <a class="dropdown-item" href=''><%=ressss['menu'] %></strong></a>
                                             <%end%>
@@ -274,26 +242,10 @@
                                     <li><a class="dropdown-item" href="<%= resss['url'] %>" ><%= resss['menu'] %></a></li>
                                   <% else %>
 
-                                    <% 
-                                        url_page = ENV['CIRACAS_WEB']+"page/#{resss['page_id'].to_s}"
-
-                                        res_page = HTTParty.get(
-                                            url_page
-                                        )
-
-                                        if res_page['status'] != false
-                                          @page = res_page['content']['url']
-                                          @keyword = res_page['content']['slug']
-                                          @id = res_page['content']['id']
-                                        else
-                                          @page = ''
-                                          @keyword = ''
-                                          @id = ''
-                                        end
-                                    %>
+                                    
                                         
-                                      <%if @keyword != ''%>
-                                        <a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=resss['menu'] %></strong></a>
+                                      <%if resss['slug'] != ''%>
+                                        <a class="dropdown-item" href=../../../<%= "pages/"+resss['slug']  %>><%=resss['menu'] %></strong></a>
                                       <%else%>
                                         <a class="dropdown-item" href=''><%=resss['menu'] %></strong></a>
                                       <%end%>
@@ -308,29 +260,11 @@
                             <li><a class="dropdown-item" href="<%= ress['url'] %>" ><%= ress['menu'] %></a></li>
                           <% else %>
 
-                              <% 
-                                  url_page = ENV['CIRACAS_WEB']+"page/#{ress['page_id'].to_s}"
-
-                                  res_page = HTTParty.get(
-                                      url_page
-                                  )
-                                  
-                                  if res_page['status'] != false
-                                    @page = res_page['content']['url']
-                                    @keyword = res_page['content']['slug']
-                                    @id = res_page['content']['id']
-                                  else
-                                    @page = ''
-                                    @keyword = ''
-                                    @id = ''
-                                  end
-
-                                  
-                              %>
+                              
                                   
                               <li>
-                              <%if @keyword != ''%>
-                                <a class="dropdown-item" href=../../../<%= "pages/"+@keyword.to_s %>><%=ress['menu'] %></strong></a>
+                              <%if ress['slug']  != ''%>
+                                <a class="dropdown-item" href=../../../<%= "pages/"+ress['slug'] %>><%=ress['menu'] %></strong></a>
                               <%else%>
                                 <a class="dropdown-item" href=''><%=ress['menu'] %></strong></a>
                               <%end%>
@@ -373,4 +307,5 @@
           }
         });
   });
+  
 </script>
