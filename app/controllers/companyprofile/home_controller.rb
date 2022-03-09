@@ -253,12 +253,12 @@ class Companyprofile::HomeController < ApplicationController
 		@datarawatinap = @data_rawat_inap['content']['data'] rescue ''
 		
 
-		url_kamar = ENV['CIRACAS_WEB']+"pelayanan?keyword=Ruang-Isolasi"
+		url_kamar = ENV['CIRACAS_WEB']+"pelayanan/rawat?keyword=Ruang-Isolasi"
 		res_kamar = HTTParty.get(url_kamar)
 		@data_kamar = res_kamar.parsed_response
 		@datakamar = @data_kamar['content']['data'] rescue ''
 
-		url_kamar_non = ENV['CIRACAS_WEB']+"pelayanan?keyword=Ruang-non-covid"
+		url_kamar_non = ENV['CIRACAS_WEB']+"pelayanan/rawat?keyword=Ruang-non-covid"
 		res_kamar_non = HTTParty.get(url_kamar_non)
 		@data_kamar_non = res_kamar_non.parsed_response
 		@datakamarnon = @data_kamar_non['content']['data'] rescue ''
