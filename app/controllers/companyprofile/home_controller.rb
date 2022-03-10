@@ -558,6 +558,22 @@ class Companyprofile::HomeController < ApplicationController
 
 	end
 	
+	def list_dokter_spesialis
+		@keyword = params['keyword'].present? ? params['keyword'] : ''
+	
+		if @keyword.present?
+			url_spesialis = ENV['CIRACAS_WEB']+"/spesialis/listsp?keyword=#{@keyword}"
+		else
+			url_spesialis = ENV['CIRACAS_WEB']+"/spesialis/listsp"
+		end
+		res_spesialis = HTTParty.get(url_spesialis)
+		@list_spesialis = res_spesialis.parsed_response
+		@dataspesialis = @list_spesialis['content']['data']
+
+		render json: @dataspesialis
+		return
+	end
+
 	def dokter_spesialis
 		@keyword = params['keyword'].present? ? params['keyword'] : ''
 	

@@ -126,6 +126,7 @@ Rails.application.routes.draw do
   post '/companyprofile/home/dokter_list'
   post '/companyprofile/home/dokter_list_id'
   post '/companyprofile/home/dokter_spesialis'
+  post '/companyprofile/home/list_dokter_spesialis'
   post '/companyprofile/home/dokter_spesialis_id'
   post '/companyprofile/home/jadwal_dokter'
   get '/companyprofile/home/jadwal_dokter'
