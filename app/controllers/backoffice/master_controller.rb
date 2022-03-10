@@ -377,25 +377,17 @@ class Backoffice::MasterController < ApplicationController
     if params['cover'].present?
       data = {
         page: params['page'],
-        short_desc: params['short_desc'],
-        content: params['content'],
-        url: params['url'],
-        cover: params['cover'],
-        status: params['status'],
-        keyword: params['keyword']
+        user: session['sess']['name'],
       }
     else
       data = {
         page: params['page'],
-        short_desc: params['short_desc'],
-        content: params['content'],
-        url: params['url'],
-        status: params['status'],
-        keyword: params['keyword']
+        user: session['sess']['name'],
       }
     end
-    @aksi = ApplicationHelper.req_del(url,data,session['sess']['my_token'])['content']
-
+  
+    @aksi = ApplicationHelper.req_del(url,data,session['sess']['my_token'])
+    
     if @aksi['status'] == true
       flash[:alert] = "success"
     else

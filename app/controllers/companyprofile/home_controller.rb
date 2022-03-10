@@ -761,6 +761,5 @@ class Companyprofile::HomeController < ApplicationController
 		return
 	
 	end
-
   
 end
