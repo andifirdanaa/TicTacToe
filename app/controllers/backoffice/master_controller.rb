@@ -444,10 +444,11 @@ class Backoffice::MasterController < ApplicationController
     end
     if @aksi['status'] == true
       flash[:alert] = "success"
+      flash[:notice] = "#{@aksi['message']}"
     else
       flash[:alert] = "danger"
+      flash[:notice] = "#{@aksi['message']}#{@aksi['content']}"
     end
-    flash[:notice] = @aksi['message']
     redirect_to '/backoffice/master/menu'
   end
 
