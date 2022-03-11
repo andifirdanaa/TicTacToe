@@ -1298,22 +1298,22 @@ padding: 8px 15px;
     </div>
   </section>
 
-  <% if @data_why['content'] != nil %>
+ 
   <section class="page-why-me" id="why-me">
     <div class="module" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="container-fluid">
-        <% if @data_why['content'] != nil %>
-          <% @data_why['content']['data'].each do |res| %>
-            <% if res['status'] == '1' %>
-              <div class="row d-flex align-items-center">
-                <div class="col-md-6 col-sm-12 col-body">
-                  <div class="card">
-                    <div class="image-whyme">
-                      <iframe width="100%" height="450" src="https://www.youtube.com/embed/lsrxkdGPD2E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      
-                    </div>
-                  </div>
-                </div>
+        <div class="row d-flex align-items-center <%= @data_why['content'] != nil ? '' : 'justify-content-center' %>">
+          <div class="col-md-6  col-sm-12 col-body">
+            <div class="card">
+              <div class="image-whyme">
+                <iframe width="100%" height="450" src="https://www.youtube.com/embed/lsrxkdGPD2E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                
+              </div>
+            </div>
+          </div>
+          <% if @data_why['content'] != nil %>
+            <% @data_why['content']['data'].each do |res| %>
+              <% if res['status'] == '1' %>
                 <div class="col-md-5 col-sm-12 col-title">
                   <div class="row">
                     <div class="col-12">
@@ -1329,14 +1329,14 @@ padding: 8px 15px;
                     </div>
                   </div>
                 </div>
-              </div>
+              <%end%>
             <%end%>
           <%end%>
-        <%end%>
+        </div>
       </div>
     </div>
   </section>
-  <%end%>
+ 
 
   <% if @data_sam['content'] != nil %>
   <section class="page-sambutan" id="sambutan-id">
