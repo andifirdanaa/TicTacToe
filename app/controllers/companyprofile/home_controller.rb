@@ -352,7 +352,7 @@ class Companyprofile::HomeController < ApplicationController
 
 	def dokter
 		
-		url_spesialis = ENV['CIRACAS_WEB']+"spesialis/list"
+		url_spesialis = ENV['CIRACAS_WEB']+"/spesialis/listsp"
 		res_spesialis = HTTParty.get(url_spesialis)
 		@list_spesialis = res_spesialis.parsed_response
 		@dataspesialis = @list_spesialis['content']['data']

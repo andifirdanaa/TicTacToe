@@ -1320,7 +1320,7 @@
           console.log(res);
           datares = res.data;
           meta = res.meta;
-          spesialis_id = res.data[0].spesialis_id;
+          // spesialis_id = res.data[0].spesialis_id;
           this.rowHtml = ''; 
           this.rowHtml2 ='';
 
@@ -1337,33 +1337,41 @@
               }
               return unique;
           },[]);
-          console.log(data);
-          for (var i = 0; i < data.length; ++i) {
+          // console.log(data);
+
+          if(data.length > 0 ){
+             for (var i = 0; i < data.length; ++i) {
             
 
-            var img = "http://192.168.1.177:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
-            this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
-              this.rowHtml += '<h3>';
-              this.rowHtml += data[i].name;
-              this.rowHtml    += '</h3>';
-              this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
-                this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=dataa('"+data[i].id+"')>";
-                  this.rowHtml += '<div class="img-dokter">';
-                    this.rowHtml += "<img alt='img' id='image1' src='http://192.168.1.177:4002/"+data[i].image_url+"'/>";
-                  this.rowHtml += '</div>';
-                  this.rowHtml += '<div class="border-dok">';
-                    this.rowHtml += '<h3 class="name-card">';
-                      this.rowHtml += data[i].name;
-                    this.rowHtml += '</h3>';
-                    this.rowHtml += '<p class="spesialis-card">';
-                      this.rowHtml += data[i].spesialis;
-                    this.rowHtml += '</p>';
-                  this.rowHtml += '</div>';
+                var img = "http://192.168.1.177:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
+                this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
+                  this.rowHtml += '<h3>';
+                  this.rowHtml += data[i].name;
+                  this.rowHtml    += '</h3>';
+                  this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
+                    this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=dataa('"+data[i].id+"')>";
+                      this.rowHtml += '<div class="img-dokter">';
+                        this.rowHtml += "<img alt='img' id='image1' src='http://192.168.1.177:4002/"+data[i].image_url+"'/>";
+                      this.rowHtml += '</div>';
+                      this.rowHtml += '<div class="border-dok">';
+                        this.rowHtml += '<h3 class="name-card">';
+                          this.rowHtml += data[i].name;
+                        this.rowHtml += '</h3>';
+                        this.rowHtml += '<p class="spesialis-card">';
+                          this.rowHtml += data[i].spesialis;
+                        this.rowHtml += '</p>';
+                      this.rowHtml += '</div>';
+                    this.rowHtml += '</div>';
+                  this.rowHtml += '</button>';
                 this.rowHtml += '</div>';
-              this.rowHtml += '</button>';
+                      
+            }
+          }else{
+            this.rowHtml += '<div class="w-100 align-items-center">';
+              this.rowHtml += '<h3>Tidak ada data</h3>';
             this.rowHtml += '</div>';
-                  
-          }
+          };
+         
          
           
           document.getElementById('jadwal_id').innerHTML = this.rowHtml;
@@ -1381,7 +1389,7 @@
     // var p = $('#spesialis_id option:selected').val('semua');
     $("#spesialis_id").change(function(){ 
         var p = $('#spesialis_id option:selected').val();
-        $("#hari_id").css("display", "block");
+        $('#hari_id').val('');
         $.ajax({
             url: "/companyprofile/home/dokter_",
             type: "GET",
@@ -1395,56 +1403,64 @@
               console.log(result);
               data = result.data;
               meta = result.meta;
-              spesialis_id = result.data[0].spesialis_id;
+              // spesialis_id = result.data[0].spesialis_id;
               this.rowHtml = ''; 
               this.rowHtml2 ='';
 
-              
-              for (var i = 0; i < data.length; ++i) {
-                    var img = "http://192.168.1.177:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
-                    this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
-                      this.rowHtml += '<h3>';
-                      this.rowHtml += data[i].name;
-                      this.rowHtml    += '</h3>';
-                      this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
-                        this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=dataa('"+data[i].id+"')>";
-                          this.rowHtml += '<div class="img-dokter">';
-                            this.rowHtml += "<img alt='img' id='image1' src='http://192.168.1.177:4002/"+data[i].image_url+"'/>";
-                          this.rowHtml += '</div>';
-                          this.rowHtml += '<div class="border-dok">';
-                            this.rowHtml += '<h3 class="name-card">';
-                              this.rowHtml += data[i].name;
-                            this.rowHtml += '</h3>';
-                            this.rowHtml += '<p class="spesialis-card">';
-                              this.rowHtml += data[i].spesialis;
-                            this.rowHtml += '</p>';
-                          this.rowHtml += '</div>';
+              if (data.length > 0){
+                   $("#hari_id").css("display", "block");
+                    for (var i = 0; i < data.length; ++i) {
+                        var img = "http://192.168.1.177:4002/dokter/1/dr._Eva_Febia__Sp.OG.jpg";
+                        this.rowHtml += '<div class="col-lg-4 col-sm-12 d-flex flex-wrap justify-content-center align-content-center" style="padding-right:auto;">';
+                          this.rowHtml += '<h3>';
+                          this.rowHtml += data[i].name;
+                          this.rowHtml    += '</h3>';
+                          this.rowHtml += "<button type='button' class='btn' data-toggle='modal' data-target='#exampleModal'>"
+                            this.rowHtml += "<div class='card card0' style='margin-bottom: 30px;' onclick=dataa('"+data[i].id+"')>";
+                              this.rowHtml += '<div class="img-dokter">';
+                                this.rowHtml += "<img alt='img' id='image1' src='http://192.168.1.177:4002/"+data[i].image_url+"'/>";
+                              this.rowHtml += '</div>';
+                              this.rowHtml += '<div class="border-dok">';
+                                this.rowHtml += '<h3 class="name-card">';
+                                  this.rowHtml += data[i].name;
+                                this.rowHtml += '</h3>';
+                                this.rowHtml += '<p class="spesialis-card">';
+                                  this.rowHtml += data[i].spesialis;
+                                this.rowHtml += '</p>';
+                              this.rowHtml += '</div>';
+                            this.rowHtml += '</div>';
+                          this.rowHtml += '</button>';
                         this.rowHtml += '</div>';
-                      this.rowHtml += '</button>';
-                    this.rowHtml += '</div>';
-              }
-              
-              this.rowHtml2 += '<div class="d-flex justify-content-center flex-wrap">';
-                this.rowHtml2 += '<nav aria-label="Page navigation example">';
-                  this.rowHtml2 += '<ul class="pagination">';
-                  if(meta.prev_page != 0){
-                    this.rowHtml2 += '<li class="page-item">';
-                      this.rowHtml2 += "<a class='page-link'  onclick='metaa("+meta.prev_page+","+p+")'>Previous</a>"
-                    this.rowHtml2 += '</li>';
-                  }
-                    for(var j = 0; j < meta.total_pages.length; ++j){
-                      this.rowHtml2 += '<li class="page-item">';
-                        this.rowHtml2 += "<a class='page-link' onclick='metaa("+meta.total_pages+")' </a>"
-                      this.rowHtml2 += '</li>';
                     }
-                  if(meta.next_page != 0){
-                    this.rowHtml2 += '<li class="page-item">';
-                      this.rowHtml2 += "<a class='page-link' onclick='metaa("+meta.next_page+","+p+")' >Next</a>"
-                    this.rowHtml2 += '</li>';
-                  }
-                  this.rowHtml2 += '</ul>';
-                this.rowHtml2 += '</nav>';
-              this.rowHtml2 += '</div>';
+              
+                  this.rowHtml2 += '<div class="d-flex justify-content-center flex-wrap">';
+                    this.rowHtml2 += '<nav aria-label="Page navigation example">';
+                      this.rowHtml2 += '<ul class="pagination">';
+                      if(meta.prev_page != 0){
+                        this.rowHtml2 += '<li class="page-item">';
+                          this.rowHtml2 += "<a class='page-link'  onclick='metaa("+meta.prev_page+","+p+")'>Previous</a>"
+                        this.rowHtml2 += '</li>';
+                      }
+                        for(var j = 0; j < meta.total_pages.length; ++j){
+                          this.rowHtml2 += '<li class="page-item">';
+                            this.rowHtml2 += "<a class='page-link' onclick='metaa("+meta.total_pages+")' </a>"
+                          this.rowHtml2 += '</li>';
+                        }
+                      if(meta.next_page != 0){
+                        this.rowHtml2 += '<li class="page-item">';
+                          this.rowHtml2 += "<a class='page-link' onclick='metaa("+meta.next_page+","+p+")' >Next</a>"
+                        this.rowHtml2 += '</li>';
+                      }
+                      this.rowHtml2 += '</ul>';
+                    this.rowHtml2 += '</nav>';
+                  this.rowHtml2 += '</div>';
+              }else{
+                  $("#hari_id").css("display", "none");
+                this.rowHtml += '<div class="w-100 align-items-center">';
+                  this.rowHtml += '<h3>Tidak ada data</h3>';
+                this.rowHtml += '</div>';
+              };
+             
           
               document.getElementById('jadwal_id').innerHTML = this.rowHtml;
               document.getElementById('pagination_id').innerHTML = this.rowHtml2;
