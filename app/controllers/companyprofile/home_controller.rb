@@ -550,10 +550,17 @@ class Companyprofile::HomeController < ApplicationController
 
 		res_jadwal = HTTParty.get(url_jadwal)
 		@list_jadwal = res_jadwal.parsed_response
-		@datajadwal = @list_jadwal['content']['data']
-		@datajadwalimage = @datajadwal[0]
+		
+		# @datajadwalimage = @datajadwal[0]
 
-	#   render json:  @keyword
+		if @list_jadwal.present?
+			@datajadwal = @list_jadwal['content']['data']
+			@datajadwalimage = @datajadwal[0]
+		else
+			@datajadwal = ''
+			@datajadwalimage = ''
+		end
+	#   render json:  @datajadwal
 	#   return
 
 	end
@@ -603,9 +610,15 @@ class Companyprofile::HomeController < ApplicationController
 
 		res_jadwal = HTTParty.get(url_jadwal)
 		@list_jadwal = res_jadwal.parsed_response
-		@datajadwal = @list_jadwal['content']['data']
-		@datajadwalimage = @datajadwal[0]
+		
 
+		if @list_jadwal.present?
+			@datajadwal = @list_jadwal['content']['data']
+			@datajadwalimage = @datajadwal[0]
+		else
+			@datajadwal = ''
+			@datajadwalimage = ''
+		end
 		# render json:  @datajadwal
 		# return
 
