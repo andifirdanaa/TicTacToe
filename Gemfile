@@ -5,11 +5,13 @@ ruby '2.6.6'
 gem 'bootstrap-datepicker-rails'
 
 # gem redis
-gem 'redis'
+# gem 'redis'
 gem 'bootstrap', '~> 4.6.1'
 gem 'jquery-rails'
-# gem "font-awesome-rails"
+gem "font-awesome-rails"
 gem 'httparty'
+
+gem 'rack-cors'
 
 #textarea
 gem 'trix'

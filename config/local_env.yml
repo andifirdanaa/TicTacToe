@@ -1,4 +1,4 @@
-CIRACAS_WEB: 'http://localhost:4002/'
+CIRACAS_WEB: 'http://192.168.1.177:4002/'
 DIGI_LIMIT_LIST: '20'
 # DIGI_URL: 'http://localhost:4002/'
 

@@ -13,9 +13,11 @@
  *= require bootstrap-datepicker3
  *= require dataTables/jquery.dataTables
  *= require trix
+ *= require font-awesome
 
  */
 
 @import "bootstrap";
 @import "toastr";
 @import "bootstrap-tagsinput";
+@import "font-awesome";
