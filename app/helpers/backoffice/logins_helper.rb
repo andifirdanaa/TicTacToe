@@ -1,2 +1,0 @@
-module Backoffice::LoginsHelper
-end
